@@ -32,7 +32,7 @@ export default function AuthUi(props: { closeAuthUi: Function }) {
 							},
 						},
 					}}
-					providers={["google", "facebook", "twitter"]}
+					providers={["google", "facebook", "github"]}
 					theme={theme ? "dark" : "default"}
 				/>
 			</section>

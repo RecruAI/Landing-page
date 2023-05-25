@@ -24,16 +24,14 @@ export default function Header(props: { font: NextFont }) {
 
 	async function checkIfLogged() {
 		const { data, error } = await supabase.auth.getSession();
-		console.log(data);
-		if (data) setSignIn(true);
+
+		if (data.session) setSignIn(true);
 	}
 
 	useEffect(() => {
 		checkIfLogged();
 
 		supabase.auth.onAuthStateChange(async (event, session) => {
-			console.log(event);
-
 			if (event == "SIGNED_IN") {
 				setSignIn(true);
 				toggleAuthUi(false);
