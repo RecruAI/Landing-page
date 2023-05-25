@@ -11,6 +11,10 @@ module.exports = {
 				colorBlue: "rgb(51, 97, 227)",
 				colorGray: "rgb(141, 141, 141)",
 			},
+			screens: {
+				QHD: "2560px",
+				WQHD: "3840px",
+			},
 		},
 	},
 	plugins: [],
