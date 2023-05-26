@@ -22,7 +22,7 @@ export default function SectionOne(props: { font: NextFont }) {
 				<source srcSet="/landing_page/images/SectionOneLight-Mobile.png" media="(hover: none) and (pointer: coarse) and (prefers-color-scheme: light)" />
 				<source srcSet="/landing_page/images/SectionOneDark.png" media="(prefers-color-scheme: dark)" />
 				<source srcSet="/landing_page/images/SectionOneLight.png" media="(prefers-color-scheme: light)" />
-				<Image src="" width="1300" height="1000" alt="Web app image" className="mt-20 drop-shadow-2xl " />
+				<Image src="" width="1300" height="1000" alt="Web app image" className="mt-20 drop-shadow-2xl xl:rounded-3xl" />
 			</picture>
 
 			<UtilitiesContainer font={props.font} />

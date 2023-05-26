@@ -9,7 +9,7 @@ export default function Utility(props: { font: NextFont; title: String; paragrap
 			</div>
 			<div className="flex flex-col max-w-md xl:max-w-xs text-left gap-y-3">
 				<h5 className={"text-[--text-rgb] text-xl lg:text-2xl tracking-wider " + props.font.className}>{props.title}</h5>
-				<p className="text-colorGray text-sm lg:text-md">{props.paragraph}</p>
+				<p className="text-colorGray text-sm lg:text-md xl:text-base">{props.paragraph}</p>
 			</div>
 		</div>
 	);
