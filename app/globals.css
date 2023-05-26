@@ -16,3 +16,7 @@
     --text-rgb: rgb(255, 255, 255);
   }
 }
+
+.responsiveWidth{
+  @apply w-full QHD:w-3/4 WQHD:w-2/3 mx-auto ;
+}

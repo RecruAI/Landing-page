@@ -49,7 +49,7 @@ export default function Header(props: { font: NextFont }) {
 
 	return (
 		<>
-			<header className="w-screen QHD:w-3/4 WQHD:w-2/3 mx-auto flex z-30 justify-between py-5 px-10 content-center items-center left-1/2 -translate-x-1/2 fixed">
+			<header className="responsiveWidth left-1/2 -translate-x-1/2 flex z-30 justify-between py-5 px-10 content-center items-center  fixed">
 				<Image src={!theme ? "/landing_page/Icon-Light.svg" : "/landing_page/Icon-Dark.svg"} width="150" height="0" alt="Logo image" />
 
 				<div className={"flex gap-x-5 items-center " + props.font.className}>
