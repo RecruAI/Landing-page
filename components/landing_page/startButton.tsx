@@ -3,7 +3,7 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 
-export default function Button() {
+export default function StartButton() {
 	const [signedIn, setSignIn] = useState(false);
 
 	const supabase = createClientComponentClient();
@@ -24,6 +24,6 @@ export default function Button() {
 		});
 	}, []);
 
-	if (signedIn) return <button className={"text-white bg-colorBlue rounded-lg px-7 py-4 text-lg font-medium w-fit"}>Start for free</button>;
+	if (signedIn) return <button className={"text-white bg-colorBlue rounded-lg px-6 sm:px-7 py-4 text-md md:text-lg font-medium w-fit"}>Start for free</button>;
 	else return <></>;
 }
