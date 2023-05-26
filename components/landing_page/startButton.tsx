@@ -3,7 +3,7 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 
-export default function Button() {
+export default function StartButton() {
 	const [signedIn, setSignIn] = useState(false);
 
 	const supabase = createClientComponentClient();

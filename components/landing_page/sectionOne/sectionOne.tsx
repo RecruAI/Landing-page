@@ -1,7 +1,7 @@
 import { NextFont } from "next/dist/compiled/@next/font";
 import Image from "next/image";
 import UtilitiesContainer from "./utilitiesContainer";
-import Button from "./button";
+import StartButton from "../startButton";
 
 export default function SectionOne(props: { font: NextFont }) {
 	return (
@@ -15,7 +15,7 @@ export default function SectionOne(props: { font: NextFont }) {
 				Top #1 task manager and to-do list app in the world.
 			</p>
 
-			<Button />
+			<StartButton />
 
 			<picture>
 				<source srcSet="/landing_page/images/SectionOneDark-Mobile.png" media="(hover: none) and (pointer: coarse) and (prefers-color-scheme: dark)" />
