@@ -8,8 +8,8 @@ export default function SectionTwo(props: { font: NextFont }) {
 				<span className="text-lg sm:text-xl bg-[#F9F1EC] text-[#C3995D] w-fit font-medium px-3 py-1 rounded-md">Headings</span>
 				<h3 className={"text-[--text-rgb] text-3xl sm:text-6xl lg:text-5xl xl:text-7xl " + props.font.className}>Divide and conquer</h3>
 				<p className="text-colorGray text-sm  sm:text-lg text-justify">
-					Use headings to create categories, milestones, or whatever you need - just give each one a name and drag your to-dos underneath. Instantly you've got a
-					nice, clean structure for your list, and the plan becomes perfectly clear.
+					Use headings to create categories, milestones, or whatever you need - just give each one a name and drag your to-dos underneath. Instantly you&apos;ve got
+					a nice, clean structure for your list, and the plan becomes perfectly clear.
 				</p>
 			</div>
 

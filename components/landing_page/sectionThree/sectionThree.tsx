@@ -19,8 +19,8 @@ export default function SectionThree(props: { font: NextFont }) {
 				<span className="text-lg sm:text-xl bg-[#EFEAF6] text-[#7448AC] w-fit font-medium px-3 py-1 rounded-md">Mobile device</span>
 				<h3 className={"text-[--text-rgb] text-3xl sm:text-6xl lg:text-5xl xl:text-7xl " + props.font.className}>Stay organized on your mobile device</h3>
 				<p className="text-colorGray text-sm  sm:text-lg text-justify">
-					With mobile app, you'll be able to review your upcoming tasks - and jot down new ones - no matter where you happen to be. Everything stays in perfect sync
-					across all your smartphone.
+					With mobile app, you&apos;ll be able to review your upcoming tasks - and jot down new ones - no matter where you happen to be. Everything stays in perfect
+					sync across all your smartphone.
 				</p>
 			</div>
 		</section>

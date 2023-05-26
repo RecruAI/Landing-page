@@ -6,7 +6,7 @@ export default function UtilitiesContainer(props: { font: NextFont }) {
 	const utilities: Array<{ title: string; paragraph: string; icon: any }> = [
 		{
 			title: "With you everywhere",
-			paragraph: "Use Do It's apps, extensions and widgets on any device or platform",
+			paragraph: "Use Do It app, extensions and widgets on any device or platform",
 			icon: faBoxArchive,
 		},
 		{
