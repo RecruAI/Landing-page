@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Utility(props: { font: NextFont; title: String; paragraph: string; icon: any }) {
 	return (
 		<div className="flex gap-x-5">
-			<div className="bg-[--background-rgb] border-2 border-colorGray w-12 h-12 rounded-lg p-2.5 flex text-colorBlue mt-1">
+			<div className="bg-[--background-rgb] border-2 border-colorGray w-12 h-12 rounded-lg p-2.5 aspect-square text-colorBlue mt-1">
 				<FontAwesomeIcon icon={props.icon} />
 			</div>
 			<div className="flex flex-col max-w-md xl:max-w-xs text-left gap-y-3">

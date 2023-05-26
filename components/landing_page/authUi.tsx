@@ -18,7 +18,7 @@ export default function AuthUi(props: { closeAuthUi: Function }) {
 
 	return (
 		<>
-			<section className="absolute z-50 bg-[--background-rgb] border-2 border-colorGray p-8 rounded-2xl top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+			<section className="fixed w-fit z-50 bg-[--background-rgb] border-2 border-colorGray p-8 rounded-2xl top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
 				<Auth
 					supabaseClient={supabase}
 					appearance={{
@@ -36,7 +36,7 @@ export default function AuthUi(props: { closeAuthUi: Function }) {
 					theme={theme ? "dark" : "default"}
 				/>
 			</section>
-			<div className="w-screen h-screen z-40 bg-black/30" onClick={() => props.closeAuthUi()}></div>
+			<div className="w-screen h-screen z-40 bg-black/30 fixed top-0 left-0" onClick={() => props.closeAuthUi()}></div>
 		</>
 	);
 }
