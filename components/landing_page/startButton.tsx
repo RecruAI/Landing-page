@@ -6,15 +6,15 @@ import { useEffect, useState } from "react";
 export default function StartButton() {
 	const [signedIn, setSignIn] = useState(false);
 
-	const supabase = createClientComponentClient();
-
-	async function checkIfLogged() {
-		const { data, error } = await supabase.auth.getSession();
-
-		if (data.session) setSignIn(true);
-	}
-
 	useEffect(() => {
+		const supabase = createClientComponentClient();
+
+		async function checkIfLogged() {
+			const { data, error } = await supabase.auth.getSession();
+
+			if (data.session) setSignIn(true);
+		}
+
 		checkIfLogged();
 
 		supabase.auth.onAuthStateChange(async (event, session) => {
