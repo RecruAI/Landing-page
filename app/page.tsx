@@ -1,3 +1,4 @@
+import Footer from "@/components/landing_page/footer";
 import Header from "@/components/landing_page/header";
 import SectionFour from "@/components/landing_page/sectionFour/sectionFour";
 import SectionOne from "@/components/landing_page/sectionOne/sectionOne";
@@ -21,6 +22,7 @@ export default function Home() {
 			<div className="px-10 md:px-20 lg:px-24 xl:px-32 w-screen relative py-40 bg-gradient-to-br gap-y-32 text-center justify-center items-center flex flex-col from-[--background-rgb] to-[--background-rgb-darker]">
 				<SectionFour font={EuropaGrotesk} />
 			</div>
+			<Footer font={EuropaGrotesk} />
 		</main>
 	);
 }
