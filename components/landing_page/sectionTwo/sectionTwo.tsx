@@ -13,7 +13,7 @@ export default function SectionTwo(props: { font: NextFont }) {
 				</p>
 			</div>
 
-			<div className="flex  flex-col items-end relative lg:basis-7/12 gap-y-5 lg:scale-75 xl:scale-100">
+			<div className="flex  flex-col items-end relative lg:basis-7/12 gap-y-5 scale-75 sm:scale-100 lg:scale-75 xl:scale-100">
 				<picture className="-translate-x-14 translate-y-10 xl:-translate-x-24">
 					<source srcSet="/landing_page/images/SectionTwoDark-1.png" media="(prefers-color-scheme: dark)" />
 					<Image src="/landing_page/images/SectionTwoLight-1.png" width="500" height="500" alt="Moble app image" className="rounded-xl" />
