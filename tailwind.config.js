@@ -15,6 +15,9 @@ module.exports = {
 				QHD: "2560px",
 				WQHD: "3840px",
 			},
+			borderWidth: {
+				1: "1px",
+			},
 		},
 	},
 	plugins: [],
