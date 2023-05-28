@@ -8,11 +8,11 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
+const supabase = createClientComponentClient();
+
 export default function Header(props: { font: NextFont }) {
 	const [authUiShowed, toggleAuthUi] = useState(false);
 	const [signedIn, setSignIn] = useState(false);
-
-	const supabase = createClientComponentClient();
 
 	function closeAuthUi() {
 		toggleAuthUi(false);

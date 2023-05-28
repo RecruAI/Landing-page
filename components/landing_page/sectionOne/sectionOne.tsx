@@ -17,14 +17,15 @@ export default function SectionOne(props: { font: NextFont }) {
 
 			<StartButton />
 
-			<picture>
-				<source srcSet="/landing_page/images/SectionOneDark-Mobile.png" media="(hover: none) and (pointer: coarse) and (prefers-color-scheme: dark)" />
-				<source srcSet="/landing_page/images/SectionOneLight-Mobile.png" media="(hover: none) and (pointer: coarse) and (prefers-color-scheme: light)" />
-				<source srcSet="/landing_page/images/SectionOneDark.png" media="(prefers-color-scheme: dark)" />
-				<source srcSet="/landing_page/images/SectionOneLight.png" media="(prefers-color-scheme: light)" />
-				<Image src="" width="1300" height="1000" alt="Web app image" className="mt-20 drop-shadow-2xl xl:rounded-3xl" />
-			</picture>
-
+			<div className="overflow-hidden bg-gradient-to-b from-transparent  to-[--background-rgb-darker] rounded-3xl border-b-1 px-8 md:px-12 lg:px-16 xl:px-20 border-colorGray/30 ">
+				<picture>
+					<source srcSet="/landing_page/images/SectionOneDark-Mobile.png" media="(hover: none) and (pointer: coarse) and (prefers-color-scheme: dark)" />
+					<source srcSet="/landing_page/images/SectionOneLight-Mobile.png" media="(hover: none) and (pointer: coarse) and (prefers-color-scheme: light)" />
+					<source srcSet="/landing_page/images/SectionOneDark.png" media="(prefers-color-scheme: dark)" />
+					<source srcSet="/landing_page/images/SectionOneLight.png" media="(prefers-color-scheme: light)" />
+					<Image src="" width="1300" height="1000" alt="Web app image" className="mt-20 drop-shadow-2xl rounded-t-3xl" />
+				</picture>
+			</div>
 			<UtilitiesContainer font={props.font} />
 		</section>
 	);

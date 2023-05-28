@@ -3,12 +3,12 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 
+const supabase = createClientComponentClient();
+
 export default function StartButton() {
 	const [signedIn, setSignIn] = useState(false);
 
 	useEffect(() => {
-		const supabase = createClientComponentClient();
-
 		async function checkIfLogged() {
 			const { data, error } = await supabase.auth.getSession();
 
