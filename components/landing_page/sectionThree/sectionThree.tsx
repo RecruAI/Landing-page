@@ -3,22 +3,22 @@ import Image from "next/image";
 
 export default function SectionThree(props: { font: NextFont }) {
 	return (
-		<section className="flex flex-col-reverse lg:flex-row justify-evenly responsiveWidth items-center ">
-			<div className="flex overflow-hidden relative basis-7/12">
-				<picture className="translate-y-8 translate-x-10">
+		<section className="responsiveWidth flex flex-col-reverse items-center justify-evenly lg:flex-row ">
+			<div className="relative flex basis-7/12 overflow-hidden">
+				<picture className="translate-x-10 translate-y-8">
 					<source srcSet="/landing_page/images/SectionThreeDark-1.png" media="(prefers-color-scheme: dark)" />
 					<Image src="/landing_page/images/SectionThreeLight-1.png" width="300" height="300" alt="Moble app image" />
 				</picture>
-				<picture className="translate-y-40 -translate-x-10">
+				<picture className="-translate-x-10 translate-y-40">
 					<source srcSet="/landing_page/images/SectionThreeDark-2.png" media="(prefers-color-scheme: dark)" />
 					<Image src="/landing_page/images/SectionThreeLight-2.png" width="300" height="300" alt="Moble app image" />
 				</picture>
 			</div>
 
-			<div className="flex flex-col basis-5/12 2xl:basis-1/3 text-start gap-y-4 sm:gap-y-8">
-				<span className="text-lg sm:text-xl bg-[#EFEAF6] text-[#7448AC] w-fit font-medium px-3 py-1 rounded-md">Mobile device</span>
-				<h3 className={"text-[--text-rgb] text-3xl sm:text-6xl lg:text-5xl xl:text-7xl " + props.font.className}>Stay organized on your mobile device</h3>
-				<p className="text-colorGray text-sm  sm:text-lg text-justify">
+			<div className="flex basis-5/12 flex-col gap-y-4 text-start sm:gap-y-8 2xl:basis-1/3">
+				<span className="w-fit rounded-md bg-[#EFEAF6] px-3 py-1 text-lg font-medium text-[#7448AC] sm:text-xl">Mobile device</span>
+				<h3 className={"text-3xl text-[--text-rgb] sm:text-6xl lg:text-5xl xl:text-7xl " + props.font.className}>Stay organized on your mobile device</h3>
+				<p className="text-justify text-sm text-colorGray sm:text-lg">
 					With mobile app, you&apos;ll be able to review your upcoming tasks - and jot down new ones - no matter where you happen to be. Everything stays in perfect
 					sync across all your smartphone.
 				</p>

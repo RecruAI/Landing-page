@@ -24,6 +24,6 @@ export default function StartButton() {
 		});
 	}, []);
 
-	if (signedIn) return <button className={"text-white bg-colorBlue rounded-lg px-6 sm:px-7 py-4 text-md md:text-lg font-medium w-fit"}>Start for free</button>;
+	if (signedIn) return <button className="text-md w-fit rounded-lg bg-colorBlue px-6 py-4 font-medium text-white sm:px-7 md:text-lg">Start for free</button>;
 	else return <></>;
 }

@@ -16,12 +16,12 @@ export default function Home() {
 			<Header font={EuropaGrotesk} />
 			<SectionOne font={EuropaGrotesk} />
 
-			<div className="px-10 md:px-20 lg:px-24 xl:px-32 w-screen relative pt-40 bg-gradient-to-br gap-y-32 text-center justify-center items-center flex flex-col from-[--background-rgb] to-[--background-rgb-darker]">
+			<div className="relative flex w-screen flex-col items-center justify-center gap-y-32 bg-gradient-to-br from-[--background-rgb] to-[--background-rgb-darker] px-10 pt-40 text-center md:px-20 lg:px-24 xl:px-32">
 				<SectionTwo font={EuropaGrotesk} />
 				<SectionThree font={EuropaGrotesk} />
 			</div>
 
-			<div className="px-10 md:px-20 lg:px-24 xl:px-32 w-screen relative pt-40 bg-gradient-to-br text-center justify-center items-center flex flex-col from-[--background-rgb] to-[--background-rgb-darker]">
+			<div className="relative flex w-screen flex-col items-center justify-center bg-gradient-to-br from-[--background-rgb] to-[--background-rgb-darker] px-10 pt-40 text-center md:px-20 lg:px-24 xl:px-32">
 				<SectionFour font={EuropaGrotesk} />
 				<SectionFive font={EuropaGrotesk} />
 				<SectionSix font={EuropaGrotesk} />

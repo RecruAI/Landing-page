@@ -18,7 +18,7 @@ export default function UtilitiesContainer(props: { font: NextFont }) {
 	];
 
 	return (
-		<div className="flex-col gap-x-20 xl:gap-x-24 2xl:gap-x-60 QHD:gap-x-96 lg:flex-row gap-y-8 flex">
+		<div className="flex flex-col gap-x-20 gap-y-8 lg:flex-row xl:gap-x-24 2xl:gap-x-60 QHD:gap-x-96">
 			{utilities.map((utility, index) => (
 				<Utility font={props.font} paragraph={utility.paragraph} title={utility.title} key={index} />
 			))}
