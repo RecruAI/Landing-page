@@ -15,7 +15,7 @@ export default function SectionThree(props: { font: NextFont }) {
 				</picture>
 			</div>
 
-			<div className="flex flex-col basis-5/12 text-start gap-y-4 sm:gap-y-8">
+			<div className="flex flex-col basis-5/12 2xl:basis-1/3 text-start gap-y-4 sm:gap-y-8">
 				<span className="text-lg sm:text-xl bg-[#EFEAF6] text-[#7448AC] w-fit font-medium px-3 py-1 rounded-md">Mobile device</span>
 				<h3 className={"text-[--text-rgb] text-3xl sm:text-6xl lg:text-5xl xl:text-7xl " + props.font.className}>Stay organized on your mobile device</h3>
 				<p className="text-colorGray text-sm  sm:text-lg text-justify">

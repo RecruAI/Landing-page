@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Footer(props: { font: NextFont }) {
 	return (
-		<footer className="responsiveWidth flex flex-col sm:flex-row justify-between py-10 px-5 md:px-8 lg:px-10 bg-[--background-rgb] mt-60 items-center gap-y-1">
+		<footer className="responsiveWidth flex flex-col sm:flex-row justify-between py-10 px-5 md:px-8 lg:px-10 bg-[--background-rgb] mt-28 sm:mt-36 lg:mt-44 xl:mt-56 2xl:mt-60 items-center gap-y-1">
 			<picture className="scale-75 sm:scale-90 md:scale-100">
 				<source srcSet="/landing_page/Icon-Dark.svg" media="(prefers-color-scheme: dark)" />
 				<Image src="/landing_page/Icon-Light.svg" width="150" height="0" alt="Logo image" />
@@ -16,7 +16,6 @@ export default function Footer(props: { font: NextFont }) {
 			>
 				Bartosz Wiaderek
 			</Link>
-			{/* <StartButton /> */}
 		</footer>
 	);
 }
