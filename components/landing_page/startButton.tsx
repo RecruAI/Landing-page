@@ -18,9 +18,10 @@ export default function StartButton() {
 		checkIfLogged();
 
 		supabase.auth.onAuthStateChange(async (event, session) => {
-			if (event == "SIGNED_IN") {
-				setSignIn(true);
-			}
+
+			if (event == "SIGNED_IN") setSignIn(true);
+			else if (event == "SIGNED_OUT") setSignIn(false);
+
 		});
 	}, []);
 
