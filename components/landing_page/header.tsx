@@ -42,7 +42,7 @@ export default function Header(props: { font: NextFont }) {
 
 	return (
 		<>
-			<header className="responsiveWidth fixed left-1/2 z-30 flex -translate-x-1/2 content-center items-center justify-between px-5 py-5 md:px-8 lg:px-10">
+			<header className="responsiveWidth fixed left-1/2 z-30 flex -translate-x-1/2 content-center items-center justify-between px-5 py-3 backdrop-blur-md sm:py-5 md:px-8 lg:px-10">
 				<picture>
 					<source srcSet="/landing_page/Icon-Dark.svg" media="(prefers-color-scheme: dark)" />
 					<Image
