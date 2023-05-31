@@ -2,6 +2,7 @@
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const supabase = createClientComponentClient();
 
@@ -25,6 +26,11 @@ export default function StartButton() {
 		});
 	}, []);
 
-	if (signedIn) return <button className="text-md w-fit rounded-lg bg-colorBlue px-6 py-4 font-medium text-white sm:px-7 md:text-lg">Start for free</button>;
+	if (signedIn)
+		return (
+			<Link href="app">
+				<button className="text-md w-fit rounded-lg bg-colorBlue px-6 py-4 font-medium text-white sm:px-7 md:text-lg">Start for free</button>
+			</Link>
+		);
 	else return <></>;
 }

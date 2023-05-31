@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOut } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 const supabase = createClientComponentClient();
 
@@ -65,7 +66,9 @@ export default function Header(props: { font: NextFont }) {
 								Log Out
 							</button>
 
-							<button className={"rounded-lg bg-colorBlue px-5 py-2 text-sm tracking-widest text-white md:text-lg lg:px-8 lg:py-3 lg:text-xl"}>Start</button>
+							<Link href="app">
+								<button className={"rounded-lg bg-colorBlue px-5 py-2 text-sm tracking-widest text-white md:text-lg lg:px-8 lg:py-3 lg:text-xl"}>Start</button>
+							</Link>
 
 							<FontAwesomeIcon icon={faSignOut} onClick={() => signOut()} className="visible h-5 text-colorGray md:invisible" />
 						</>
