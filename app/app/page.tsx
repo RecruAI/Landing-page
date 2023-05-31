@@ -13,5 +13,5 @@ export default async function Page() {
 		redirect("/");
 	}
 
-	return <div className="text-white">page</div>;
+	return <div className="ml-20vw text-[--text-rgb]"></div>;
 }

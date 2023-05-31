@@ -6,6 +6,7 @@
   --background-rgb: rgb(255, 255, 255);
   --background-rgb-darker:rgb( 242, 242, 242);
   --text-rgb:rgb( 25, 25, 25);
+  --sidebar-rgb:rgb(249, 249, 249);
 
 }
 
@@ -14,6 +15,8 @@
     --background-rgb: rgb( 33, 33, 33);
     --background-rgb-darker:rgb( 20, 20, 20);
     --text-rgb: rgb(255, 255, 255);
+    --sidebar-rgb:rgb(37, 39, 40);
+
   }
 }
 
