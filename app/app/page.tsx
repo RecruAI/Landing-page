@@ -13,5 +13,5 @@ export default async function Page() {
 		redirect("/");
 	}
 
-	return <div className="ml-20vw text-[--text-rgb]"></div>;
+	return <div className="ml-80 text-[--text-rgb] 2xl:ml-20vw"></div>;
 }
