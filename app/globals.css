@@ -23,3 +23,10 @@
 .responsiveWidth{
   @apply w-full QHD:w-3/4 WQHD:w-2/3 mx-auto ;
 }
+
+.input{
+  @apply border-1 border-colorGray/30 hover:border-colorGray/70 px-5 py-4 outline-none bg-transparent text-lg rounded-md text-[--text-rgb]
+}
+.disabledInput{
+  @apply rounded-md border-1 border-colorGray/30 bg-transparent px-5 py-4 text-lg text-colorGray/60 outline-none
+}

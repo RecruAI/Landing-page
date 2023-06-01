@@ -15,15 +15,15 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 	if (!session) {
 		redirect("/");
 	} else {
-		let { data: users, error } = await supabase.from("users").select();
+		let { data: users, error } = await supabase.from("users").select().eq("user_id", session.user.id);
 
-		if (!users) {
+		if (users?.length! > 0) {
 			return (
 				<main>
 					<SideBar />
 					{children}
 				</main>
 			);
-		} else return <GetAccountData />;
+		} else return <GetAccountData user={session.user} />;
 	}
 }
