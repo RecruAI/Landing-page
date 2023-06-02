@@ -1,7 +1,7 @@
 "use client";
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type userData = {
@@ -11,14 +11,14 @@ type userData = {
 };
 
 export default function GetAccountData(props: { user: userData }) {
+	const supabase = createClientComponentClient();
+	const router = useRouter();
+
 	const [error, setError] = useState("");
 
 	const [nickname, setNickname] = useState("");
 	const [name, setName] = useState("");
 	const [lastName, setLastName] = useState("");
-
-	const supabase = createClientComponentClient();
-	const router = useRouter();
 
 	async function handleDataUpload() {
 		if (nickname != "" && name != "" && lastName != "") {
@@ -27,7 +27,7 @@ export default function GetAccountData(props: { user: userData }) {
 			const { error } = await supabase.from("users").insert({ user_id: props.user.id, name: name, last_name: lastName, nickname: nickname, email: props.user.email });
 
 			if (!error) {
-				router.reload();
+				router.refresh();
 			} else {
 				setError("Error occured! Try again later.");
 			}
