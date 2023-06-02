@@ -11,31 +11,31 @@ export default function SideBar() {
 
 			<div className="flex flex-col gap-y-1">
 				<button className="sidebarButton">
-					<FontAwesomeIcon icon={faMagnifyingGlass} className="h-8 w-8 p-1.5 text-colorGray" />
+					<FontAwesomeIcon fixedWidth icon={faMagnifyingGlass} className="h-8 w-8 p-1.5 text-colorGray" />
 					<p className="font-medium text-[--text-rgb]">Quick find</p>
 				</button>
 
 				<button className="sidebarButton">
-					<FontAwesomeIcon icon={faInbox} className="h-8 w-8 p-1.5 text-[#4B81EB]" />
+					<FontAwesomeIcon fixedWidth icon={faInbox} className="h-8 w-8 p-1.5 text-[#4B81EB]" />
 					<p className="font-medium text-[--text-rgb]">Inbox</p>
 				</button>
 			</div>
 
 			<div className="flex flex-col gap-y-1">
 				<button className="sidebarButton">
-					<FontAwesomeIcon icon={faCalendarCheck} className="h-8 w-8 p-1.5 text-[#46BF77]" />
+					<FontAwesomeIcon fixedWidth icon={faCalendarCheck} className="h-8 w-8 p-1.5 text-[#46BF77]" />
 					<p className="font-medium text-[--text-rgb]">Today</p>
 					<p className="ms-auto font-medium text-colorGray">21</p>
 				</button>
 
 				<button className="sidebarButton">
-					<FontAwesomeIcon icon={faCalendar} className="h-8 w-8 p-1.5 text-[#9D59DF]" />
+					<FontAwesomeIcon fixedWidth icon={faCalendar} className="h-8 w-8 p-1.5 text-[#9D59DF]" />
 					<p className="font-medium text-[--text-rgb]">Upcoming</p>
 					<p className="ms-auto font-medium text-colorGray">9</p>
 				</button>
 
 				<button className="sidebarButton">
-					<FontAwesomeIcon icon={faBoxArchive} className="h-8 w-8 p-1.5 text-[#DF8637]" />
+					<FontAwesomeIcon fixedWidth icon={faBoxArchive} className="h-8 w-8 p-1.5 text-[#DF8637]" />
 					<p className="font-medium text-[--text-rgb]">Someday</p>
 					<p className="ms-auto font-medium text-colorGray">2</p>
 				</button>
