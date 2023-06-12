@@ -31,5 +31,8 @@
   @apply rounded-md border-1 border-colorGray/30 bg-transparent px-5 py-4 text-lg text-colorGray/60 outline-none
 }
 .sidebarButton{
-  @apply flex items-center gap-x-3 rounded-lg px-3 py-1.5 transition-all hover:bg-colorGray/30
+  @apply flex items-center gap-x-3 rounded-lg pl-3 pr-4 py-1.5 transition-all hover:bg-colorGray/30
+} 
+.listButton{
+  @apply flex items-center font-medium gap-x-3 rounded-lg pl-3 pr-4 py-1 transition-all hover:bg-colorGray/30
 } 
