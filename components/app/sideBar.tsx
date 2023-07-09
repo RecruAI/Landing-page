@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export default async function SideBar() {
+	// Creating supabase connection
 	const supabase = createServerComponentClient({
 		cookies,
 	});
@@ -13,11 +14,14 @@ export default async function SideBar() {
 		data: { session },
 	} = await supabase.auth.getSession();
 
+	// Fetching user data from db
 	let { data: users, error } = await supabase.from("users").select().eq("user_id", session?.user.id);
 
 	return (
 		<aside className="fixed top-0 h-screen w-80 snap-start scroll-smooth border-r-1 border-colorGray/20 bg-[--sidebar-rgb] 2xl:w-1/5">
 			<div className="flex flex-col gap-y-3 px-4 pb-5 pt-7">
+				{/* Mapping over returned users (always one) */}
+				{/* Returning account tile with name from db */}
 				{users?.map((user) => {
 					return <AccountButton name={`${user?.name} ${user?.last_name}`} key={user.id} />;
 				})}

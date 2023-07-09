@@ -20,6 +20,7 @@ export default function GetAccountData(props: { user: userData }) {
 	const [name, setName] = useState("");
 	const [lastName, setLastName] = useState("");
 
+	// Function inserting new user to db if all credentials are correct
 	async function handleDataUpload() {
 		if (nickname != "" && name != "" && lastName != "") {
 			setError("");
@@ -53,6 +54,7 @@ export default function GetAccountData(props: { user: userData }) {
 			<label htmlFor="lastName">Last name</label>
 			<input id="lastName" name="lastName" type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} className="input mb-4" />
 
+			{/* Showing users email (without possibility to change it) if user created account providing one */}
 			{props.user.email != null && props.user.email != "" ? (
 				<>
 					<label htmlFor="email">Email</label>
@@ -62,6 +64,7 @@ export default function GetAccountData(props: { user: userData }) {
 				<></>
 			)}
 
+			{/* Showing users phone number (without possibility to change it) if user created account providing one */}
 			{props.user.phone != null && props.user.phone != "" ? (
 				<>
 					<label htmlFor="phoneNumber">Phone number</label>
