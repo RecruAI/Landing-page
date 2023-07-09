@@ -1,12 +1,26 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInbox, faMagnifyingGlass, faCalendarCheck, faCalendar, faBoxArchive, faPlus } from "@fortawesome/free-solid-svg-icons";
 import AccountButton from "./accountButton";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function SideBar() {
+export default async function SideBar() {
+	const supabase = createServerComponentClient({
+		cookies,
+	});
+	const {
+		data: { session },
+	} = await supabase.auth.getSession();
+
+	let { data: users, error } = await supabase.from("users").select().eq("user_id", session?.user.id);
+
 	return (
-		<aside className="fixed top-0 h-screen w-80 snap-start overflow-scroll scroll-smooth border-r-1 border-colorGray/20 bg-[--sidebar-rgb] 2xl:w-1/5">
+		<aside className="fixed top-0 h-screen w-80 snap-start scroll-smooth border-r-1 border-colorGray/20 bg-[--sidebar-rgb] 2xl:w-1/5">
 			<div className="flex flex-col gap-y-3 px-4 pb-5 pt-7">
-				<AccountButton name={"Bartosz Wiaderek"} />
+				{users?.map((user) => {
+					return <AccountButton name={`${user?.name} ${user?.last_name}`} key={user.id} />;
+				})}
 
 				<div className="flex flex-col gap-y-1">
 					<button className="sidebarButton">
