@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInbox, faMagnifyingGlass, faCalendarCheck, faCalendar, faBoxArchive, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faInbox, faMagnifyingGlass, faCalendarCheck, faCalendar, faBoxArchive } from "@fortawesome/free-solid-svg-icons";
 import AccountButton from "./accountButton";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import AddListButton from "./addListButton";
 
 export default async function SideBar() {
 	// Creating supabase connection
@@ -82,10 +82,7 @@ export default async function SideBar() {
 						<p className="ms-auto text-colorGray">2</p>
 					</button>
 
-					<button className="listButton mt-1">
-						<FontAwesomeIcon fixedWidth icon={faPlus} className="h-8 w-8 p-1 text-[#4F81E1]" />
-						<p className="font-medium text-[--text-rgb]">Add list</p>
-					</button>
+					<AddListButton />
 				</div>
 			</div>
 		</aside>

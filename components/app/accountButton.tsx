@@ -15,7 +15,10 @@ export default function AccountButton(props: { name: string }) {
 	return (
 		<>
 			<div className="relative z-50">
-				<div onClick={() => setVisible(!visible)} className="flex cursor-pointer items-center gap-x-3 rounded-lg px-3 py-2.5 transition-all hover:bg-colorGray/30">
+				<div
+					onClick={() => setVisible(!visible)}
+					className="flex cursor-pointer select-none items-center gap-x-3 rounded-lg px-3 py-2.5 transition-all hover:bg-colorGray/30"
+				>
 					<div className="flex h-8 w-8 items-center justify-center rounded bg-[--text-rgb] text-lg font-bold text-[--background-rgb]">
 						{props.name.slice(0, 1).toLocaleUpperCase()}
 					</div>
@@ -24,7 +27,7 @@ export default function AccountButton(props: { name: string }) {
 
 				{/* Tiles opened if 'visible' is true */}
 				{visible ? (
-					<div className="absolute -bottom-3 left-0  flex w-full translate-y-full flex-col gap-y-1 rounded-lg bg-[#444647] px-2 py-3">
+					<div className="absolute -bottom-3 left-0 flex w-full translate-y-full flex-col gap-y-1 rounded-lg bg-[#444647] px-2 py-3">
 						<button className="listButton" onClick={async () => push("/")}>
 							<FontAwesomeIcon fixedWidth icon={faHouse} className="h-8 w-8 p-0.5 text-[--text-rgb]" />
 
