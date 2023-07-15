@@ -4,6 +4,7 @@ import AccountButton from "./accountButton";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AddListButton from "./addListButton";
+import ListsContainer from "./listsContainer";
 
 export default async function SideBar() {
 	// Creating supabase connection
@@ -63,26 +64,8 @@ let { data: users, error } = await supabase.from("users").select().eq("user_id",
 			<div className="border-t-1 border-colorGray/20">
 				<div className="flex flex-col gap-y-1 px-4 py-5">
 					<p className="py-2.5 ps-2 text-xl font-semibold text-[--text-rgb]">Lists</p>
-					<button className="listButton">
-						<span className="p-1 text-lg">🍎</span>
-						<p className="text-[--text-rgb]">Numquam</p>
-						<p className="ms-auto text-colorGray">2</p>
-					</button>
-					<button className="listButton">
-						<span className="p-1 text-lg">🦛</span>
-						<p className="text-[--text-rgb]">Similique, non!</p>
-						<p className="ms-auto text-colorGray">2</p>
-					</button>
-					<button className="listButton">
-						<span className="p-1 text-lg">🚥</span>
-						<p className="text-[--text-rgb]">Lorem, ipsum.</p>
-						<p className="ms-auto text-colorGray">2</p>
-					</button>
-					<button className="listButton">
-						<span className="p-1 text-lg">🔑</span>
-						<p className="text-[--text-rgb]">Doloremque</p>
-						<p className="ms-auto text-colorGray">2</p>
-					</button>
+
+					<ListsContainer />
 
 					<AddListButton userId={userSessionId} />
 				</div>

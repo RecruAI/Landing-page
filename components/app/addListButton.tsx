@@ -82,7 +82,6 @@ export default function AddListButton(props: { userId: String | undefined }) {
 						{visibleIconPicker ? (
 							<EmojiPicker
 								onEmojiClick={(e) => {
-									console.log(e);
 									setVisibleIconPicker(false);
 									setSelectedEmoji(e.emoji);
 								}}
