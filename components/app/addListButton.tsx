@@ -4,28 +4,12 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faClose } from "@fortawesome/free-solid-svg-icons";
 import EmojiPicker, { Emoji, EmojiStyle, Theme } from "emoji-picker-react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export default function AddListButton(props: { userId: String | undefined }) {
+export default function AddListButton() {
 	const [visible, setVisible] = useState<boolean>(false);
-	const [visibleIconPicker, setVisibleIconPicker] = useState<boolean>(false);
-
 	const [selectedEmoji, setSelectedEmoji] = useState<string>("1f5d2-fe0f");
 	const [listTitle, setListTitle] = useState<string>("");
-
-	const userId = props.userId;
-	const supabase = createClientComponentClient({});
-
-	async function insertNewListToDB() {
-		const { data, error } = await supabase
-			.from("lists")
-			// .insert([{ user_id: userId, name: listTitle, icon: selectedEmoji }])
-			.select("*");
-
-		console.log(data);
-
-		// setVisible(false);
-	}
+	const [visibleIconPicker, setVisibleIconPicker] = useState<boolean>(false);
 
 	return (
 		<>
@@ -72,10 +56,8 @@ export default function AddListButton(props: { userId: String | undefined }) {
 
 						<button
 							className={`text-md w-full rounded-lg px-6 py-4 font-medium text-white transition-all duration-500 sm:px-7 md:text-lg ${
-								listTitle != "" ? "bg-colorBlue" : "bg-red-900"
+								listTitle != "" ? "bg-colorBlue" : "bg-red-600"
 							}`}
-							disabled={listTitle == ""}
-							onClick={() => insertNewListToDB()}
 						>
 							{listTitle != "" ? 'Add "' + listTitle + '" list' : "Fill all of the fields!"}
 						</button>

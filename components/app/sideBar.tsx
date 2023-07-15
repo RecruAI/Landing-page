@@ -10,15 +10,12 @@ export default async function SideBar() {
 	const supabase = createServerComponentClient({
 		cookies,
 	});
-
 	const {
 		data: { session },
 	} = await supabase.auth.getSession();
 
-	const userId: String | undefined = session?.user.id;
-
 	// Fetching user data from db
-	let { data: users, error } = await supabase.from("users").select().eq("user_id", userId);
+	let { data: users, error } = await supabase.from("users").select().eq("user_id", session?.user.id);
 
 	return (
 		<aside className="fixed top-0 h-screen w-80 snap-start scroll-smooth border-r-1 border-colorGray/20 bg-[--sidebar-rgb] 2xl:w-1/5">
@@ -85,7 +82,7 @@ export default async function SideBar() {
 						<p className="ms-auto text-colorGray">2</p>
 					</button>
 
-					<AddListButton userId={userId} />
+					<AddListButton />
 				</div>
 			</div>
 		</aside>
