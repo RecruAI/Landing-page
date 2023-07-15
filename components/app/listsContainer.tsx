@@ -3,29 +3,62 @@
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { Key, useEffect, useState } from "react";
+import { PostgrestSingleResponse } from "@supabase/supabase-js";
+import { RealtimePostgresChangesPayload } from "@supabase/realtime-js/dist/module/RealtimeChannel";
+import { useEffect, useState } from "react";
+
+type dataType = {
+	id: string;
+	user_id: string;
+	name: string;
+	icon: string;
+	date_created: string;
+}[];
 
 export default function ListsContainer() {
-	const [lists, setLists] = useState<any[]>();
+	const [lists, setLists] = useState<dataType>([]);
 
 	const supabase = createClientComponentClient({});
 
 	useEffect(() => {
 		async function fetchData() {
-			let { data: lists, error } = await supabase.from("lists").select("*");
+			let { data: lists, error }: PostgrestSingleResponse<dataType> = await supabase.from("lists").select("*");
 
-			setLists(lists != null ? lists : []);
+			setLists(lists != undefined && lists != null ? lists : []);
 		}
 
 		fetchData();
+
+		supabase
+			.channel("any")
+			.on("postgres_changes", { event: "*", schema: "public", table: "lists" }, (payload) => handleListsChange(payload))
+			.subscribe();
+
+		function handleListsChange(payload: any) {
+			if (payload.eventType == "DELETE") {
+				const newArray = lists.filter(function (item: any) {
+					return item.id != payload.old.id;
+				});
+				setLists(newArray);
+			} else if (payload.eventType == "INSERT") {
+				let newArray = lists;
+				newArray.unshift(payload.new);
+				setLists(newArray);
+			} else {
+				let objIndex: number = lists.findIndex((obj) => obj.id == payload.old.id);
+				let newArray = lists;
+				newArray[objIndex] = payload.new;
+				setLists(newArray);
+			}
+		}
 	}, []);
 
 	return (
 		<>
-			{lists != undefined ? (
-				lists.map((list, index) => {
+			{lists.length != 0 ? (
+				lists.map((list) => {
 					return (
-						<button className="listButton" key={index}>
+						<button className="listButton" key={list.id}>
 							<span className="p-1 text-lg">{list.icon}</span>
 
 							<p className="text-[--text-rgb]">{list.name}</p>
