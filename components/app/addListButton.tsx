@@ -3,14 +3,14 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faClose } from "@fortawesome/free-solid-svg-icons";
-import EmojiPicker, { Emoji, EmojiStyle, Theme } from "emoji-picker-react";
+import EmojiPicker, { EmojiStyle, Theme } from "emoji-picker-react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function AddListButton(props: { userId: String | undefined }) {
 	const [visible, setVisible] = useState<boolean>(false);
 	const [visibleIconPicker, setVisibleIconPicker] = useState<boolean>(false);
 
-	const [selectedEmoji, setSelectedEmoji] = useState<string>("1f5d2-fe0f");
+	const [selectedEmoji, setSelectedEmoji] = useState<string>("🗒️");
 	const [listTitle, setListTitle] = useState<string>("");
 
 	const userId = props.userId;
@@ -30,7 +30,7 @@ export default function AddListButton(props: { userId: String | undefined }) {
 			<button
 				className="listButton mt-1"
 				onClick={() => {
-					setSelectedEmoji("1f5d2-fe0f");
+					setSelectedEmoji("🗒️");
 					setVisibleIconPicker(false);
 					setListTitle("");
 					setVisible(true);
@@ -54,7 +54,7 @@ export default function AddListButton(props: { userId: String | undefined }) {
 								onClick={() => setVisibleIconPicker(true)}
 								className="m-auto cursor-pointer rounded-md bg-colorGray/20 p-3 transition-all hover:bg-colorGray/30"
 							>
-								<Emoji unified={selectedEmoji} emojiStyle={EmojiStyle.NATIVE} size={32} />
+								{selectedEmoji}
 							</div>
 							<input
 								id="nickname"
@@ -82,8 +82,9 @@ export default function AddListButton(props: { userId: String | undefined }) {
 						{visibleIconPicker ? (
 							<EmojiPicker
 								onEmojiClick={(e) => {
+									console.log(e);
 									setVisibleIconPicker(false);
-									setSelectedEmoji(e.unified);
+									setSelectedEmoji(e.emoji);
 								}}
 								autoFocusSearch={false}
 								theme={Theme.DARK}
