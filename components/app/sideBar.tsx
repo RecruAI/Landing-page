@@ -21,7 +21,7 @@ const userSessionId: String | undefined = session?.user.id;
 let { data: users, error } = await supabase.from("users").select().eq("user_id", userSessionId);
 
 	return (
-		<aside className="h-screen w-80 overflow-y-auto scroll-smooth border-r-1 border-colorGray/20 bg-[--sidebar-rgb] 2xl:w-1/5">
+		<aside className="absolute -left-full h-screen w-80 overflow-y-auto scroll-smooth border-r-1 border-colorGray/20 bg-[--sidebar-rgb] xl:left-0 2xl:w-1/5">
 			<div className="flex flex-col gap-y-3 px-4 pb-5 pt-7">
 				{/* Mapping over returned users (always one) */}
 				{/* Returning account tile with name from db */}

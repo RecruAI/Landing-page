@@ -49,7 +49,7 @@ export default function AccountButton(props: { name: string }) {
 				)}
 			</div>
 
-			{visible ? <div className="absolute left-0 top-0 z-30 h-screen w-screen " onClick={() => setVisible(false)}></div> : <></>}
+			{visible ? <div className="fixed left-0 top-0 z-30 h-screen w-screen" onClick={() => setVisible(false)}></div> : <></>}
 		</>
 	);
 }

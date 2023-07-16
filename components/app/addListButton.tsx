@@ -41,7 +41,7 @@ export default function AddListButton(props: { userId: String | undefined }) {
 			</button>
 
 			{visible ? (
-				<div className="absolute left-0 top-0 flex h-screen w-screen">
+				<div className="fixed left-0 top-0 flex h-screen w-screen ">
 					<div className="absolute left-1/2 top-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-y-6 rounded-xl bg-[--sidebar-rgb] p-6">
 						<div className="flex w-full items-center">
 							<p className="me-auto text-xl font-bold text-[--text-rgb]">Add new list</p>
@@ -96,7 +96,7 @@ export default function AddListButton(props: { userId: String | undefined }) {
 						)}
 					</div>
 
-					<div className="absolute left-0 top-0 z-30 h-screen w-screen" onClick={() => setVisible(false)}></div>
+					<div className="fixed left-0 top-0 z-30 h-screen w-screen" onClick={() => setVisible(false)}></div>
 				</div>
 			) : (
 				<></>
