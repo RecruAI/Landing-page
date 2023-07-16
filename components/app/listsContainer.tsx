@@ -4,7 +4,6 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
-import { RealtimePostgresChangesPayload } from "@supabase/realtime-js/dist/module/RealtimeChannel";
 import { useEffect, useState } from "react";
 
 type dataType = {
