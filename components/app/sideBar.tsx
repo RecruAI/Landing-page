@@ -23,9 +23,10 @@ export default function SideBar() {
 				</div>
 			</div>
 
+			{/* Sidebar */}
 			<aside
-				className={`absolute z-40 h-screen w-80 overflow-y-scroll scroll-smooth border-r-1 border-colorGray/20 bg-[--sidebar-rgb] transition-all duration-500 ease-out xl:left-0 2xl:w-1/5 ${
-					visible ? "left-0" : "-left-80 2xl:-left-[20vw]"
+				className={`absolute z-40 h-screen w-80 overflow-y-auto border-r-1 border-colorGray/20 bg-[--sidebar-rgb] transition-all duration-500 ease-out 2xl:w-1/5 ${
+					visible ? "left-0" : "-left-80 xl:left-0"
 				}`}
 			>
 				<div className="flex flex-col gap-y-3 px-4 pb-5 pt-7">

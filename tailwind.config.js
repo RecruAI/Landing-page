@@ -19,7 +19,8 @@ module.exports = {
 				1: "1px",
 			},
 			margin: {
-				"20vw": "20vw",
+				"20vw": "calc(20vw + 3rem)",
+				88: "22rem",
 			},
 			padding: { 0.75: "0.1875rem" },
 		},
