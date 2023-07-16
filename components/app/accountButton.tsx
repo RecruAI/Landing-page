@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,9 +8,18 @@ import { faHouse, faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 const supabase = createClientComponentClient();
 
-export default function AccountButton(props: { name: string }) {
+export default function AccountButton(props: { userId: String }) {
 	const [visible, setVisible] = useState<boolean>(false);
+	const [name, setName] = useState<String>("Loading...");
 	const { push } = useRouter();
+
+	useEffect(() => {
+		async function fetch() {
+			const { data: user_name }: any = await supabase.from("users").select().eq("user_id", props.userId);
+			setName(user_name[0].name + " " + user_name[0].last_name);
+		}
+		fetch();
+	}, []);
 
 	return (
 		<>
@@ -20,9 +29,9 @@ export default function AccountButton(props: { name: string }) {
 					className="flex cursor-pointer select-none items-center gap-x-3 rounded-lg px-3 py-2.5 transition-all hover:bg-colorGray/30"
 				>
 					<div className="flex h-8 w-8 items-center justify-center rounded bg-[--text-rgb] text-lg font-bold text-[--background-rgb]">
-						{props.name.slice(0, 1).toLocaleUpperCase()}
+						{name.slice(0, 1).toLocaleUpperCase()}
 					</div>
-					<p className="text-lg font-semibold text-[--text-rgb]">{props.name}</p>
+					<p className="text-lg font-semibold text-[--text-rgb]">{name}</p>
 				</div>
 
 				{/* Tiles opened if 'visible' is true */}

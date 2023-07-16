@@ -1,33 +1,26 @@
+"use client";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInbox, faMagnifyingGlass, faCalendarCheck, faCalendar, faBoxArchive } from "@fortawesome/free-solid-svg-icons";
 import AccountButton from "./accountButton";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 import AddListButton from "./addListButton";
 import ListsContainer from "./listsContainer";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default async function SideBar() {
 	// Creating supabase connection
-	const supabase = createServerComponentClient({
-		cookies,
-	});
+	const supabase = createClientComponentClient({});
+	// Getting auth data
 	const {
 		data: { session },
-	} = await supabase.auth.getSession();
-
-const userSessionId: String | undefined = session?.user.id;
-
-// Fetching user data from db
-let { data: users, error } = await supabase.from("users").select().eq("user_id", userSessionId);
+	}: any = await supabase.auth.getSession();
+	// Saving id of user session to variable
+	const userSessionId: String = session?.user.id;
 
 	return (
 		<aside className="absolute -left-full h-screen w-80 overflow-y-auto scroll-smooth border-r-1 border-colorGray/20 bg-[--sidebar-rgb] xl:left-0 2xl:w-1/5">
 			<div className="flex flex-col gap-y-3 px-4 pb-5 pt-7">
-				{/* Mapping over returned users (always one) */}
-				{/* Returning account tile with name from db */}
-				{users?.map((user) => {
-					return <AccountButton name={`${user?.name} ${user?.last_name}`} key={user.id} />;
-				})}
+				<AccountButton userId={userSessionId} />
 
 				<div className="flex flex-col gap-y-1">
 					<button className="sidebarButton">
