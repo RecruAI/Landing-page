@@ -5,22 +5,12 @@ import { faInbox, faMagnifyingGlass, faCalendarCheck, faCalendar, faBoxArchive }
 import AccountButton from "./accountButton";
 import AddListButton from "./addListButton";
 import ListsContainer from "./listsContainer";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export default async function SideBar() {
-	// Creating supabase connection
-	const supabase = createClientComponentClient({});
-	// Getting auth data
-	const {
-		data: { session },
-	}: any = await supabase.auth.getSession();
-	// Saving id of user session to variable
-	const userSessionId: String = session?.user.id;
-
+export default function SideBar() {
 	return (
 		<aside className="absolute -left-full h-screen w-80 overflow-y-auto scroll-smooth border-r-1 border-colorGray/20 bg-[--sidebar-rgb] xl:left-0 2xl:w-1/5">
 			<div className="flex flex-col gap-y-3 px-4 pb-5 pt-7">
-				<AccountButton userId={userSessionId} />
+				<AccountButton />
 
 				<div className="flex flex-col gap-y-1">
 					<button className="sidebarButton">
@@ -60,7 +50,7 @@ export default async function SideBar() {
 
 					<ListsContainer />
 
-					<AddListButton userId={userSessionId} />
+					<AddListButton />
 				</div>
 			</div>
 		</aside>

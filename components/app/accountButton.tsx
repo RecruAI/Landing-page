@@ -8,14 +8,18 @@ import { faHouse, faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 const supabase = createClientComponentClient();
 
-export default function AccountButton(props: { userId: String }) {
+export default function AccountButton() {
 	const [visible, setVisible] = useState<boolean>(false);
 	const [name, setName] = useState<String>("Loading...");
 	const { push } = useRouter();
 
 	useEffect(() => {
 		async function fetch() {
-			const { data: user_name }: any = await supabase.from("users").select().eq("user_id", props.userId);
+			const {
+				data: { session },
+			} = await supabase.auth.getSession();
+
+			const { data: user_name }: any = await supabase.from("users").select().eq("user_id", session?.user.id);
 			setName(user_name[0].name + " " + user_name[0].last_name);
 		}
 		fetch();

@@ -5,21 +5,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faClose } from "@fortawesome/free-solid-svg-icons";
 import EmojiPicker, { EmojiStyle, Theme } from "emoji-picker-react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { strict } from "assert";
 
-export default function AddListButton(props: { userId: String | undefined }) {
+export default function AddListButton() {
 	const [visible, setVisible] = useState<boolean>(false);
 	const [visibleIconPicker, setVisibleIconPicker] = useState<boolean>(false);
 
 	const [selectedEmoji, setSelectedEmoji] = useState<string>("🗒️");
 	const [listTitle, setListTitle] = useState<string>("");
 
-	const userId = props.userId;
 	const supabase = createClientComponentClient({});
+
+	async function getUserId(): Promise<string> {
+		const {
+			data: { session },
+		}: any = await supabase.auth.getSession();
+		return session.user.id;
+	}
 
 	async function insertNewListToDB() {
 		const { data, error } = await supabase
 			.from("lists")
-			.insert([{ user_id: userId, name: listTitle, icon: selectedEmoji }])
+			.insert([{ user_id: await getUserId(), name: listTitle, icon: selectedEmoji }])
 			.select();
 
 		setVisible(false);
@@ -52,7 +59,7 @@ export default function AddListButton(props: { userId: String | undefined }) {
 						<div className="flex gap-x-5">
 							<div
 								onClick={() => setVisibleIconPicker(true)}
-								className="m-auto cursor-pointer rounded-md bg-colorGray/20 p-3 transition-all hover:bg-colorGray/30"
+								className="m-auto aspect-square cursor-pointer rounded-md bg-colorGray/20 p-3 transition-all hover:bg-colorGray/30"
 							>
 								{selectedEmoji}
 							</div>
