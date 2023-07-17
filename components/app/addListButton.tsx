@@ -56,10 +56,10 @@ export default function AddListButton() {
 						</div>
 
 						{/* Emoji button and title input */}
-						<div className="flex gap-x-5">
+						<div className="flex gap-x-2 sm:gap-x-5">
 							<div
 								onClick={() => setVisibleIconPicker(true)}
-								className="m-auto aspect-square cursor-pointer rounded-md bg-colorGray/20 p-3 transition-all hover:bg-colorGray/30"
+								className="sm:text-md m-auto aspect-square cursor-pointer rounded-md bg-colorGray/20 p-2 text-sm transition-all hover:bg-colorGray/30 sm:p-3"
 							>
 								{selectedEmoji}
 							</div>
@@ -76,7 +76,7 @@ export default function AddListButton() {
 						</div>
 
 						<button
-							className={`md:text-md mt-3 w-full rounded-lg px-6 py-4 text-sm font-medium text-white transition-all duration-500 sm:px-7 ${
+							className={`md:text-md mt-3 w-full rounded-lg px-5 py-3 text-sm font-medium text-white transition-all duration-500 sm:px-7 sm:py-4 ${
 								listTitle != "" ? "bg-colorBlue" : "bg-red-900"
 							}`}
 							disabled={listTitle == ""}
