@@ -46,7 +46,7 @@ export default function AccountButton() {
 
 				{/* Tiles opened if 'visible' is true */}
 				{visible ? (
-					<div className="absolute -bottom-3 left-0 flex w-full translate-y-full flex-col gap-y-1 rounded-lg bg-[#444647] px-2 py-3">
+					<div className="absolute -bottom-3 left-0 flex w-full translate-y-full flex-col gap-y-1 rounded-lg bg-[--background-rgb] px-2 py-3 shadow-md">
 						<button className="sidebarButton" onClick={async () => push("/")}>
 							<FontAwesomeIcon fixedWidth icon={faHouse} className="h-8 w-8 p-0.5 text-[--text-rgb]" />
 

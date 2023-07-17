@@ -49,7 +49,7 @@ export default function AddListButton() {
 
 			{visible ? (
 				<div className="fixed left-0 top-0 flex h-screen w-screen">
-					<div className="absolute left-1/2 top-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-y-5 rounded-lg bg-[--sidebar-rgb] px-7 py-6 sm:px-10">
+					<div className="absolute left-1/2 top-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-y-5 rounded-lg bg-[--sidebar-rgb] px-7 py-6 shadow-md sm:px-10">
 						<div className="flex w-full items-center">
 							<p className="me-auto text-lg font-bold text-[--text-rgb]">Add new list</p>
 							<FontAwesomeIcon fixedWidth icon={faClose} className="h-8 w-8 p-1 text-colorGray/30" onClick={() => setVisible(false)} />
@@ -77,7 +77,7 @@ export default function AddListButton() {
 
 						<button
 							className={`md:text-md mt-3 w-full rounded-lg px-5 py-3 text-sm font-medium text-white transition-all duration-500 sm:px-7 sm:py-4 ${
-								listTitle != "" ? "bg-colorBlue" : "bg-red-900"
+								listTitle != "" ? "bg-colorBlue" : "bg-red-700"
 							}`}
 							disabled={listTitle == ""}
 							onClick={() => insertNewListToDB()}
