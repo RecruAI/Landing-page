@@ -19,7 +19,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 		redirect("/");
 	} else {
 		// Fetching users with user id of user
-		let { data: users, error } = await supabase.from("users").select().eq("user_id", session.user.id);
+		let { data: users } = await supabase.from("users").select().eq("user_id", session.user.id);
 
 		// Checking if there is record in db with user id
 		if (users?.length! > 0) {

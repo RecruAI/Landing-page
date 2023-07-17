@@ -25,7 +25,7 @@ export default function SideBar() {
 
 			{/* Sidebar */}
 			<aside
-				className={`absolute z-40 h-screen w-64 overflow-y-auto border-r-1 border-colorGray/20 bg-[--sidebar-rgb] transition-all duration-500 ease-out sm:w-72 2xl:w-1/5 ${
+				className={`absolute z-40 min-h-screen w-64 border-r-1 border-colorGray/20 bg-[--sidebar-rgb] transition-all duration-500 ease-out sm:w-72 2xl:w-1/5 ${
 					visible ? "left-0" : "-left-64 sm:-left-72 xl:left-0"
 				}`}
 			>
