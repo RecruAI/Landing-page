@@ -35,7 +35,7 @@ export default function AddListButton() {
 	return (
 		<>
 			<button
-				className="listButton mt-1"
+				className="sidebarButton mt-1"
 				onClick={() => {
 					setSelectedEmoji("🗒️");
 					setVisibleIconPicker(false);
@@ -48,10 +48,10 @@ export default function AddListButton() {
 			</button>
 
 			{visible ? (
-				<div className="fixed left-0 top-0 flex h-screen w-screen ">
-					<div className="absolute left-1/2 top-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-y-6 rounded-xl bg-[--sidebar-rgb] p-6">
+				<div className="fixed left-0 top-0 flex h-screen w-screen">
+					<div className="absolute left-1/2 top-1/2 z-50 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-y-5 rounded-lg bg-[--sidebar-rgb] px-7 py-6 sm:px-10">
 						<div className="flex w-full items-center">
-							<p className="me-auto text-xl font-bold text-[--text-rgb]">Add new list</p>
+							<p className="me-auto text-lg font-bold text-[--text-rgb]">Add new list</p>
 							<FontAwesomeIcon fixedWidth icon={faClose} className="h-8 w-8 p-1 text-colorGray/30" onClick={() => setVisible(false)} />
 						</div>
 
@@ -71,12 +71,12 @@ export default function AddListButton() {
 								value={listTitle}
 								placeholder="List title"
 								onChange={(e) => setListTitle(e.target.value)}
-								className="rounded-md border-1 border-colorGray/30 bg-transparent px-3 py-2 text-lg text-[--text-rgb] outline-none hover:border-colorGray/70"
+								className="rounded-md border-1 border-colorGray/30 bg-transparent px-3 py-2 text-sm text-[--text-rgb] outline-none hover:border-colorGray/70"
 							/>
 						</div>
 
 						<button
-							className={`text-md w-full rounded-lg px-6 py-4 font-medium text-white transition-all duration-500 sm:px-7 md:text-lg ${
+							className={`md:text-md mt-3 w-full rounded-lg px-6 py-4 text-sm font-medium text-white transition-all duration-500 sm:px-7 ${
 								listTitle != "" ? "bg-colorBlue" : "bg-red-900"
 							}`}
 							disabled={listTitle == ""}

@@ -17,7 +17,7 @@ export default function SectionOne(props: { font: NextFont }) {
 
 			<StartButton />
 
-			<div className="overflow-hidden rounded-3xl border-b-1  border-colorGray/30 bg-gradient-to-b from-transparent to-[--background-rgb-darker] px-8 md:px-12 lg:px-16 xl:px-20 ">
+			<div className="overflow-hidden rounded-3xl border-b-1 border-colorGray/30 bg-gradient-to-b from-transparent to-[--background-rgb-darker] px-8 md:px-12 lg:px-16 xl:px-20 ">
 				<picture>
 					<source srcSet="/landing_page/images/SectionOneDark-Mobile.png" media="(hover: none) and (pointer: coarse) and (prefers-color-scheme: dark)" />
 					<source srcSet="/landing_page/images/SectionOneLight-Mobile.png" media="(hover: none) and (pointer: coarse) and (prefers-color-scheme: light)" />
