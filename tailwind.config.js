@@ -19,10 +19,10 @@ module.exports = {
 				1: "1px",
 			},
 			margin: {
-				"20vw": "calc(20vw + 3rem)",
-				88: "22rem",
+				"20vw": "20vw",
 			},
 			padding: { 0.75: "0.1875rem" },
+			width: { xlFull: "calc(100vw - 18rem)" },
 		},
 	},
 	plugins: [],

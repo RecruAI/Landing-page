@@ -7,14 +7,10 @@ export const metadata = {
 	title: "DoIt",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
-  return (
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+	return (
 		<html lang="en" className="overflow-x-hidden bg-[--background-rgb]">
 			<body className={inter.className}>{children}</body>
 		</html>
-  );
+	);
 }

@@ -26,7 +26,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 			return (
 				<main>
 					<SideBar />
-					<div className="absolute mx-16 my-1 xl:me-12 xl:ms-88 2xl:ms-20vw">{children}</div>
+					<div className="absolute w-full xl:ms-72 xl:w-xlFull 2xl:ms-20vw 2xl:w-4/5">{children}</div>
 				</main>
 			);
 
