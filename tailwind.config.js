@@ -22,10 +22,12 @@ module.exports = {
 			},
 			margin: {
 				"20vw": "20vw",
+				"7px": "7px",
 			},
 			padding: { 0.75: "0.1875rem" },
 			width: { xlFull: "calc(100vw - 18rem)" },
 			spacing: { 0.75: "3px" },
+
 			animation: {
 				"shrink-bounce": "shrink-bounce 200ms cubic-bezier(.4,.0,.23,1)",
 				"checkbox-check": "checkbox-check 125ms 250ms cubic-bezier(.4,.0,.23,1) forwards",
