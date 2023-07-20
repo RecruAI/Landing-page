@@ -35,23 +35,23 @@
 } 
 
 .taskTile{
-  @apply -mx-3 flex items-center gap-x-3 rounded-lg px-5 py-0.5 font-medium transition-all
+  @apply -mx-3 flex items-center gap-x-4 rounded-lg px-5 py-0.5 font-medium transition-all
 }
 .taskTileUndone{
   @apply text-[--text-rgb] outline outline-2 -outline-offset-1 outline-colorGray/0 hover:outline-colorGray/50
-
 }
 .taskTileDone{
   @apply bg-colorGray/10 text-colorGray/60
 }
+
 .spanCheckbox{
-  @apply mr-4 flex h-5 w-5 items-center justify-center rounded-sm border-2 border-colorGray bg-transparent transition-all duration-300 ease-bouncy-bezier
+  @apply flex h-5 w-5  items-center justify-center rounded-md border-2 border-colorGray bg-transparent transition-all duration-300 ease-bouncy-bezier
 }
 .activeSpanCheckbox{
   @apply border-10 border-colorBlue animate-shrink-bounce;
 }
 .activeSpanCheckbox::before{
-  @apply absolute content-[""] animate-checkbox-check top-2.5 left-0.75 border-transparent border-b-3 border-r-3 rotate-45 origin-bottom-left;
+  @apply absolute content-[""] animate-checkbox-check top-2.5 left-0.75 rounded-sm border-transparent border-b-3 border-r-3 rotate-45 origin-bottom-left;
 }
 
 
