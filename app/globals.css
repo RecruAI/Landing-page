@@ -44,6 +44,16 @@
 .taskTileDone{
   @apply bg-colorGray/10 text-colorGray/60
 }
+.spanCheckbox{
+  @apply mr-4 flex h-5 w-5 items-center justify-center rounded-sm border-2 border-colorGray bg-transparent transition-all duration-300 ease-bouncy-bezier
+}
+.activeSpanCheckbox{
+  @apply border-10 border-colorBlue animate-shrink-bounce;
+}
+.activeSpanCheckbox::before{
+  @apply absolute content-[""] animate-checkbox-check top-2.5 left-0.75 border-transparent border-b-3 border-r-3 rotate-45 origin-bottom-left;
+}
+
 
 /* Menu Button */
 .menu-btn span,
@@ -122,21 +132,3 @@
   transition-delay: .5s;
 }
 
-
-
-input[type='checkbox'] + label{
-  @apply relative flex transition-all ease-bouncy-bezier duration-300 my-2.5 items-center;
-
-}
-input[type='checkbox'] + label > span{
-@apply border-2 transition-all ease-bouncy-bezier border-colorGray duration-300 rounded-sm bg-transparent h-5 w-5 mr-4 flex justify-center items-center;  
-} 
-
-input[type='checkbox']:checked + label > span{
-  @apply  border-10 border-colorBlue animate-shrink-bounce;
-
-}
-input[type='checkbox']:checked + label > span:before{
-  @apply absolute content-[""] animate-checkbox-check top-2.5 left-0.75 border-transparent border-b-3 border-r-3 rotate-45 origin-bottom-left;
-
-}

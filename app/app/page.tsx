@@ -1,7 +1,12 @@
+"use client";
+
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 
-export default async function Page() {
+export default function Page() {
+	const [checkbox, setCheckbox] = useState<boolean>(false);
+
 	return (
 		<article className="mx-20 mt-28 text-[--text-rgb]">
 			<div className="flex flex-col gap-y-10">
@@ -35,31 +40,15 @@ export default async function Page() {
 
 					{/* Tasks */}
 					<div className="flex flex-col gap-y-1">
-						<button className="taskTile taskTileUndone">
-							<input id="checkbox1" type="checkbox" className="hidden h-0 w-0" />
-							<label for="checkbox1">
-								<span></span>
-							</label>
+						{/* Example of task */}
+						<button className={`taskTile ${checkbox ? "taskTileDone line-through" : "taskTileUndone"}`}>
+							{/* Checkbox */}
+							<div onClick={() => setCheckbox(!checkbox)} className="relative my-2.5 flex items-center transition-all duration-300 ease-bouncy-bezier">
+								<span className={`spanCheckbox ${checkbox ? "activeSpanCheckbox" : ""}`}></span>
+							</div>
 
-							<p>New table</p>
-						</button>
-
-						<button className="taskTileDone taskTile">
-							<input id="checkbox2" type="checkbox" className="hidden h-0 w-0" />
-							<label for="checkbox2">
-								<span></span>
-							</label>
-
-							<p className="line-through">New table</p>
-						</button>
-
-						<button className="taskTileDone taskTile">
-							<input id="checkbox3" type="checkbox" className="hidden h-0 w-0" />
-							<label for="checkbox3">
-								<span></span>
-							</label>
-
-							<p className="line-through">New table</p>
+							{/* Title */}
+							<p>Example task</p>
 						</button>
 					</div>
 				</div>
