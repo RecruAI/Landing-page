@@ -1,7 +1,5 @@
 "use client";
 
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
@@ -49,12 +47,34 @@ export default function ListsContainer() {
 	return (
 		<>
 			{loading ? (
-				// Showing loading before fetched data from db
-				<button className="listButton">
-					<FontAwesomeIcon fixedWidth icon={faSpinner} className="h-8 w-8 p-1.5 text-colorGray" />
+				<>
+					{/* // Showing loading before fetched data from db */}
+					<button className={`listButton animate-pulse bg-colorGray/10`}>
+						<div className="m-1 h-7 w-7 rounded-lg bg-colorGray/50 text-lg"></div>
 
-					<p className="text-[--text-rgb]">Loading...</p>
-				</button>
+						<div className="h-5 w-[40%] rounded bg-colorGray/50"></div>
+					</button>
+					<button className={`listButton animate-pulse bg-colorGray/10`} style={{ animationDelay: "75ms" }}>
+						<div className="m-1 h-7 w-7 rounded-lg bg-colorGray/50 text-lg"></div>
+
+						<div className="h-5 w-[85%] rounded bg-colorGray/50"></div>
+					</button>
+					<button className={`listButton animate-pulse bg-colorGray/10`} style={{ animationDelay: "150ms" }}>
+						<div className="m-1 h-7 w-7 rounded-lg bg-colorGray/50 text-lg"></div>
+
+						<div className="h-5 w-[75%] rounded bg-colorGray/50"></div>
+					</button>
+					<button className={`listButton animate-pulse bg-colorGray/10`} style={{ animationDelay: "225ms" }}>
+						<div className="m-1 h-7 w-7 rounded-lg bg-colorGray/50 text-lg"></div>
+
+						<div className="h-5 w-[25%] rounded bg-colorGray/50"></div>
+					</button>
+					<button className={`listButton animate-pulse bg-colorGray/10`} style={{ animationDelay: "300ms" }}>
+						<div className="m-1 h-7 w-7 rounded-lg bg-colorGray/50 text-lg"></div>
+
+						<div className="h-5 w-[65%] rounded bg-colorGray/50"></div>
+					</button>
+				</>
 			) : (
 				lists.map((list) => {
 					return (
