@@ -2,11 +2,14 @@
 
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 
-export default function Title(props: { icon: string; name: string }) {
+export default function Title(props: { icon: string; name: string; id: string }) {
 	const [title, setTitle] = useState<string>(props.name);
 	const [titleEditing, setTitleEditing] = useState<Boolean>(false);
+
+	const supabase = createClientComponentClient({});
 
 	return (
 		<div className="flex flex-col gap-y-8">
@@ -15,7 +18,10 @@ export default function Title(props: { icon: string; name: string }) {
 				<input
 					autoFocus
 					value={title}
-					onBlur={() => setTitleEditing(false)}
+					onBlur={async (e) => {
+						await supabase.from("lists").update({ name: e.target.value }).eq("id", props.id);
+						setTitleEditing(false);
+					}}
 					onChange={(e) => setTitle(e.target.value)}
 					className="-ms-5 w-fit cursor-pointer rounded-lg bg-transparent px-5 py-2 text-5xl font-semibold text-[--text-rgb] outline-none transition-all"
 				/>

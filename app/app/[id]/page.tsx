@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
 	return (
 		<article className="mx-20 mt-28 text-[--text-rgb]">
-			<Title icon={dataList.icon} name={dataList.name} />
+			<Title icon={dataList.icon} name={dataList.name} id={params.id} />
 
 			<div className="mt-16 flex flex-col gap-y-20">
 				{/* Task table */}
