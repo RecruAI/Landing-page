@@ -51,7 +51,7 @@
   @apply border-10 border-colorBlue animate-shrink-bounce;
 }
 .activeSpanCheckbox::before{
-  @apply absolute content-[""] animate-checkbox-check top-2.5 left-0.75 rounded-sm border-transparent border-b-3 border-r-3 rotate-45 origin-bottom-left;
+  @apply absolute content-[""] animate-checkbox-check top-2.5 left-[3px] rounded-sm border-transparent border-b-3 border-r-3 rotate-45 origin-bottom-left;
 }
 
 
