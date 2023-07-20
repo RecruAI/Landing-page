@@ -50,31 +50,31 @@ export default function ListsContainer() {
 			{loading ? (
 				<>
 					{/* // Showing loading before fetched data from db */}
-					<button className={`listButton animate-pulse bg-colorGray/10`}>
+					<div className={`sidebarButton animate-pulse bg-colorGray/10`}>
 						<div className="m-1 h-7 w-7 rounded-lg bg-colorGray/50 text-lg"></div>
 
 						<div className="h-5 w-[40%] rounded bg-colorGray/50"></div>
-					</button>
-					<button className={`listButton animate-pulse bg-colorGray/10`} style={{ animationDelay: "75ms" }}>
+					</div>
+					<div className={`sidebarButton animate-pulse bg-colorGray/10`} style={{ animationDelay: "75ms" }}>
 						<div className="m-1 h-7 w-7 rounded-lg bg-colorGray/50 text-lg"></div>
 
 						<div className="h-5 w-[85%] rounded bg-colorGray/50"></div>
-					</button>
-					<button className={`listButton animate-pulse bg-colorGray/10`} style={{ animationDelay: "150ms" }}>
+					</div>
+					<div className={`sidebarButton animate-pulse bg-colorGray/10`} style={{ animationDelay: "150ms" }}>
 						<div className="m-1 h-7 w-7 rounded-lg bg-colorGray/50 text-lg"></div>
 
 						<div className="h-5 w-[75%] rounded bg-colorGray/50"></div>
-					</button>
-					<button className={`listButton animate-pulse bg-colorGray/10`} style={{ animationDelay: "225ms" }}>
+					</div>
+					<div className={`sidebarButton animate-pulse bg-colorGray/10`} style={{ animationDelay: "225ms" }}>
 						<div className="m-1 h-7 w-7 rounded-lg bg-colorGray/50 text-lg"></div>
 
 						<div className="h-5 w-[25%] rounded bg-colorGray/50"></div>
-					</button>
-					<button className={`listButton animate-pulse bg-colorGray/10`} style={{ animationDelay: "300ms" }}>
+					</div>
+					<div className={`sidebarButton animate-pulse bg-colorGray/10`} style={{ animationDelay: "300ms" }}>
 						<div className="m-1 h-7 w-7 rounded-lg bg-colorGray/50 text-lg"></div>
 
 						<div className="h-5 w-[65%] rounded bg-colorGray/50"></div>
-					</button>
+					</div>
 				</>
 			) : (
 				lists.map((list) => {
