@@ -15,14 +15,26 @@ type dataType = {
 
 export default function ListsContainer() {
 	const [lists, setLists] = useState<dataType>([]);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	const supabase = createClientComponentClient({});
 
+	function handleListsChange(payload: any) {
+		if (payload.eventType === "DELETE") {
+			setLists((prevLists) => prevLists.filter((item) => item.id !== payload.old.id));
+		} else if (payload.eventType === "INSERT") {
+			setLists((prevLists) => [payload.new, ...prevLists]);
+		} else {
+			setLists((prevLists) => prevLists.map((item) => (item.id === payload.old.id ? payload.new : item)));
+		}
+	}
+
 	useEffect(() => {
 		async function fetchData() {
-			let { data: lists, error }: PostgrestSingleResponse<dataType> = await supabase.from("lists").select("*");
+			let { data: lists }: PostgrestSingleResponse<dataType> = await supabase.from("lists").select("*");
 
 			setLists(lists != undefined && lists != null ? lists : []);
+			setLoading(false);
 		}
 
 		fetchData();
@@ -31,24 +43,6 @@ export default function ListsContainer() {
 			.channel("any")
 			.on("postgres_changes", { event: "*", schema: "public", table: "lists" }, (payload) => handleListsChange(payload))
 			.subscribe();
-
-		function handleListsChange(payload: any) {
-			if (payload.eventType == "DELETE") {
-				const newArray = lists.filter(function (item: any) {
-					return item.id != payload.old.id;
-				});
-				setLists(newArray);
-			} else if (payload.eventType == "INSERT") {
-				let newArray = lists;
-				newArray.unshift(payload.new);
-				setLists(newArray);
-			} else {
-				let objIndex: number = lists.findIndex((obj) => obj.id == payload.old.id);
-				let newArray = lists;
-				newArray[objIndex] = payload.new;
-				setLists(newArray);
-			}
-		}
 	}, []);
 
 	return (
@@ -99,3 +93,4 @@ export default function ListsContainer() {
 		</>
 	);
 }
+	
