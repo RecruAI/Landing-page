@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faClose } from "@fortawesome/free-solid-svg-icons";
 import EmojiPicker, { EmojiStyle, Theme } from "emoji-picker-react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { strict } from "assert";
 
 export default function AddListButton() {
 	const [visible, setVisible] = useState<boolean>(false);
