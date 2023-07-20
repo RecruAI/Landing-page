@@ -31,7 +31,7 @@ export default function SectionFive(props: { font: NextFont }) {
 				/>
 			</div>
 
-			<p className="max-w-3xl text-sm tracking-wide text-colorGray sm:text-lg md:text-xl ">
+			<p className="max-w-3xl text-sm tracking-wide text-colorGray sm:text-lg md:text-xl">
 				&quot;Do It helps keep me organized - I truly could not live without it! Allows me to prioritize my tasks in a super simple way. I definitely recommend Do It
 				to everyone - I really think it&apos;s the best to-do list app available!&quot;
 			</p>

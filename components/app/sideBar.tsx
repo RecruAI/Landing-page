@@ -1,75 +1,79 @@
+"use client";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInbox, faMagnifyingGlass, faCalendarCheck, faCalendar, faBoxArchive } from "@fortawesome/free-solid-svg-icons";
+import { faInbox, faMagnifyingGlass, faCalendarCheck, faCalendar, faBoxArchive, faBarChart } from "@fortawesome/free-solid-svg-icons";
 import AccountButton from "./accountButton";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 import AddListButton from "./addListButton";
 import ListsContainer from "./listsContainer";
+import { useState } from "react";
 
-export default async function SideBar() {
-	// Creating supabase connection
-	const supabase = createServerComponentClient({
-		cookies,
-	});
-	const {
-		data: { session },
-	} = await supabase.auth.getSession();
-
-const userSessionId: String | undefined = session?.user.id;
-
-// Fetching user data from db
-let { data: users, error } = await supabase.from("users").select().eq("user_id", userSessionId);
+export default function SideBar() {
+	const [visible, setVisible] = useState<Boolean>(false);
 
 	return (
-		<aside className="h-screen w-80 overflow-y-auto scroll-smooth border-r-1 border-colorGray/20 bg-[--sidebar-rgb] 2xl:w-1/5">
-			<div className="flex flex-col gap-y-3 px-4 pb-5 pt-7">
-				{/* Mapping over returned users (always one) */}
-				{/* Returning account tile with name from db */}
-				{users?.map((user) => {
-					return <AccountButton name={`${user?.name} ${user?.last_name}`} key={user.id} />;
-				})}
-
-				<div className="flex flex-col gap-y-1">
-					<button className="sidebarButton">
-						<FontAwesomeIcon fixedWidth icon={faMagnifyingGlass} className="h-8 w-8 p-1.5 text-colorGray" />
-						<p className="font-medium text-[--text-rgb]">Quick find</p>
-					</button>
-					<button className="sidebarButton">
-						<FontAwesomeIcon fixedWidth icon={faInbox} className="h-8 w-8 p-1.5 text-[#4B81EB]" />
-						<p className="font-medium text-[--text-rgb]">Inbox</p>
-					</button>
-				</div>
-
-				<div className="flex flex-col gap-y-1">
-					<button className="sidebarButton">
-						<FontAwesomeIcon fixedWidth icon={faCalendarCheck} className="h-8 w-8 p-1.5 text-[#46BF77]" />
-						<p className="font-medium text-[--text-rgb]">Today</p>
-						<p className="ms-auto font-medium text-colorGray">21</p>
-					</button>
-
-					<button className="sidebarButton">
-						<FontAwesomeIcon fixedWidth icon={faCalendar} className="h-8 w-8 p-1.5 text-[#9D59DF]" />
-						<p className="font-medium text-[--text-rgb]">Upcoming</p>
-						<p className="ms-auto font-medium text-colorGray">9</p>
-					</button>
-
-					<button className="sidebarButton">
-						<FontAwesomeIcon fixedWidth icon={faBoxArchive} className="h-8 w-8 p-1.5 text-[#DF8637]" />
-						<p className="font-medium text-[--text-rgb]">Someday</p>
-						<p className="ms-auto font-medium text-colorGray">2</p>
-					</button>
+		<>
+			{/* Hamburger button */}
+			<div
+				className={`fixed z-50 m-2 rounded-md bg-[--sidebar-rgb] p-3 transition-all duration-500 ease-out xl:hidden ${
+					visible ? "active left-64 sm:left-72 2xl:left-[20vw]" : "left-0"
+				}`}
+			>
+				<div className={`menu-btn h-4 w-5 cursor-pointer ${visible ? "active" : ""}`} onClick={() => setVisible(!visible)}>
+					<span></span>
 				</div>
 			</div>
 
-			<div className="border-t-1 border-colorGray/20">
-				<div className="flex flex-col gap-y-1  px-4 py-5">
-					<p className="py-2.5 ps-2 text-xl font-semibold text-[--text-rgb]">Lists</p>
+			{/* Sidebar */}
+			<aside
+				className={`absolute z-40 min-h-screen w-64 border-r-1 border-colorGray/20 bg-[--sidebar-rgb] transition-all duration-500 ease-out sm:w-72 2xl:w-1/5 ${
+					visible ? "left-0" : "-left-64 sm:-left-72 xl:left-0"
+				}`}
+			>
+				<div className="flex flex-col gap-y-3 px-4 pb-5 pt-7">
+					<AccountButton />
 
-					<ListsContainer />
+					<div className="flex flex-col gap-y-1">
+						<button className="sidebarButton">
+							<FontAwesomeIcon fixedWidth icon={faMagnifyingGlass} className="h-8 w-8 p-1.5 text-colorGray" />
+							<p className="text-[--text-rgb]">Quick find</p>
+						</button>
+						<button className="sidebarButton">
+							<FontAwesomeIcon fixedWidth icon={faInbox} className="h-8 w-8 p-1.5 text-[#4B81EB]" />
+							<p className="text-[--text-rgb]">Inbox</p>
+						</button>
+					</div>
 
-					<AddListButton userId={userSessionId} />
+					<div className="flex flex-col gap-y-1">
+						<button className="sidebarButton">
+							<FontAwesomeIcon fixedWidth icon={faCalendarCheck} className="h-8 w-8 p-1.5 text-[#46BF77]" />
+							<p className="text-[--text-rgb]">Today</p>
+							<p className="ms-auto text-colorGray">21</p>
+						</button>
+
+						<button className="sidebarButton">
+							<FontAwesomeIcon fixedWidth icon={faCalendar} className="h-8 w-8 p-1.5 text-[#9D59DF]" />
+							<p className="text-[--text-rgb]">Upcoming</p>
+							<p className="ms-auto text-colorGray">9</p>
+						</button>
+
+						<button className="sidebarButton">
+							<FontAwesomeIcon fixedWidth icon={faBoxArchive} className="h-8 w-8 p-1.5 text-[#DF8637]" />
+							<p className="text-[--text-rgb]">Someday</p>
+							<p className="ms-auto text-colorGray">2</p>
+						</button>
+					</div>
 				</div>
-			</div>
-		</aside>
+
+				<div className="border-t-1 border-colorGray/20">
+					<div className="flex flex-col gap-y-1 px-4 py-5">
+						<p className="py-2.5 ps-2 text-lg font-semibold text-[--text-rgb]">Lists</p>
+
+						<ListsContainer />
+
+						<AddListButton />
+					</div>
+				</div>
+			</aside>
+		</>
 	);
 }

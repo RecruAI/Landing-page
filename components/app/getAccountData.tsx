@@ -39,10 +39,10 @@ export default function GetAccountData(props: { user: userData }) {
 
 	return (
 		<div className="flex h-screen w-full flex-col justify-center gap-y-2 p-10 px-32 text-sm text-colorGray lg:w-1/2">
-			<div className=" mb-8 flex flex-col gap-y-3">
+			<div className="mb-8 flex flex-col gap-y-3">
 				<h3 className={"text-6xl font-bold text-[--text-rgb]"}>Fill form</h3>
 
-				<p className={" text-lg text-[--text-rgb]"}>Fill all missing informations to starting using DoIt app.</p>
+				<p className="text-lg text-[--text-rgb]">Fill all missing informations to starting using DoIt app.</p>
 			</div>
 
 			<label htmlFor="nickname">Nickname</label>

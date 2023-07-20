@@ -31,8 +31,70 @@
   @apply rounded-md border-1 border-colorGray/30 bg-transparent px-5 py-4 text-lg text-colorGray/60 outline-none
 }
 .sidebarButton{
-  @apply flex items-center gap-x-3 rounded-lg pl-3 pr-4 py-1.5 transition-all hover:bg-colorGray/30
+  @apply flex text-sm font-medium items-center gap-x-3 rounded-lg pl-3 pr-4 py-px transition-all hover:bg-colorGray/30
 } 
-.listButton{
-  @apply flex items-center font-medium gap-x-3 rounded-lg pl-3 pr-4 py-1 transition-all hover:bg-colorGray/30
-} 
+
+.taskTile{
+  @apply -mx-3 flex items-center gap-x-4 rounded-lg px-5 py-0.5 font-medium transition-all
+}
+.taskTileUndone{
+  @apply text-[--text-rgb] outline outline-2 -outline-offset-1 outline-colorGray/0 hover:outline-colorGray/50
+}
+.taskTileDone{
+  @apply bg-colorGray/10 text-colorGray/60
+}
+
+.spanCheckbox{
+  @apply flex h-5 w-5  items-center justify-center rounded-md border-2 border-colorGray bg-transparent transition-all duration-300 ease-bouncy-bezier
+}
+.activeSpanCheckbox{
+  @apply border-10 border-colorBlue animate-shrink-bounce;
+}
+.activeSpanCheckbox::before{
+  @apply absolute content-[""] animate-checkbox-check top-2.5 left-0.75 rounded-sm border-transparent border-b-3 border-r-3 rotate-45 origin-bottom-left;
+}
+
+
+/* Menu Button */
+.menu-btn span,
+.menu-btn span::before,
+.menu-btn span::after {
+  @apply bg-[--text-rgb] content-[''] absolute w-5 h-0.5 mt-7px;
+  -webkit-transition: .3s ease-in-out .3s;
+  -moz-transition: .3s ease-in-out .3s;
+  -o-transition: .3s ease-in-out .3s;
+  transition: .3s ease-in-out .3s;
+}
+
+.menu-btn span::before {
+  @apply -mt-7px;
+  -webkit-transition: .3s ease-in-out;
+  -moz-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.menu-btn span::after {
+  @apply mt-7px;
+-webkit-transition: .3s ease-in-out;
+  -moz-transition: .3s ease-in-out;
+  -o-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+.menu-btn.active span {
+  @apply bg-transparent -rotate-90;  
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
+}
+
+.menu-btn.active span::before {
+  @apply mt-0 delay-500 -rotate-45;
+}
+
+.menu-btn.active span::after {
+  @apply mt-0 delay-500 rotate-45;
+}
+
