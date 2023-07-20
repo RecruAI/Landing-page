@@ -4,6 +4,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type dataType = {
@@ -21,7 +22,7 @@ export default function ListsContainer() {
 
 	useEffect(() => {
 		async function fetchData() {
-			let { data: lists, error }: PostgrestSingleResponse<dataType> = await supabase.from("lists").select("*");
+			let { data: lists }: PostgrestSingleResponse<dataType> = await supabase.from("lists").select("*");
 
 			setLists(lists != undefined && lists != null ? lists : []);
 		}
@@ -57,14 +58,14 @@ export default function ListsContainer() {
 			{lists.length != 0 ? (
 				lists.map((list) => {
 					return (
-						<button className="sidebarButton" key={list.id}>
+						<Link href={"/app/" + list.id} className="sidebarButton" key={list.id}>
 							<span className="p-1 text-lg">{list.icon}</span>
 
 							<p className="text-[--text-rgb]">{list.name}</p>
 
 							{/* Indicator showing how many undone 'dos' are on that list (to do later) */}
 							{/* <p className="ms-auto text-colorGray">2</p> */}
-						</button>
+						</Link>
 					);
 				})
 			) : (
