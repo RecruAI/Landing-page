@@ -1,7 +1,12 @@
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+"use client";
 
-export default async function Page() {
+import { faArrowsRotate, faCodeMerge, faDiagramProject, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+
+export default function Page() {
+	const [checkbox, setCheckbox] = useState<boolean>(false);
+
 	return (
 		<article className="mx-20 mt-28 text-[--text-rgb]">
 			<div className="flex flex-col gap-y-10">
@@ -9,7 +14,7 @@ export default async function Page() {
 
 				<h1 className="text-5xl font-semibold text-[--text-rgb]">Personal</h1>
 
-				<button className="text-md -mx-3 flex items-center gap-x-3 rounded-lg px-3 py-1 font-medium text-colorGray/60 transition-all hover:bg-colorGray/20 hover:text-colorGray">
+				<button className="text-md -mx-3 flex items-center gap-x-3 rounded-lg px-3 py-1 font-medium text-colorGray/60 transition-all hover:bg-colorGray/20 hover:text-[--text-rgb]">
 					<FontAwesomeIcon fixedWidth icon={faPlus} className="h-8 w-8 p-1 text-[#4F81E1]" />
 					<p>New table</p>
 				</button>
@@ -23,7 +28,8 @@ export default async function Page() {
 						<h2 className="text-2xl font-bold text-[--text-rgb]">Skincare</h2>
 						<p className="text-md font-medium text-colorGray">4</p>
 
-						<div className="w-full" />
+						{/* Spacer */}
+						<div className="grow" />
 
 						<div className="flex rounded-lg hover:bg-colorGray/20">
 							<FontAwesomeIcon fixedWidth icon={faPlus} className="aspect-square h-8 p-1 px-2.5 text-[#4F81E1]" />
@@ -35,31 +41,32 @@ export default async function Page() {
 
 					{/* Tasks */}
 					<div className="flex flex-col gap-y-1">
-						<button className="taskTile taskTileUndone">
-							<input id="checkbox1" type="checkbox" className="hidden h-0 w-0" />
-							<label for="checkbox1">
-								<span></span>
-							</label>
+						{/* Example of task */}
+						<button className={`taskTile text-clip ${checkbox ? "taskTileDone" : "taskTileUndone"}`}>
+							{/* Checkbox */}
+							<div onClick={() => setCheckbox(!checkbox)} className="relative my-2.5 flex items-center transition-all duration-300 ease-bouncy-bezier">
+								<span className={`spanCheckbox ${checkbox ? "activeSpanCheckbox" : ""}`}></span>
+							</div>
 
-							<p>New table</p>
-						</button>
+							{/* Title */}
+							<p className={checkbox ? "line-through" : ""}>Example task</p>
 
-						<button className="taskTileDone taskTile">
-							<input id="checkbox2" type="checkbox" className="hidden h-0 w-0" />
-							<label for="checkbox2">
-								<span></span>
-							</label>
+							{/* Date tile */}
+							{/* Today */}
+							<div className="rounded-md bg-green-500/10 px-2 py-1 text-sm text-green-500">Today</div>
+							{/* Other */}
+							<div className="rounded-md bg-colorGray/10 px-2 py-1 text-sm text-colorGray">Tommorow</div>
 
-							<p className="line-through">New table</p>
-						</button>
+							{/* Spacer */}
+							<div className="grow" />
 
-						<button className="taskTileDone taskTile">
-							<input id="checkbox3" type="checkbox" className="hidden h-0 w-0" />
-							<label for="checkbox3">
-								<span></span>
-							</label>
+							{/* Amount of subtasks */}
+							<div className="flex flex-row items-center gap-x-2 text-sm text-colorGray/50">
+								<FontAwesomeIcon fixedWidth icon={faDiagramProject} className="aspect-square h-3.5" />
+								2/4
+							</div>
 
-							<p className="line-through">New table</p>
+							<FontAwesomeIcon fixedWidth icon={faArrowsRotate} className="aspect-square h-3.5 text-colorGray/50" />
 						</button>
 					</div>
 				</div>
