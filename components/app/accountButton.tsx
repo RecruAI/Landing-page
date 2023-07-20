@@ -10,8 +10,9 @@ const supabase = createClientComponentClient();
 
 export default function AccountButton() {
 	const [visible, setVisible] = useState<boolean>(false);
-	const [name, setName] = useState<String>("Loading...");
-	const [nickname, setNickname] = useState<String>();
+	const [loaded, setLoaded] = useState<boolean>(false);
+	const [name, setName] = useState<String>("");
+	const [nickname, setNickname] = useState<String>("");
 	const { push } = useRouter();
 
 	useEffect(() => {
@@ -23,6 +24,8 @@ export default function AccountButton() {
 			const { data: user_name }: any = await supabase.from("users").select().eq("user_id", session?.user.id);
 			setNickname(user_name[0].nickname);
 			setName(user_name[0].name + " " + user_name[0].last_name);
+
+			setLoaded(true);
 		}
 		fetch();
 	}, []);
@@ -30,19 +33,30 @@ export default function AccountButton() {
 	return (
 		<>
 			<div className="relative z-50">
-				<div
-					onClick={() => setVisible(!visible)}
-					className="flex cursor-pointer select-none items-center gap-x-3 rounded-lg px-3 py-2 transition-all hover:bg-colorGray/30"
-				>
-					<div className="flex h-9 w-9 items-center justify-center rounded-md bg-[--text-rgb] text-lg font-bold text-[--background-rgb]">
-						{nickname != undefined ? nickname.slice(0, 1).toLocaleUpperCase() : "*"}
-					</div>
+				{loaded ? (
+					<div
+						onClick={() => setVisible(!visible)}
+						className="flex cursor-pointer select-none items-center gap-x-3 rounded-lg px-3 py-2 transition-all hover:bg-colorGray/30"
+					>
+						<div className="flex h-9 w-9 items-center justify-center rounded-md bg-[--text-rgb] text-lg font-bold text-[--background-rgb]">
+							{nickname.slice(0, 1).toLocaleUpperCase()}
+						</div>
 
-					<div className="flex flex-col">
-						<p className="text-md font-semibold text-[--text-rgb]">{nickname}</p>
-						<p className="text-xs font-medium text-[--text-rgb] opacity-70">{name}</p>
+						<div className="flex flex-col">
+							<p className="text-md font-semibold text-[--text-rgb]">{nickname}</p>
+							<p className="text-xs font-medium text-[--text-rgb] opacity-70">{name}</p>
+						</div>
 					</div>
-				</div>
+				) : (
+					<div className="flex cursor-pointer items-center gap-x-3 rounded-lg px-3 py-2 transition-all hover:bg-colorGray/30">
+						<div className="h-9 w-9 animate-pulse rounded-md bg-[--text-rgb] "></div>
+
+						<div className="flex flex-col gap-y-2 py-0.5">
+							<p className="h-4 w-60 animate-pulse rounded bg-colorGray/50"></p>
+							<p className="h-3 w-40 animate-pulse rounded bg-colorGray/20" style={{ animationDelay: "100ms" }}></p>
+						</div>
+					</div>
+				)}
 
 				{/* Tiles opened if 'visible' is true */}
 				{visible ? (

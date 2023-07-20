@@ -66,7 +66,7 @@ export default function SideBar() {
 
 				<div className="border-t-1 border-colorGray/20">
 					<div className="flex flex-col gap-y-1 px-4 py-5">
-						<p className="py-2.5 ps-2 text-lg font-semibold text-[--text-rgb]">Lists</p>
+						<p className="select-none py-2.5 ps-2 text-lg font-semibold text-[--text-rgb]">Lists</p>
 
 						<ListsContainer />
 
