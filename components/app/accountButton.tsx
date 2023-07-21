@@ -25,7 +25,7 @@ export default function AccountButton() {
 			setNickname(user_name[0].nickname);
 			setName(user_name[0].name + " " + user_name[0].last_name);
 
-			setLoaded(true);
+			setLoaded(false);
 		}
 		fetch();
 	}, []);
@@ -49,11 +49,11 @@ export default function AccountButton() {
 					</div>
 				) : (
 					<div className="flex cursor-pointer items-center gap-x-3 rounded-lg px-3 py-2 transition-all hover:bg-colorGray/30">
-						<div className="h-9 w-9 animate-pulse rounded-md bg-[--text-rgb] "></div>
+						<div className="h-9 w-9 animate-pulse rounded-md bg-[--text-rgb]"></div>
 
-						<div className="flex flex-col gap-y-2 py-0.5">
-							<p className="h-4 w-60 animate-pulse rounded bg-colorGray/50"></p>
-							<p className="h-3 w-40 animate-pulse rounded bg-colorGray/20" style={{ animationDelay: "100ms" }}></p>
+						<div className="flex grow flex-col gap-y-2 py-0.5">
+							<p className="h-4 w-1/3 animate-pulse rounded bg-colorGray/50"></p>
+							<p className="h-3 w-1/2 animate-pulse rounded bg-colorGray/20" style={{ animationDelay: "100ms" }}></p>
 						</div>
 					</div>
 				)}

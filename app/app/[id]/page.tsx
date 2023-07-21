@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
 	let { data }: any = await supabase.from("lists").select().eq("id", params.id);
 
-	if (data.length == 0 || data == null) redirect("/app");
+	if (data == null) redirect("/app");
 
 	let dataList: DataListType = data[0];
 
