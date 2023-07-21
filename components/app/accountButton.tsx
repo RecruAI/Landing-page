@@ -25,7 +25,7 @@ export default function AccountButton() {
 			setNickname(user_name[0].nickname);
 			setName(user_name[0].name + " " + user_name[0].last_name);
 
-			setLoaded(false);
+			setLoaded(true);
 		}
 		fetch();
 	}, []);
