@@ -18,10 +18,10 @@ export default function Title(props: { icon: string; name: string; id: string })
 	return (
 		<>
 			<div className="flex flex-col gap-y-3 md:gap-y-8">
-				<div className={`flex ${iconEditing ? "flex-col" : "flex-row"}  gap-x-1 gap-y-8 md:flex-col md:items-start`}>
+				<div className={`flex ${iconEditing ? "flex-col" : "flex-row"} items-center gap-x-1 gap-y-8 md:flex-col md:items-start`}>
 					<p
 						onClick={() => setIconEditing(true)}
-						className="w-fit cursor-pointer rounded-lg p-1 text-4xl transition-all hover:bg-colorGray/20 md:-ms-2 md:p-2 md:text-6xl"
+						className="w-fit cursor-pointer rounded-lg p-1 px-1.5 text-4xl transition-all hover:bg-colorGray/20 md:-ms-2 md:p-2 md:text-6xl"
 					>
 						{icon}
 					</p>
@@ -59,7 +59,7 @@ export default function Title(props: { icon: string; name: string; id: string })
 								RevalidateListPage();
 							}}
 							onChange={(e) => setTitle(e.target.value)}
-							className="w-full cursor-pointer bg-transparent px-2 pb-[4px] text-2xl font-semibold text-[--text-rgb] outline-none md:-ms-5 md:px-5 md:pb-[3px] md:pt-[2px] md:text-5xl"
+							className="w-full cursor-pointer bg-transparent px-2 text-2xl font-semibold text-[--text-rgb] outline-none md:-ms-5 md:px-5 md:pb-[3px] md:pt-[2px] md:text-5xl"
 						/>
 					) : (
 						<h1

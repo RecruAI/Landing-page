@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 		<article className="mx-4 mb-10 mt-20 text-[--text-rgb] md:mx-20 md:mb-20 md:mt-28">
 			<Title icon={dataList.icon} name={dataList.name} id={params.id} />
 
-			<div className="mt-8 flex flex-col gap-y-20 md:mt-16">
+			<div className="mt-8 flex flex-col gap-y-10 md:mt-16 md:gap-y-20">
 				{/* Task table */}
 				<div className="flex flex-col gap-y-1">
 					{/* Task table title row */}
@@ -35,7 +35,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 						<div className="grow" />
 
 						<div className="flex rounded-lg transition-all hover:bg-colorGray/20">
-							<FontAwesomeIcon fixedWidth icon={faPlus} className="aspect-square h-4 cursor-pointer p-1 text-[#4F81E1] md:h-8 md:px-2.5" />
+							<FontAwesomeIcon fixedWidth icon={faPlus} className="h-4 cursor-pointer p-1 py-1.5 text-[#4F81E1] md:h-8 md:px-2.5" />
 						</div>
 					</div>
 
