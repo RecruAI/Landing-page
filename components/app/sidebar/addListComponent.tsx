@@ -5,8 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import EmojiPicker, { EmojiStyle, Theme } from "emoji-picker-react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 
 export default function AddListComponent(props: { hideComponent: Function }) {
+	const router = useRouter();
+
 	const [visibleIconPicker, setVisibleIconPicker] = useState<boolean>(false);
 
 	const [selectedEmoji, setSelectedEmoji] = useState<string>("🗒️");
@@ -22,9 +25,14 @@ export default function AddListComponent(props: { hideComponent: Function }) {
 	}
 
 	async function insertNewListToDB() {
-		await supabase.from("lists").insert([{ user_id: await getUserId(), name: listTitle, icon: selectedEmoji }]);
-
 		props.hideComponent();
+
+		const { data }: any = await supabase
+			.from("lists")
+			.insert([{ user_id: await getUserId(), name: listTitle, icon: selectedEmoji }])
+			.select();
+
+		router.push(`/app/${data[0].id}`);
 	}
 
 	return (

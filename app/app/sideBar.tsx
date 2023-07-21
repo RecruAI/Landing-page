@@ -84,6 +84,7 @@ export default function SideBar() {
 							className="sidebarButton mt-1"
 							onClick={() => {
 								setAddListComponentVisible(!addListComponentVisible);
+								if (!addListComponentVisible) setVisible(false);
 							}}
 						>
 							<FontAwesomeIcon fixedWidth icon={faPlus} className="h-8 w-8 p-1 text-[#4F81E1]" />
