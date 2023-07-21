@@ -5,6 +5,8 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+type DataListType = { icon: string; id: string; name: string; user_id: string; date_created: string; tasks: string[] };
+
 export default async function Page({ params }: { params: { id: string } }) {
 	const supabase = createServerComponentClient({
 		cookies,
@@ -15,7 +17,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
 	if (data.length == 0 || data == null) redirect("/app");
 
-	const dataList: { icon: string; id: string; name: string; user_id: string; date_created: string; tasks: string[] } = data[0];
+	let dataList: DataListType = data[0];
 
 	return (
 		<article className="mx-20 mt-28 text-[--text-rgb]">

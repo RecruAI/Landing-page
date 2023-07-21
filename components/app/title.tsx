@@ -1,5 +1,6 @@
 "use client";
 
+import RevalidateListPage from "@/app/app/[id]/revalidateListPage";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -12,7 +13,7 @@ export default function Title(props: { icon: string; name: string; id: string })
 	const [titleEditing, setTitleEditing] = useState<Boolean>(false);
 	const [iconEditing, setIconEditing] = useState<Boolean>(false);
 
-	const supabase = createClientComponentClient({});
+	const supabase = createClientComponentClient();
 
 	return (
 		<div className="flex flex-col gap-y-8">
@@ -20,9 +21,10 @@ export default function Title(props: { icon: string; name: string; id: string })
 				<EmojiPicker
 					onEmojiClick={async (e) => {
 						await supabase.from("lists").update({ icon: e.emoji }).eq("id", props.id);
-
 						setIcon(e.emoji);
 						setIconEditing(false);
+
+						RevalidateListPage();
 					}}
 					autoFocusSearch={false}
 					theme={Theme.DARK}
@@ -43,6 +45,8 @@ export default function Title(props: { icon: string; name: string; id: string })
 					onBlur={async (e) => {
 						await supabase.from("lists").update({ name: e.target.value }).eq("id", props.id);
 						setTitleEditing(false);
+
+						RevalidateListPage();
 					}}
 					onChange={(e) => setTitle(e.target.value)}
 					className="-ms-5 w-full cursor-pointer bg-transparent px-5 pb-[3px] pt-[2px] text-5xl font-semibold text-[--text-rgb] outline-none"
