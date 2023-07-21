@@ -30,8 +30,9 @@
 .disabledInput{
   @apply rounded-md border-1 border-colorGray/30 bg-transparent px-5 py-4 text-lg text-colorGray/60 outline-none
 }
+
 .sidebarButton{
-  @apply flex text-sm font-medium items-center gap-x-3 rounded-lg pl-3 pr-4 py-px transition-all hover:bg-colorGray/30
+  @apply flex select-none text-sm font-medium items-center gap-x-3 rounded-lg pl-3 pr-4 py-px transition-all hover:bg-colorGray/30
 } 
 
 .taskTile{
