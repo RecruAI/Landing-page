@@ -1,4 +1,4 @@
-import Title from "@/components/app/title";
+import ListHeading from "@/components/app/listPage/listHeading";
 import { faArrowsRotate, faDiagramProject, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
 	return (
 		<article className="mx-4 mb-10 mt-20 text-[--text-rgb] md:mx-20 md:mb-20 md:mt-28">
-			<Title icon={dataList.icon} name={dataList.name} id={params.id} />
+			<ListHeading icon={dataList.icon} name={dataList.name} id={params.id} />
 
 			<div className="mt-8 flex flex-col gap-y-10 md:mt-16 md:gap-y-20">
 				{/* Task table */}

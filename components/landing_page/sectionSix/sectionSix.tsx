@@ -17,8 +17,13 @@ export default function SectionSix(props: { font: NextFont }) {
 			</div>
 			<picture className="hidden lg:block xl:translate-x-1/4 xl:translate-y-16 2xl:translate-y-20">
 				<source srcSet="/landing_page/images/SectionSixDark.png" media="(prefers-color-scheme: dark)" />
-				<source srcSet="/landing_page/images/SectionSixLight.png" media="(prefers-color-scheme: light)" />
-				<Image src="" width="1300" height="1000" alt="Web app image" className="mt-16 rounded-3xl drop-shadow-2xl xl:mt-0 xl:rounded-none xl:rounded-tl-3xl" />
+				<Image
+					src="/landing_page/images/SectionSixLight.png"
+					width="1300"
+					height="1000"
+					alt="Web app image"
+					className="mt-16 rounded-3xl drop-shadow-2xl xl:mt-0 xl:rounded-none xl:rounded-tl-3xl"
+				/>
 			</picture>
 		</section>
 	);

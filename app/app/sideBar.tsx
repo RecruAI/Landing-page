@@ -2,9 +2,9 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInbox, faMagnifyingGlass, faCalendarCheck, faCalendar, faBoxArchive, faBarChart, faPlus, faL } from "@fortawesome/free-solid-svg-icons";
-import AccountButton from "./accountButton";
-import AddListComponent from "./addListComponent";
-import ListsContainer from "./listsContainer";
+import AddListComponent from "@/components/app/sidebar/addListComponent";
+import ListsContainer from "@/components/app/sidebar/listsContainer";
+import AccountButton from "@/components/app/sidebar/accountButton";
 import { useState } from "react";
 
 export default function SideBar() {
@@ -79,8 +79,6 @@ export default function SideBar() {
 						<p className="select-none py-2.5 ps-2 text-lg font-semibold text-[--text-rgb]">Lists</p>
 
 						<ListsContainer hideSidebar={() => hideSidebar()} />
-
-						{/* <AddListButton /> */}
 
 						<button
 							className="sidebarButton mt-1"

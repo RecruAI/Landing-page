@@ -41,14 +41,17 @@ export default function AddListComponent(props: { hideComponent: Function }) {
 						/>
 					</div>
 
-					{/* Emoji button and title input */}
+					{/* Icon button and title input */}
 					<div className="flex gap-x-2 sm:gap-x-5">
+						{/* Icon display */}
 						<div
 							onClick={() => setVisibleIconPicker(true)}
 							className="sm:text-md m-auto aspect-square cursor-pointer rounded-md bg-colorGray/20 p-2 text-sm transition-all hover:bg-colorGray/30 sm:p-3"
 						>
 							{selectedEmoji}
 						</div>
+
+						{/* Text input */}
 						<input
 							id="nickname"
 							name="nickname"

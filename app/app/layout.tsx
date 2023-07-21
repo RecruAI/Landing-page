@@ -1,5 +1,5 @@
 import GetAccountData from "@/components/app/getAccountData";
-import SideBar from "@/components/app/sideBar";
+import SideBar from "./sideBar";
 
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";

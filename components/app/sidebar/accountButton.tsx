@@ -48,6 +48,7 @@ export default function AccountButton() {
 						</div>
 					</div>
 				) : (
+					// If data not fetched, show skeleton
 					<div className="flex cursor-pointer items-center gap-x-3 rounded-lg px-3 py-2 transition-all hover:bg-colorGray/30">
 						<div className="h-9 w-9 animate-pulse rounded-md bg-[--text-rgb]"></div>
 
@@ -58,6 +59,7 @@ export default function AccountButton() {
 					</div>
 				)}
 
+				{/* Dropdown menu */}
 				{/* Tiles opened if 'visible' is true */}
 				{visible ? (
 					<div className="absolute -bottom-3 left-0 flex w-full translate-y-full flex-col gap-y-1 rounded-lg bg-[--background-rgb] px-2 py-3 shadow-md">

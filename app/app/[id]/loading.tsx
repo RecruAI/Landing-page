@@ -7,11 +7,14 @@ export default function Loading() {
 			{/* title section */}
 			<div className="flex flex-col gap-y-3 md:gap-y-8">
 				<div className="flex flex-row items-center gap-x-3 gap-y-8 md:flex-col md:items-start">
+					{/* Icon */}
 					<div className="h-[40px] w-[40px] animate-pulse rounded-lg bg-colorGray/50 md:my-2 md:h-[60px] md:w-[60px]"></div>
 
+					{/* List name */}
 					<div className="my-3 h-7 w-32 animate-pulse rounded-lg bg-colorGray/50 md:h-12 md:w-96" style={{ animationDelay: "90ms" }}></div>
 				</div>
 
+				{/* Add new task button */}
 				<div className="flex animate-pulse items-center gap-x-3 rounded-lg bg-colorGray/20 px-3 py-2 md:py-2.5" style={{ animationDelay: "180ms" }}>
 					<div className="h-5 w-5 rounded-md bg-colorGray/50 p-1 md:h-8 md:w-8" />
 					<div className="h-4 w-3/4 rounded-md bg-colorGray/50 p-1 md:h-6" style={{ width: randomInteger(40, 90) + "%" }} />
