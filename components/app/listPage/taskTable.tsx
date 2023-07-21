@@ -7,7 +7,6 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 
 export default function TaskTable(props: { task: string; id: string; tasks: string[]; index: number }) {
-	const [allTasks, setAllTasks] = useState<string[]>(props.tasks);
 	const [name, setName] = useState<string>(props.task);
 	const [oldName, setOldName] = useState<string>(props.task);
 	const [nameEditing, setNameEditing] = useState<Boolean>(false);
@@ -19,27 +18,30 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 	return (
 		<div className="flex flex-col gap-y-1">
 			{/* Task table title row */}
-			{allTasks.toString()}
 			<div className="flex flex-row items-center gap-x-3">
 				{nameEditing ? (
 					<input
 						className="grow bg-transparent  text-lg font-bold text-[--text-rgb] outline-none md:text-2xl"
 						value={name}
 						onBlur={async () => {
-							RevalidateListPage();
+							if (name != "") {
+								const newName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 
-							const newName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+								setOldName(newName);
+								setName(newName);
 
-							setOldName(newName);
-							setName(newName);
+								setNameEditing(false);
 
-							setNameEditing(false);
+								let newTasks = props.tasks;
+								newTasks[props.index] = newName;
 
-							let newTasks = allTasks;
-							newTasks[props.index] = newName;
-							setAllTasks(newTasks);
+								await supabase.from("lists").update({ tasks: newTasks }).eq("id", props.id);
 
-							await supabase.from("lists").update({ tasks: allTasks }).eq("id", props.id);
+								RevalidateListPage();
+							} else {
+								setName(oldName);
+								setNameEditing(false);
+							}
 						}}
 						autoFocus
 						onChange={(e) => {
