@@ -20,22 +20,22 @@ export default async function Page({ params }: { params: { id: string } }) {
 	let dataList: DataListType = data[0];
 
 	return (
-		<article className="mx-20 mt-28 text-[--text-rgb]">
+		<article className="mx-4 mb-10 mt-20 text-[--text-rgb] md:mx-20 md:mb-20 md:mt-28">
 			<Title icon={dataList.icon} name={dataList.name} id={params.id} />
 
-			<div className="mt-16 flex flex-col gap-y-20">
+			<div className="mt-8 flex flex-col gap-y-20 md:mt-16">
 				{/* Task table */}
 				<div className="flex flex-col gap-y-1">
 					{/* Task table title row */}
 					<div className="flex flex-row items-center gap-x-3">
-						<h2 className="text-2xl font-bold text-[--text-rgb]">Skincare</h2>
-						<p className="text-md font-medium text-colorGray">4</p>
+						<h2 className="text-lg font-bold text-[--text-rgb] md:text-2xl">Skincare</h2>
+						<p className="text-sm font-medium text-colorGray md:text-base">4</p>
 
 						{/* Spacer */}
 						<div className="grow" />
 
 						<div className="flex rounded-lg transition-all hover:bg-colorGray/20">
-							<FontAwesomeIcon fixedWidth icon={faPlus} className="aspect-square h-8 cursor-pointer p-1 px-2.5 text-[#4F81E1]" />
+							<FontAwesomeIcon fixedWidth icon={faPlus} className="aspect-square h-4 cursor-pointer p-1 text-[#4F81E1] md:h-8 md:px-2.5" />
 						</div>
 					</div>
 
@@ -55,24 +55,24 @@ export default async function Page({ params }: { params: { id: string } }) {
 							</div>
 
 							{/* Title */}
-							<p className={checkbox ? "line-through" : ""}>Example task</p>
+							<p className={`text-xs md:text-base ${checkbox ? "line-through" : ""}`}>Example task</p>
 
 							{/* Date tile */}
 							{/* Today */}
-							<div className="rounded-md bg-green-500/10 px-2 py-1 text-sm text-green-500">Today</div>
+							<div className="rounded-md bg-green-500/10 px-1.5 py-0.5 text-2xs text-green-500 md:px-2 md:py-1 md:text-sm">Today</div>
 							{/* Other */}
-							<div className="rounded-md bg-colorGray/10 px-2 py-1 text-sm text-colorGray">Tommorow</div>
+							{/* <div className="rounded-md bg-colorGray/10 px-2 py-1 text-sm text-colorGray">Tommorow</div> */}
 
 							{/* Spacer */}
 							<div className="grow" />
 
 							{/* Amount of subtasks */}
-							<div className="flex flex-row items-center gap-x-2 text-sm text-colorGray/50">
+							<div className="flex flex-row items-center gap-x-2 text-2xs text-colorGray/50 md:text-sm">
 								<FontAwesomeIcon fixedWidth icon={faDiagramProject} className="aspect-square h-3.5" />
-								2/4
+								<p className="hidden md:block">2/4</p>
 							</div>
 
-							<FontAwesomeIcon fixedWidth icon={faArrowsRotate} className="aspect-square h-3.5 text-colorGray/50" />
+							<FontAwesomeIcon fixedWidth icon={faArrowsRotate} className="aspect-square h-3.5 text-2xs text-colorGray/50 md:text-sm" />
 						</button>
 					</div>
 				</div>

@@ -23,7 +23,7 @@ module.exports = {
 			margin: {
 				"20vw": "20vw",
 			},
-
+			fontSize: { "2xs": "10px" },
 			width: { xlFull: "calc(100vw - 18rem)" },
 			animation: {
 				"shrink-bounce": "shrink-bounce 200ms cubic-bezier(.4,.0,.23,1)",
