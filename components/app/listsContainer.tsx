@@ -13,7 +13,7 @@ type dataType = {
 	date_created: string;
 }[];
 
-export default function ListsContainer() {
+export default function ListsContainer(props: { hideSidebar: Function }) {
 	const [lists, setLists] = useState<dataType>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -77,9 +77,16 @@ export default function ListsContainer() {
 					</div>
 				</>
 			) : (
-				lists.map((list) => {
+				lists.map((list, index) => {
 					return (
-						<Link href={"/app/" + list.id} className="sidebarButton" key={list.id}>
+						<Link
+							href={"/app/" + list.id}
+							className="sidebarButton"
+							key={index}
+							onClick={() => {
+								props.hideSidebar();
+							}}
+						>
 							<span className="p-1 text-lg">{list.icon}</span>
 
 							<p className="text-[--text-rgb]">{list.name}</p>

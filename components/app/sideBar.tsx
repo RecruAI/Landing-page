@@ -14,6 +14,9 @@ export default function SideBar() {
 	function hideAddListComponent() {
 		setAddListComponentVisible(false);
 	}
+	function hideSidebar() {
+		setVisible(false);
+	}
 
 	return (
 		<>
@@ -75,7 +78,7 @@ export default function SideBar() {
 					<div className="flex flex-col gap-y-1 px-4 py-5">
 						<p className="select-none py-2.5 ps-2 text-lg font-semibold text-[--text-rgb]">Lists</p>
 
-						<ListsContainer />
+						<ListsContainer hideSidebar={() => hideSidebar()} />
 
 						{/* <AddListButton /> */}
 
