@@ -14,6 +14,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 
 	useEffect(() => {
 		setOldName(props.task);
+		setName(props.task);
 	}, [props.task]);
 
 	async function updateTask() {
