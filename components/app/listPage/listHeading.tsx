@@ -1,19 +1,39 @@
 "use client";
 
 import RevalidateListPage from "@/components/app/listPage/revalidateListPage";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import EmojiPicker, { EmojiStyle, Theme } from "emoji-picker-react";
 import { useState } from "react";
 
-export default function ListHeading(props: { icon: string; name: string; id: string }) {
+export default function ListHeading(props: { icon: string; name: string; id: string; tasks: string[] }) {
 	const [name, setName] = useState<string>(props.name);
 	const [icon, setIcon] = useState<string>(props.icon);
+	const [taskName, setTaskName] = useState<string>("");
 	const [nameEditing, setNameEditing] = useState<Boolean>(false);
 	const [iconEditing, setIconEditing] = useState<Boolean>(false);
+	const [newTaskInputVisible, setNewTaskInputVisible] = useState<Boolean>(false);
 
 	const supabase = createClientComponentClient();
+
+	async function insertTask() {
+		if (taskName != "") {
+			const newName = taskName.charAt(0).toUpperCase() + taskName.slice(1).toLowerCase();
+
+			setNewTaskInputVisible(false);
+			setTaskName("");
+
+			let newTasks = [newName, ...props.tasks];
+
+			await supabase.from("lists").update({ tasks: newTasks }).eq("id", props.id);
+
+			RevalidateListPage();
+		} else {
+			setNewTaskInputVisible(false);
+			setTaskName("");
+		}
+	}
 
 	return (
 		<>
@@ -75,10 +95,61 @@ export default function ListHeading(props: { icon: string; name: string; id: str
 				</div>
 
 				{/* Add new task button */}
-				<button className="flex items-center gap-x-3 rounded-lg px-2 text-xs font-medium text-colorGray/60 transition-all hover:bg-colorGray/20 hover:text-[--text-rgb] md:-mx-3 md:px-3 md:py-1 md:text-base">
-					<FontAwesomeIcon fixedWidth icon={faPlus} className="h-7 p-1 text-[#4F81E1] md:h-8" />
-					<p>New table</p>
-				</button>
+				<div
+					onClick={() => {
+						if (!newTaskInputVisible) setNewTaskInputVisible(true);
+					}}
+					className={`flex items-center gap-x-3 rounded-lg px-2 py-0 text-xs font-medium transition-all md:-mx-3 md:px-3 md:py-1 md:text-base ${
+						newTaskInputVisible ? "bg-colorGray/20 text-[--text-rgb]" : "cursor-pointer text-colorGray/60 hover:bg-colorGray/20 hover:text-[--text-rgb]"
+					}`}
+				>
+					<div
+						onClick={insertTask}
+						className={`my-1 flex rounded-lg transition duration-200 md:-mx-1 ${newTaskInputVisible ? "cursor-pointer hover:bg-colorGray/30" : ""}`}
+					>
+						<FontAwesomeIcon
+							fixedWidth
+							icon={faPlus}
+							className={`h-7 w-7 px-1.5 text-[#4F81E1] transition-transform duration-700 md:h-8 md:w-8 md:px-2 md:py-0.5 ${
+								newTaskInputVisible ? "" : "rotate-180"
+							}`}
+						/>
+					</div>
+
+					{newTaskInputVisible ? (
+						<>
+							<input
+								onBlur={() => {
+									if (taskName == "") setNewTaskInputVisible(false);
+								}}
+								autoFocus
+								placeholder="Type name of new task"
+								className="w-full bg-transparent outline-none"
+								type="text"
+								value={taskName}
+								onSubmit={() => console.log("s")}
+								onChange={(e) => setTaskName(e.target.value)}
+							/>
+							<div
+								onClick={() => {
+									setNewTaskInputVisible(false);
+									setTaskName("");
+								}}
+								className="my-1 flex cursor-pointer rounded-lg text-colorGray/50 transition duration-200 hover:bg-colorGray/30 hover:text-colorGray md:-mx-1"
+							>
+								<FontAwesomeIcon
+									fixedWidth
+									icon={faClose}
+									className={`h-7 w-7 px-1.5 transition duration-700 md:h-8 md:w-8 md:px-2 md:py-0.5 ${
+										taskName == "" ? "scale-50 opacity-0" : "scale-180 opacity-100"
+									}`}
+								/>
+							</div>
+						</>
+					) : (
+						<p>New table</p>
+					)}
+				</div>
 			</div>
 		</>
 	);

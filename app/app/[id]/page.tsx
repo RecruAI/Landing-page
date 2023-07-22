@@ -19,7 +19,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
 	return (
 		<article className="mx-4 mb-10 mt-20 text-[--text-rgb] md:mx-20 md:mb-20 md:mt-28">
-			<ListHeading icon={dataList.icon} name={dataList.name} id={params.id} />
+			<ListHeading icon={dataList.icon} name={dataList.name} id={params.id} tasks={dataList.tasks} />
 
 			<TasksList listData={dataList} />
 		</article>

@@ -18,10 +18,10 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 	return (
 		<div className="flex flex-col gap-y-1">
 			{/* Task table title row */}
-			<div className="flex flex-row items-center gap-x-3">
+			<div className="flex flex-row items-center gap-x-1.5 md:gap-x-3">
 				{nameEditing ? (
 					<input
-						className="grow bg-transparent  text-lg font-bold text-[--text-rgb] outline-none md:text-2xl"
+						className="w-full bg-transparent text-lg font-bold text-[--text-rgb] outline-none md:text-2xl"
 						value={name}
 						onBlur={async () => {
 							if (name != "") {
