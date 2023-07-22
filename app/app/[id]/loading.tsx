@@ -23,7 +23,7 @@ export default function Loading() {
 
 			<div className="mt-8 flex flex-col gap-y-10 md:mt-16 md:gap-y-20">
 				{[...Array(4)].map((x, i) => (
-					<div className="flex flex-col gap-y-1" key={i}>
+					<div className="flex flex-col gap-y-1" key={`${x}-${i}`}>
 						{/* Task table title row */}
 						<div className="flex animate-pulse flex-row items-center gap-x-3" style={{ animationDelay: (i + 1) * (90 + 350) + 180 + "ms" }}>
 							<div className={`h-6 rounded-lg bg-colorGray/50 md:h-8`} style={{ width: randomInteger(15, 40) + "%" }}></div>
@@ -42,7 +42,11 @@ export default function Loading() {
 						{/* Tasks */}
 						<div className="flex flex-col gap-y-1">
 							{[...Array(7)].map((x, j) => (
-								<div className="taskTile animate-pulse bg-colorGray/5" key={i} style={{ animationDelay: (j + 1) * 50 + ((i + 1) * (90 + 350) + 180) + "ms" }}>
+								<div
+									className="taskTile animate-pulse bg-colorGray/5"
+									key={`${x}-${j}`}
+									style={{ animationDelay: (j + 1) * 50 + ((i + 1) * (90 + 350) + 180) + "ms" }}
+								>
 									{/* Checkbox */}
 									<div className="my-2.5 h-5 w-5 rounded-md bg-colorGray/50"></div>
 

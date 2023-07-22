@@ -26,7 +26,7 @@ export default function TasksList(props: { listData: DataListType }) {
 			{/* Task table */}
 			{tasks.map((task: string, index: number) => (
 				<>
-					<TaskTable task={task} id={props.listData.id} tasks={tasks} index={index} key={index} />
+					<TaskTable task={task} id={props.listData.id} tasks={tasks} index={index} key={task} />
 				</>
 			))}
 		</div>

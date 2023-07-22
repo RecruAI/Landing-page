@@ -81,12 +81,12 @@ export default function ListsContainer(props: { hideSidebar: Function }) {
 					</div>
 				</>
 			) : (
-				lists.map((list, index) => {
+				lists.map((list) => {
 					return (
 						<Link
 							href={"/app/" + list.id}
 							className="sidebarButton"
-							key={index}
+							key={list.id}
 							onClick={() => {
 								props.hideSidebar();
 							}}
