@@ -13,7 +13,7 @@ export default function TasksList(props: { listData: DataListType }) {
 	useEffect(() => {
 		const subscription = supabase
 			.channel("taskListSub")
-			.on("postgres_changes", { event: "UPDATE", schema: "public", table: "lists" }, (payload: any) => setTasks(payload.new.tasks))
+			.on("postgres_changes", { event: "UPDATE", schema: "public", table: "lists", filter: `id=eq.${props.listData.id}` }, (payload: any) => setTasks(payload.new.tasks))
 			.subscribe();
 
 		return () => {
