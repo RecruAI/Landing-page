@@ -4,6 +4,7 @@ import { faArrowsRotate, faDiagramProject, faPlus } from "@fortawesome/free-soli
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
+import RevalidateListPage from "./revalidateListPage";
 
 export default function TaskTable(props: { task: string; id: string; tasks: string[]; index: number }) {
 	const [name, setName] = useState<string>(props.task);
@@ -30,6 +31,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 			newTasks[props.index] = newName;
 
 			await supabase.from("lists").update({ tasks: newTasks }).eq("id", props.id);
+			RevalidateListPage();
 		} else {
 			setName(oldName);
 			setNameEditing(false);
