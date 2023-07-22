@@ -39,11 +39,15 @@ export default function ListsContainer(props: { hideSidebar: Function }) {
 
 		fetchData();
 
-		supabase
-			.channel("any")
+		const subscription = supabase
+			.channel("listsContainerSub")
 			.on("postgres_changes", { event: "*", schema: "public", table: "lists" }, (payload) => handleListsChange(payload))
 			.subscribe();
-	}, []);
+
+		return () => {
+			subscription.unsubscribe();
+		};
+	}, [supabase]);
 
 	return (
 		<>
