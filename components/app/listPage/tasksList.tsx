@@ -12,14 +12,30 @@ export default function TasksList(props: { listData: DataListType; dosData: Data
 	const [dos, setDos] = useState<DataDoType[]>(props.dosData);
 	const supabase = createClientComponentClient({});
 
+	function handleListsChange(payload: any) {
+		if (payload.eventType === "DELETE") {
+			setDos((prevDoes) => prevDoes.filter((doData: DataDoType) => doData.id !== payload.old.id));
+		} else if (payload.eventType === "INSERT") {
+			setDos((prevDoes) => [payload.new, ...prevDoes]);
+		} else {
+			setDos((prevDoes) => prevDoes.map((doData: DataDoType) => (doData.id === payload.old.id ? payload.new : doData)));
+		}
+	}
+
 	useEffect(() => {
-		const subscription = supabase
+		const subscriptionList = supabase
 			.channel("taskListSub")
 			.on("postgres_changes", { event: "UPDATE", schema: "public", table: "lists", filter: `id=eq.${props.listData.id}` }, (payload: any) => setTasks(payload.new.tasks))
 			.subscribe();
 
+		const subscriptionDos = supabase
+			.channel("taskListSub")
+			.on("postgres_changes", { event: "*", schema: "public", table: "dos" }, (payload: any) => handleListsChange(payload))
+			.subscribe();
+
 		return () => {
-			subscription.unsubscribe();
+			subscriptionList.unsubscribe();
+			subscriptionDos.unsubscribe();
 		};
 	}, [supabase]);
 

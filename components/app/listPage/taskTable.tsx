@@ -84,7 +84,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 			{/* Tasks */}
 			<div className="flex flex-col gap-y-1">
 				{props.dos.map((singleDo) => (
-					<DoComponent do={singleDo} />
+					<DoComponent do={singleDo} key={singleDo.id} />
 				))}
 			</div>
 		</div>

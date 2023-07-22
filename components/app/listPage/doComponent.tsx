@@ -37,7 +37,7 @@ export default function DoComponent(props: { do: DataDoType }) {
 			{isToday ? (
 				<div className="rounded-md bg-green-500/10 px-1.5 py-0.5 text-2xs text-green-500 md:px-2 md:py-1 md:text-sm">Today</div>
 			) : (
-				<div className="rounded-md bg-colorGray/10 px-2 py-1 text-sm text-colorGray">{isTommorow ? "Tommorow" : visibbleDueDate} </div>
+				<div className="x-1.5 rounded-md bg-colorGray/10 py-0.5 text-2xs text-colorGray md:px-2 md:py-1 md:text-sm">{isTommorow ? "Tommorow" : visibbleDueDate} </div>
 			)}
 
 			{/* Spacer */}
