@@ -24,7 +24,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 	async function updateTask() {
 		if (name != "") {
 			const newName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-
+			const prevName = oldName;
 			setOldName(newName);
 			setName(newName);
 
@@ -33,7 +33,10 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 			let newTasks = props.tasks;
 			newTasks[props.index] = newName;
 
-			await supabase.from("lists").update({ tasks: newTasks }).eq("id", props.id);
+			let uniqueTasks = Array.from(new Set(newTasks));
+
+			await supabase.from("lists").update({ tasks: uniqueTasks }).eq("id", props.id);
+			await supabase.from("dos").update({ task: newName }).eq("task", prevName);
 			RevalidateListPage();
 		} else {
 			setName(oldName);

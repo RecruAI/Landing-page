@@ -25,8 +25,9 @@ export default function ListHeading(props: { icon: string; name: string; id: str
 			setTaskName("");
 
 			let newTasks = [newName, ...props.tasks];
+			let uniqueTasks = Array.from(new Set(newTasks));
 
-			await supabase.from("lists").update({ tasks: newTasks }).eq("id", props.id);
+			await supabase.from("lists").update({ tasks: uniqueTasks }).eq("id", props.id);
 
 			RevalidateListPage();
 		} else {
