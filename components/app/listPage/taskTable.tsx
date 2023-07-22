@@ -1,10 +1,9 @@
 "use client";
 
-import RevalidateListPage from "@/components/app/listPage/revalidateListPage";
 import { faArrowsRotate, faDiagramProject, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function TaskTable(props: { task: string; id: string; tasks: string[]; index: number }) {
 	const [name, setName] = useState<string>(props.task);
@@ -12,6 +11,29 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 	const [nameEditing, setNameEditing] = useState<Boolean>(false);
 
 	const supabase = createClientComponentClient();
+
+	useEffect(() => {
+		setOldName(props.task);
+	}, [props.task]);
+
+	async function updateTask() {
+		if (name != "") {
+			const newName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+
+			setOldName(newName);
+			setName(newName);
+
+			setNameEditing(false);
+
+			let newTasks = props.tasks;
+			newTasks[props.index] = newName;
+
+			await supabase.from("lists").update({ tasks: newTasks }).eq("id", props.id);
+		} else {
+			setName(oldName);
+			setNameEditing(false);
+		}
+	}
 
 	const checkbox = true;
 
@@ -23,26 +45,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 					<input
 						className="w-full bg-transparent text-lg font-bold text-[--text-rgb] outline-none md:text-2xl"
 						value={name}
-						onBlur={async () => {
-							if (name != "") {
-								const newName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-
-								setOldName(newName);
-								setName(newName);
-
-								setNameEditing(false);
-
-								let newTasks = props.tasks;
-								newTasks[props.index] = newName;
-
-								await supabase.from("lists").update({ tasks: newTasks }).eq("id", props.id);
-
-								RevalidateListPage();
-							} else {
-								setName(oldName);
-								setNameEditing(false);
-							}
-						}}
+						onBlur={updateTask}
 						autoFocus
 						onChange={(e) => {
 							setName(e.target.value);

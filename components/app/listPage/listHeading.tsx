@@ -123,7 +123,7 @@ export default function ListHeading(props: { icon: string; name: string; id: str
 									if (taskName == "") setNewTaskInputVisible(false);
 								}}
 								autoFocus
-								placeholder="Type name of new task"
+								placeholder="Type name of new Task-Table"
 								className="w-full bg-transparent outline-none"
 								type="text"
 								value={taskName}
@@ -147,7 +147,7 @@ export default function ListHeading(props: { icon: string; name: string; id: str
 							</div>
 						</>
 					) : (
-						<p>New table</p>
+						<p>New Task-Table</p>
 					)}
 				</div>
 			</div>
