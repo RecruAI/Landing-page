@@ -23,8 +23,8 @@ export default function UtilitiesContainer(props: { font: NextFont }) {
 
 	return (
 		<div className="responsiveWidth mt-20 flex flex-col items-center justify-around gap-y-10 xl:flex-row">
-			{utilities.map((utility, index) => (
-				<Utility font={props.font} paragraph={utility.paragraph} title={utility.title} icon={utility.icon} key={index} />
+			{utilities.map((utility) => (
+				<Utility font={props.font} paragraph={utility.paragraph} title={utility.title} icon={utility.icon} key={utility.title} />
 			))}
 		</div>
 	);

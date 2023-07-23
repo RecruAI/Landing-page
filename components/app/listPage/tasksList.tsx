@@ -46,7 +46,7 @@ export default function TasksList(props: { listData: DataListType; dosData: Data
 			{tasks.map((task: string, index: number) => {
 				const dosForTable: DataDoType[] = dos.filter((singleDo: DataDoType) => singleDo.task == task);
 
-				return <TaskTable task={task} dos={dosForTable} id={props.listData.id} tasks={tasks} index={index} key={index} />;
+				return <TaskTable task={task} dos={dosForTable} id={props.listData.id} tasks={tasks} index={index} key={task} />;
 			})}
 		</div>
 	);
