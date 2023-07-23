@@ -2,13 +2,17 @@
 
 import { faArrowsRotate, faDiagramProject } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
+import RevalidateListPage from "./revalidateListPage";
 
 type DataDoType = { due_date: string; name: string; description: string; task: string; id: string; list: string; sub_tasks: []; done: boolean };
 
 export default function DoComponent(props: { do: DataDoType }) {
 	const [checkbox, setCheckbox] = useState<boolean>(props.do.done);
 	const [doData, setDoData] = useState<DataDoType>(props.do);
+
+	const supabase = createClientComponentClient();
 
 	useEffect(() => {
 		setCheckbox(props.do.done);
@@ -26,7 +30,14 @@ export default function DoComponent(props: { do: DataDoType }) {
 	return (
 		<button className={`taskTile text-clip ${checkbox ? "taskTileDone" : "taskTileUndone"}`}>
 			{/* Checkbox */}
-			<div onClick={() => setCheckbox(!checkbox)} className="relative my-2.5 flex items-center transition-all duration-300 ease-bouncy-bezier">
+			<div
+				onClick={async (e) => {
+					setCheckbox(!checkbox);
+					await supabase.from("dos").update({ done: !checkbox }).eq("id", props.do.id);
+					RevalidateListPage();
+				}}
+				className="relative my-2.5 flex items-center transition-all duration-300 ease-bouncy-bezier"
+			>
 				<span className={`spanCheckbox ${checkbox ? "activeSpanCheckbox" : ""}`}></span>
 			</div>
 

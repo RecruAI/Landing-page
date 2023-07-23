@@ -18,7 +18,19 @@ export default function TasksList(props: { listData: DataListType; dosData: Data
 		} else if (payload.eventType === "INSERT") {
 			setDos((prevDoes) => [payload.new, ...prevDoes]);
 		} else {
-			setDos((prevDoes) => prevDoes.map((doData: DataDoType) => (doData.id === payload.old.id ? payload.new : doData)));
+			setDos((prevDoes) =>
+				prevDoes
+					.map((doData: DataDoType) => (doData.id === payload.old.id ? payload.new : doData))
+					.sort((doA, doB) => {
+						if (doB.done == doA.done) {
+							if (doB.due_date < doA.due_date) return 1;
+							else if (doB.due_date > doA.due_date) return -1;
+							else return doB.name < doA.name ? 1 : -1;
+						} else if (!doB.done && doA.done) return 1;
+						else if (doB.done && !doA.done) return -1;
+						else return 0;
+					})
+			);
 		}
 	}
 
@@ -29,7 +41,7 @@ export default function TasksList(props: { listData: DataListType; dosData: Data
 			.subscribe();
 
 		const subscriptionDos = supabase
-			.channel("taskListSub")
+			.channel("taskDosSub")
 			.on("postgres_changes", { event: "*", schema: "public", table: "dos" }, (payload: any) => handleListsChange(payload))
 			.subscribe();
 

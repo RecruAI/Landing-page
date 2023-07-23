@@ -12,6 +12,7 @@ type DataDoType = { due_date: string; name: string; description: string; task: s
 export default function TaskTable(props: { task: string; id: string; tasks: string[]; index: number; dos: DataDoType[] }) {
 	const [name, setName] = useState<string>(props.task);
 	const [oldName, setOldName] = useState<string>(props.task);
+	const [dos, setDos] = useState<DataDoType[]>(props.dos);
 	const [nameEditing, setNameEditing] = useState<Boolean>(false);
 
 	const supabase = createClientComponentClient();
@@ -20,6 +21,10 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 		setOldName(props.task);
 		setName(props.task);
 	}, [props.task]);
+
+	useEffect(() => {
+		setDos(props.dos);
+	}, [props.dos]);
 
 	async function updateTask() {
 		if (name != "") {
@@ -83,7 +88,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 
 			{/* Tasks */}
 			<div className="flex flex-col gap-y-1">
-				{props.dos.map((singleDo) => (
+				{dos.map((singleDo) => (
 					<DoComponent do={singleDo} key={singleDo.id} />
 				))}
 			</div>
