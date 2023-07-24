@@ -6,11 +6,49 @@ import AddListComponent from "@/components/app/sidebar/addListComponent";
 import ListLinksContainer from "@/components/app/sidebar/listLinksContainer";
 import AccountButton from "@/components/app/sidebar/accountButton";
 import QuickActionsMenu from "@/components/app/sidebar/quickActionsMenu";
-import { useState } from "react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { PostgrestSingleResponse } from "@supabase/supabase-js";
+import { useEffect, useState } from "react";
+
+type DataListType = { icon: string; id: string; name: string; user_id: string; date_created: string; tasks: string[] };
 
 export default function SideBar() {
 	const [visible, setVisible] = useState<Boolean>(false);
 	const [addListComponentVisible, setAddListComponentVisible] = useState<Boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
+	const [lists, setLists] = useState<DataListType[]>([]);
+
+	const supabase = createClientComponentClient({});
+
+	function handleListsChange(payload: any): void {
+		if (payload.eventType === "DELETE") {
+			setLists((prevLists) => prevLists.filter((item) => item.id !== payload.old.id));
+		} else if (payload.eventType === "INSERT") {
+			setLists((prevLists) => [payload.new, ...prevLists]);
+		} else {
+			setLists((prevLists) => prevLists.map((item) => (item.id === payload.old.id ? payload.new : item)));
+		}
+	}
+
+	useEffect(() => {
+		async function fetchData() {
+			let { data: lists }: PostgrestSingleResponse<DataListType[]> = await supabase.from("lists").select("*");
+
+			setLists(lists != undefined && lists != null ? lists : []);
+			setLoading(false);
+		}
+
+		fetchData();
+
+		const subscription = supabase
+			.channel("listsContainerSub")
+			.on("postgres_changes", { event: "*", schema: "public", table: "lists" }, (payload) => handleListsChange(payload))
+			.subscribe();
+
+		return () => {
+			subscription.unsubscribe();
+		};
+	}, [supabase]);
 
 	function hideAddListComponent() {
 		setAddListComponentVisible(false);
@@ -50,7 +88,7 @@ export default function SideBar() {
 					<div className="flex flex-col gap-y-1 px-4 py-5">
 						<p className="select-none py-2.5 ps-2 text-lg font-semibold text-[--text-rgb]">Lists</p>
 
-						<ListLinksContainer hideSidebar={() => hideSidebar()} />
+						<ListLinksContainer lists={lists} hideSidebar={() => hideSidebar()} loading={loading} />
 
 						<button
 							className="sidebarButton mt-1"

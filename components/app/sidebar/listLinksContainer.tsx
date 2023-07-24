@@ -1,51 +1,11 @@
-"use client";
-
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 
-type DataListType = { icon: string; id: string; name: string; user_id: string; date_created: string; tasks: string[] }[];
+type DataListType = { icon: string; id: string; name: string; user_id: string; date_created: string; tasks: string[] };
 
-export default function ListLinksContainer(props: { hideSidebar: Function }) {
-	const [lists, setLists] = useState<DataListType>([]);
-	const [loading, setLoading] = useState<boolean>(true);
-
-	const supabase = createClientComponentClient({});
-
-	function handleListsChange(payload: any) {
-		if (payload.eventType === "DELETE") {
-			setLists((prevLists) => prevLists.filter((item) => item.id !== payload.old.id));
-		} else if (payload.eventType === "INSERT") {
-			setLists((prevLists) => [payload.new, ...prevLists]);
-		} else {
-			setLists((prevLists) => prevLists.map((item) => (item.id === payload.old.id ? payload.new : item)));
-		}
-	}
-
-	useEffect(() => {
-		async function fetchData() {
-			let { data: lists }: PostgrestSingleResponse<DataListType> = await supabase.from("lists").select("*");
-
-			setLists(lists != undefined && lists != null ? lists : []);
-			setLoading(false);
-		}
-
-		fetchData();
-
-		const subscription = supabase
-			.channel("listsContainerSub")
-			.on("postgres_changes", { event: "*", schema: "public", table: "lists" }, (payload) => handleListsChange(payload))
-			.subscribe();
-
-		return () => {
-			subscription.unsubscribe();
-		};
-	}, [supabase]);
-
+export default function ListLinksContainer(props: { hideSidebar: Function; loading: boolean; lists: DataListType[] }) {
 	return (
 		<>
-			{loading ? (
+			{props.loading ? (
 				<>
 					{/* // Showing loading before fetched data from db */}
 					<div className={`sidebarButton animate-pulse bg-colorGray/10`}>
@@ -75,7 +35,7 @@ export default function ListLinksContainer(props: { hideSidebar: Function }) {
 					</div>
 				</>
 			) : (
-				lists.map((list) => {
+				props.lists.map((list) => {
 					return (
 						<Link
 							href={"/app/" + list.id}
@@ -98,4 +58,3 @@ export default function ListLinksContainer(props: { hideSidebar: Function }) {
 		</>
 	);
 }
-	
