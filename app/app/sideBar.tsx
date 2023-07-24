@@ -3,7 +3,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import AddListComponent from "@/components/app/sidebar/addListComponent";
-import ListsContainer from "@/components/app/sidebar/listsContainer";
+import ListLinksContainer from "@/components/app/sidebar/listLinksContainer";
 import AccountButton from "@/components/app/sidebar/accountButton";
 import QuickActionsMenu from "@/components/app/sidebar/quickActionsMenu";
 import { useState } from "react";
@@ -50,7 +50,7 @@ export default function SideBar() {
 					<div className="flex flex-col gap-y-1 px-4 py-5">
 						<p className="select-none py-2.5 ps-2 text-lg font-semibold text-[--text-rgb]">Lists</p>
 
-						<ListsContainer hideSidebar={() => hideSidebar()} />
+						<ListLinksContainer hideSidebar={() => hideSidebar()} />
 
 						<button
 							className="sidebarButton mt-1"

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 type DataListType = { icon: string; id: string; name: string; user_id: string; date_created: string; tasks: string[] }[];
 
-export default function ListsContainer(props: { hideSidebar: Function }) {
+export default function ListLinksContainer(props: { hideSidebar: Function }) {
 	const [lists, setLists] = useState<DataListType>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 type DataListType = { icon: string; id: string; name: string; user_id: string; date_created: string; tasks: string[] };
 type DataDoType = { due_date: string; name: string; description: string; task: string; id: string; list: string; sub_tasks: []; done: boolean };
 
-export default function TasksList(props: { listData: DataListType; dosData: DataDoType[] }) {
+export default function TaskTablesContainer(props: { listData: DataListType; dosData: DataDoType[] }) {
 	const [tasks, setTasks] = useState<string[]>(props.listData.tasks);
 	const [dos, setDos] = useState<DataDoType[]>(props.dosData);
 	const supabase = createClientComponentClient({});
