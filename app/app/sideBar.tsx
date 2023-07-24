@@ -1,10 +1,11 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInbox, faMagnifyingGlass, faCalendarCheck, faCalendar, faBoxArchive, faBarChart, faPlus, faL } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import AddListComponent from "@/components/app/sidebar/addListComponent";
 import ListsContainer from "@/components/app/sidebar/listsContainer";
 import AccountButton from "@/components/app/sidebar/accountButton";
+import QuickActionsMenu from "@/components/app/sidebar/quickActionsMenu";
 import { useState } from "react";
 
 export default function SideBar() {
@@ -42,36 +43,7 @@ export default function SideBar() {
 				<div className="flex flex-col gap-y-3 px-4 pb-5 pt-7">
 					<AccountButton />
 
-					<div className="flex flex-col gap-y-1">
-						<button className="sidebarButton">
-							<FontAwesomeIcon fixedWidth icon={faMagnifyingGlass} className="h-8 w-8 p-1.5 text-colorGray" />
-							<p className="text-[--text-rgb]">Quick find</p>
-						</button>
-						<button className="sidebarButton">
-							<FontAwesomeIcon fixedWidth icon={faInbox} className="h-8 w-8 p-1.5 text-[#4B81EB]" />
-							<p className="text-[--text-rgb]">Inbox</p>
-						</button>
-					</div>
-
-					<div className="flex flex-col gap-y-1">
-						<button className="sidebarButton">
-							<FontAwesomeIcon fixedWidth icon={faCalendarCheck} className="h-8 w-8 p-1.5 text-[#46BF77]" />
-							<p className="text-[--text-rgb]">Today</p>
-							<p className="ms-auto text-colorGray">21</p>
-						</button>
-
-						<button className="sidebarButton">
-							<FontAwesomeIcon fixedWidth icon={faCalendar} className="h-8 w-8 p-1.5 text-[#9D59DF]" />
-							<p className="text-[--text-rgb]">Upcoming</p>
-							<p className="ms-auto text-colorGray">9</p>
-						</button>
-
-						<button className="sidebarButton">
-							<FontAwesomeIcon fixedWidth icon={faBoxArchive} className="h-8 w-8 p-1.5 text-[#DF8637]" />
-							<p className="text-[--text-rgb]">Someday</p>
-							<p className="ms-auto text-colorGray">2</p>
-						</button>
-					</div>
+					<QuickActionsMenu />
 				</div>
 
 				<div className="border-t-1 border-colorGray/20">

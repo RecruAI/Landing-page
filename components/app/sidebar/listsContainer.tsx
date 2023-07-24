@@ -5,16 +5,10 @@ import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-type dataType = {
-	id: string;
-	user_id: string;
-	name: string;
-	icon: string;
-	date_created: string;
-}[];
+type DataListType = { icon: string; id: string; name: string; user_id: string; date_created: string; tasks: string[] }[];
 
 export default function ListsContainer(props: { hideSidebar: Function }) {
-	const [lists, setLists] = useState<dataType>([]);
+	const [lists, setLists] = useState<DataListType>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 
 	const supabase = createClientComponentClient({});
@@ -31,7 +25,7 @@ export default function ListsContainer(props: { hideSidebar: Function }) {
 
 	useEffect(() => {
 		async function fetchData() {
-			let { data: lists }: PostgrestSingleResponse<dataType> = await supabase.from("lists").select("*");
+			let { data: lists }: PostgrestSingleResponse<DataListType> = await supabase.from("lists").select("*");
 
 			setLists(lists != undefined && lists != null ? lists : []);
 			setLoading(false);
