@@ -11,38 +11,44 @@ import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
 type DataListType = { icon: string; id: string; name: string; user_id: string; date_created: string; tasks: string[] };
+type DataDoType = { due_date: string; name: string; description: string; task: string; id: string; list: string; sub_tasks: []; done: boolean };
 
 export default function SideBar() {
 	const [visible, setVisible] = useState<Boolean>(false);
 	const [addListComponentVisible, setAddListComponentVisible] = useState<Boolean>(false);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [lists, setLists] = useState<DataListType[]>([]);
+	const [dos, setDos] = useState<DataDoType[]>([]);
 
 	const supabase = createClientComponentClient({});
 
-	function handleListsChange(payload: any): void {
+	function handleDataChange(prevData: DataListType[] | DataDoType[], payload: any) {
 		if (payload.eventType === "DELETE") {
-			setLists((prevLists) => prevLists.filter((item) => item.id !== payload.old.id));
+			const arrFixed: Array<(typeof prevData)[number]> = prevData;
+			return arrFixed.filter((item: DataListType | DataDoType) => item.id !== payload.old.id);
 		} else if (payload.eventType === "INSERT") {
-			setLists((prevLists) => [payload.new, ...prevLists]);
+			return [payload.new, ...prevData];
 		} else {
-			setLists((prevLists) => prevLists.map((item) => (item.id === payload.old.id ? payload.new : item)));
+			return prevData.map((item) => (item.id === payload.old.id ? payload.new : item));
 		}
 	}
 
 	useEffect(() => {
 		async function fetchData() {
 			let { data: lists }: PostgrestSingleResponse<DataListType[]> = await supabase.from("lists").select("*");
+			let { data: dos }: PostgrestSingleResponse<DataDoType[]> = await supabase.from("dos").select("*");
 
 			setLists(lists != undefined && lists != null ? lists : []);
+			setDos(dos != undefined && dos != null ? dos : []);
 			setLoading(false);
 		}
 
 		fetchData();
 
 		const subscription = supabase
-			.channel("listsContainerSub")
-			.on("postgres_changes", { event: "*", schema: "public", table: "lists" }, (payload) => handleListsChange(payload))
+			.channel("sidebarSub")
+			.on("postgres_changes", { event: "*", schema: "public", table: "lists" }, (payload) => setLists((prevData: DataListType[]) => handleDataChange(prevData, payload)))
+			.on("postgres_changes", { event: "*", schema: "public", table: "dos" }, (payload) => setDos((prevData: DataDoType[]) => handleDataChange(prevData, payload)))
 			.subscribe();
 
 		return () => {
