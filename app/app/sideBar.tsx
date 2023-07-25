@@ -94,7 +94,7 @@ export default function SideBar() {
 					<div className="flex flex-col gap-y-1 px-4 py-5">
 						<p className="select-none py-2.5 ps-2 text-lg font-semibold text-[--text-rgb]">Lists</p>
 
-						<ListLinksContainer lists={lists} hideSidebar={() => hideSidebar()} loading={loading} />
+						<ListLinksContainer lists={lists} dos={dos} hideSidebar={() => hideSidebar()} loading={loading} />
 
 						<button
 							className="sidebarButton mt-1"

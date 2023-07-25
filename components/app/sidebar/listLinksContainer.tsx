@@ -1,8 +1,9 @@
 import Link from "next/link";
 
 type DataListType = { icon: string; id: string; name: string; user_id: string; date_created: string; tasks: string[] };
+type DataDoType = { due_date: string; name: string; description: string; task: string; id: string; list: string; sub_tasks: []; done: boolean };
 
-export default function ListLinksContainer(props: { hideSidebar: Function; loading: boolean; lists: DataListType[] }) {
+export default function ListLinksContainer(props: { hideSidebar: Function; loading: boolean; lists: DataListType[]; dos: DataDoType[] }) {
 	return (
 		<>
 			{props.loading ? (
@@ -36,6 +37,8 @@ export default function ListLinksContainer(props: { hideSidebar: Function; loadi
 				</>
 			) : (
 				props.lists.map((list) => {
+					const dosForList: DataDoType[] = props.dos.filter((singleDo: DataDoType) => singleDo.list == list.id && !singleDo.done);
+
 					return (
 						<Link
 							href={"/app/" + list.id}
@@ -49,8 +52,8 @@ export default function ListLinksContainer(props: { hideSidebar: Function; loadi
 
 							<p className="text-[--text-rgb]">{list.name}</p>
 
-							{/* Indicator showing how many undone 'dos' are on that list (to do later) */}
-							{/* <p className="ms-auto text-colorGray">2</p> */}
+							{/* Indicator showing how many undone 'dos' are on that list */}
+							<p className="ms-auto text-colorGray">{dosForList.length != 0 ? dosForList.length : ""}</p>
 						</Link>
 					);
 				})
