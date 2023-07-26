@@ -29,9 +29,14 @@ export default function DoComponent(props: { do: DataDoType }) {
 		setDoData(props.do);
 	}, [props]);
 
+	// Function returs 0 if present, -1 if past and 1 if future
 	function checkDate(): number {
+		// Setting dates
+		// Getting just date from both
 		const dateToCheck = new Date(doData.due_date);
 		const dateNow = new Date(new Date().toDateString());
+
+		// Setting time to 00:00
 		dateToCheck.setHours(0, 0, 0, 0);
 		dateNow.setHours(0, 0, 0, 0);
 
@@ -43,29 +48,44 @@ export default function DoComponent(props: { do: DataDoType }) {
 		else return 0;
 	}
 
+	// Function returns formatted date text
 	function returnDate(): string {
+		// Setting times
 		var today = new Date();
 		var taskData = new Date(doData.due_date);
+
+		// Setting time var
 		const dateTime = checkDate();
 
+		// If dateTime equals 0 return "Today"
+		if (dateTime == 0) return "Today";
+
+		// Declaring months names
 		const monthsNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
+		// Setting tommorows and yeasterdays date
 		const yesterday = new Date();
 		yesterday.setDate(yesterday.getDate() - 1);
 		const tommorow = new Date();
 		tommorow.setDate(tommorow.getDate() + 1);
 
+		// Checking if date is tommorows or yeasterdays
 		const isYesterday = yesterday.toDateString() === taskData.toDateString();
 		const isTommorow = tommorow.toDateString() === taskData.toDateString();
 
-		if (dateTime == 0) return "Today";
-		else if (dateTime == -1) {
+		if (dateTime == -1) {
+			// If isYesterday equals true, return "Yesterday"
+			// Else return date
 			if (isYesterday) return "Yesterday";
 			else return taskData.getDate() + " " + monthsNames[today.getMonth() + 1];
-		} else {
+		} else if (dateTime == 1) {
+			// If isTommorows equals true, return "Tommorow"
+			// Else return date
 			if (isTommorow) return "Tommorow";
 			else return taskData.getDate() + " " + monthsNames[today.getMonth() + 1];
 		}
+		// If dateTime is undefined return error
+		else return "Error";
 	}
 
 	return (

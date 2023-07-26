@@ -12,11 +12,13 @@ type DataDoType = { due_date: string; name: string; description: string; task: s
 export default function TaskTable(props: { task: string; id: string; tasks: string[]; index: number; dos: DataDoType[] }) {
 	const [name, setName] = useState<string>(props.task);
 	const [oldName, setOldName] = useState<string>(props.task);
-	const [dos, setDos] = useState<DataDoType[]>(props.dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done)));
 	const [nameEditing, setNameEditing] = useState<Boolean>(false);
+	// Adding only dos which aren't done
+	const [dos, setDos] = useState<DataDoType[]>(props.dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done)));
 
 	const supabase = createClientComponentClient();
 
+	// Updating values on data change in parents data
 	useEffect(() => {
 		setOldName(props.task);
 		setName(props.task);
@@ -27,6 +29,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 	}, [props.dos]);
 
 	async function updateTask() {
+		// Updating name if name fields isn't empty
 		if (name != "") {
 			const newName = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 			const prevName = oldName;
@@ -49,9 +52,14 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 		}
 	}
 
+	// Function check if date if past relative to current date
 	function checkIfPastDate(date: string): boolean {
+		// Setting dates
+		// Getting just date from both
 		const dateToCheck = new Date(date);
 		const dateNow = new Date(new Date().toDateString());
+
+		// Setting time to 00:00
 		dateToCheck.setHours(0, 0, 0, 0);
 		dateNow.setHours(0, 0, 0, 0);
 
@@ -80,13 +88,14 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 						>
 							{oldName}
 						</h2>
-						<p className="text-sm font-medium text-colorGray md:text-base">{dos.length}</p>
+						<p className="text-sm font-medium text-colorGray md:text-base">{dos.filter((singleDo) => !singleDo.done).length}</p>
 
 						{/* Spacer */}
 						<div className="grow" />
 					</>
 				)}
 
+				{/* Add new 'do' button */}
 				<div className="flex rounded-lg transition-all hover:bg-colorGray/20">
 					<FontAwesomeIcon fixedWidth icon={faPlus} className="h-4 cursor-pointer p-1 py-1.5 text-[#4F81E1] md:h-8 md:px-2.5" />
 				</div>
