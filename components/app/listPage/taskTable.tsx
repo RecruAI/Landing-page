@@ -12,7 +12,7 @@ type DataDoType = { due_date: string; name: string; description: string; task: s
 export default function TaskTable(props: { task: string; id: string; tasks: string[]; index: number; dos: DataDoType[] }) {
 	const [name, setName] = useState<string>(props.task);
 	const [oldName, setOldName] = useState<string>(props.task);
-	const [dos, setDos] = useState<DataDoType[]>(props.dos);
+	const [dos, setDos] = useState<DataDoType[]>(props.dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done)));
 	const [nameEditing, setNameEditing] = useState<Boolean>(false);
 
 	const supabase = createClientComponentClient();
@@ -23,7 +23,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 	}, [props.task]);
 
 	useEffect(() => {
-		setDos(props.dos);
+		setDos(props.dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done)));
 	}, [props.dos]);
 
 	async function updateTask() {
@@ -49,6 +49,15 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 		}
 	}
 
+	function checkIfPastDate(date: string): boolean {
+		const dateToCheck = new Date(date);
+		const dateNow = new Date(new Date().toDateString());
+		dateToCheck.setHours(0, 0, 0, 0);
+		dateNow.setHours(0, 0, 0, 0);
+
+		return dateToCheck.getTime() < dateNow.getTime();
+	}
+
 	return (
 		<div className="flex flex-col gap-y-1">
 			{/* Task table title row */}
@@ -71,7 +80,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 						>
 							{oldName}
 						</h2>
-						<p className="text-sm font-medium text-colorGray md:text-base">{props.dos.length}</p>
+						<p className="text-sm font-medium text-colorGray md:text-base">{dos.length}</p>
 
 						{/* Spacer */}
 						<div className="grow" />

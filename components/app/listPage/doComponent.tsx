@@ -6,7 +6,17 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import RevalidateListPage from "./revalidateListPage";
 
-type DataDoType = { due_date: string; name: string; description: string; task: string; id: string; list: string; sub_tasks: []; done: boolean };
+type DataDoType = {
+	due_date: string;
+	name: string;
+	description: string;
+	task: string;
+	id: string;
+	list: string;
+	sub_tasks: SubTaskType[];
+	done: boolean;
+};
+type SubTaskType = { id: number; name: string; done: boolean };
 
 export default function DoComponent(props: { do: DataDoType }) {
 	const [checkbox, setCheckbox] = useState<boolean>(props.do.done);
@@ -19,14 +29,45 @@ export default function DoComponent(props: { do: DataDoType }) {
 		setDoData(props.do);
 	}, [props]);
 
-	var monthsNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+	function checkDate(): number {
+		const dateToCheck = new Date(doData.due_date);
+		const dateNow = new Date(new Date().toDateString());
+		dateToCheck.setHours(0, 0, 0, 0);
+		dateNow.setHours(0, 0, 0, 0);
 
-	const taskDueDate = new Date(doData.due_date);
-	const visibbleDueDate = taskDueDate.getDate() + " " + monthsNames[taskDueDate.getMonth()];
+		// Past
+		if (dateToCheck.getTime() < dateNow.getTime()) return -1;
+		// Future
+		else if (dateToCheck.getTime() > dateNow.getTime()) return 1;
+		// Present
+		else return 0;
+	}
 
-	var today = new Date();
-	const isToday = doData.due_date == today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, "0") + "-" + today.getDate();
-	const isTommorow = doData.due_date == today.getFullYear() + "-" + String(today.getMonth() + 1).padStart(2, "0") + "-" + (today.getDate() + 1);
+	function returnDate(): string {
+		var today = new Date();
+		var taskData = new Date(doData.due_date);
+		const dateTime = checkDate();
+
+		const monthsNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+
+		const yesterday = new Date();
+		yesterday.setDate(yesterday.getDate() - 1);
+		const tommorow = new Date();
+		tommorow.setDate(tommorow.getDate() + 1);
+
+		const isYesterday = yesterday.toDateString() === taskData.toDateString();
+		const isTommorow = tommorow.toDateString() === taskData.toDateString();
+
+		if (dateTime == 0) return "Today";
+		else if (dateTime == -1) {
+			if (isYesterday) return "Yesterday";
+			else return taskData.getDate() + " " + monthsNames[today.getMonth() + 1];
+		} else {
+			if (isTommorow) return "Tommorow";
+			else return taskData.getDate() + " " + monthsNames[today.getMonth() + 1];
+		}
+	}
+
 	return (
 		<button className={`taskTile text-clip ${checkbox ? "taskTileDone" : "taskTileUndone"}`}>
 			{/* Checkbox */}
@@ -45,11 +86,13 @@ export default function DoComponent(props: { do: DataDoType }) {
 			<p className={`text-xs md:text-base ${checkbox ? "line-through" : ""}`}>{doData.name}</p>
 
 			{/* Date tile */}
-			{isToday ? (
-				<div className="rounded-md bg-green-500/10 px-1.5 py-0.5 text-2xs text-green-500 md:px-2 md:py-1 md:text-sm">Today</div>
-			) : (
-				<div className="x-1.5 rounded-md bg-colorGray/10 py-0.5 text-2xs text-colorGray md:px-2 md:py-1 md:text-sm">{isTommorow ? "Tommorow" : visibbleDueDate} </div>
-			)}
+			<div
+				className={`rounded-md px-1.5 py-0.5 text-2xs md:px-2 md:py-1 md:text-sm ${
+					checkDate() == 0 ? "bg-green-500/10 text-green-500" : checkDate() == 1 ? "bg-colorGray/10 text-colorGray" : "bg-red-500/10 text-red-500"
+				}`}
+			>
+				{returnDate()}
+			</div>
 
 			{/* Spacer */}
 			<div className="grow" />
@@ -58,7 +101,9 @@ export default function DoComponent(props: { do: DataDoType }) {
 			{doData.sub_tasks.length != 0 ? (
 				<div className="flex flex-row items-center gap-x-2 text-2xs text-colorGray/50 md:text-sm">
 					<FontAwesomeIcon fixedWidth icon={faDiagramProject} className="aspect-square h-3.5" />
-					<p className="hidden md:block">2/4</p>
+					<p className="hidden md:block">
+						{doData.sub_tasks.filter((sub_task: SubTaskType) => sub_task.done == true).length}/{doData.sub_tasks.length}
+					</p>
 				</div>
 			) : (
 				<></>
