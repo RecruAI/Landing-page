@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import RevalidateListPage from "./revalidateListPage";
+import EditDo from "./editDo";
 
 type DataDoType = {
 	due_date: string;
@@ -21,6 +22,7 @@ type SubTaskType = { id: number; name: string; done: boolean };
 export default function DoComponent(props: { do: DataDoType }) {
 	const [checkbox, setCheckbox] = useState<boolean>(props.do.done);
 	const [doData, setDoData] = useState<DataDoType>(props.do);
+	const [settingsVisible, setSettingsVisible] = useState<boolean>(false);
 
 	const supabase = createClientComponentClient();
 
@@ -49,7 +51,7 @@ export default function DoComponent(props: { do: DataDoType }) {
 	}
 
 	// Function returns formatted date text
-	function returnDate(): string {
+	function returnDateTileText(): string {
 		// Setting times
 		var today = new Date();
 		var taskData = new Date(doData.due_date);
@@ -89,47 +91,65 @@ export default function DoComponent(props: { do: DataDoType }) {
 	}
 
 	return (
-		<button className={`taskTile text-clip ${checkbox ? "taskTileDone" : "taskTileUndone"}`}>
-			{/* Checkbox */}
-			<div
-				onClick={async (e) => {
-					setCheckbox(!checkbox);
-					await supabase.from("dos").update({ done: !checkbox }).eq("id", props.do.id);
-					RevalidateListPage();
-				}}
-				className="relative my-2.5 flex items-center transition-all duration-300 ease-bouncy-bezier"
+		<>
+			<button
+				className={`taskTile text-clip ${checkbox ? "taskTileDone" : "taskTileUndone"} ${settingsVisible ? "z-40 scale-[1.02] !outline-colorGray/50" : ""}`}
+				onClick={() => setSettingsVisible((prevState) => !prevState)}
 			>
-				<span className={`spanCheckbox ${checkbox ? "activeSpanCheckbox" : ""}`}></span>
-			</div>
-
-			{/* Title */}
-			<p className={`text-xs md:text-base ${checkbox ? "line-through" : ""}`}>{doData.name}</p>
-
-			{/* Date tile */}
-			<div
-				className={`rounded-md px-1.5 py-0.5 text-2xs md:px-2 md:py-1 md:text-sm ${
-					checkDate() == 0 ? "bg-green-500/10 text-green-500" : checkDate() == 1 ? "bg-colorGray/10 text-colorGray" : "bg-red-500/10 text-red-500"
-				}`}
-			>
-				{returnDate()}
-			</div>
-
-			{/* Spacer */}
-			<div className="grow" />
-
-			{/* Amount of subtasks */}
-			{doData.sub_tasks.length != 0 ? (
-				<div className="flex flex-row items-center gap-x-2 text-2xs text-colorGray/50 md:text-sm">
-					<FontAwesomeIcon fixedWidth icon={faDiagramProject} className="aspect-square h-3.5" />
-					<p className="hidden md:block">
-						{doData.sub_tasks.filter((sub_task: SubTaskType) => sub_task.done == true).length}/{doData.sub_tasks.length}
-					</p>
+				{/* Checkbox */}
+				<div
+					onClick={async (e) => {
+						setSettingsVisible(true);
+						setCheckbox(!checkbox);
+						await supabase.from("dos").update({ done: !checkbox }).eq("id", props.do.id);
+						RevalidateListPage();
+					}}
+					className="relative z-30 my-2.5 flex items-center transition-all duration-300 ease-bouncy-bezier"
+				>
+					<span className={`spanCheckbox ${checkbox ? "activeSpanCheckbox" : ""}`}></span>
 				</div>
+
+				{/* Title */}
+				<p className={`text-xs md:text-base ${checkbox ? "line-through" : ""}`}>{doData.name}</p>
+
+				{/* Date tile */}
+				<div
+					className={`rounded-md px-1.5 py-0.5 text-2xs md:px-2 md:py-1 md:text-sm ${
+						checkDate() == 0 ? "bg-green-500/10 text-green-500" : checkDate() == 1 ? "bg-colorGray/10 text-colorGray" : "bg-red-500/10 text-red-500"
+					}`}
+				>
+					{returnDateTileText()}
+				</div>
+
+				{/* Spacer */}
+				<div className="grow" />
+
+				{/* Amount of subtasks */}
+				{doData.sub_tasks.length != 0 ? (
+					<div className="flex flex-row items-center gap-x-2 text-2xs text-colorGray/50 md:text-sm">
+						<FontAwesomeIcon fixedWidth icon={faDiagramProject} className="aspect-square h-3.5" />
+						<p className="hidden md:block">
+							{doData.sub_tasks.filter((sub_task: SubTaskType) => sub_task.done == true).length}/{doData.sub_tasks.length}
+						</p>
+					</div>
+				) : (
+					<></>
+				)}
+
+				{/* <FontAwesomeIcon fixedWidth icon={faArrowsRotate} className="aspect-square h-3.5 text-2xs text-colorGray/50 md:text-sm" /> */}
+			</button>
+
+			{settingsVisible ? (
+				<>
+					<EditDo dateTileText={returnDateTileText()} do={doData} dateTileTense={checkDate()} />
+					<div
+						className={`fixed left-0 top-0 z-30 h-full w-full bg-[--background-rgb] opacity-50 transition-all duration-700`}
+						onClick={() => setSettingsVisible(false)}
+					></div>
+				</>
 			) : (
 				<></>
 			)}
-
-			{/* <FontAwesomeIcon fixedWidth icon={faArrowsRotate} className="aspect-square h-3.5 text-2xs text-colorGray/50 md:text-sm" /> */}
-		</button>
+		</>
 	);
 }
