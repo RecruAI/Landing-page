@@ -80,6 +80,60 @@ export default function EditDo(props: { do: DataDoType; dateTileText: string; da
 						<p className={`text-2xs md:text-sm ${sub_task.done ? "text-colorGray/50 line-through" : ""}`}>{sub_task.name}</p>
 					</div>
 				))}
+
+				<div
+					onClick={() => {
+						if (!newTaskInputVisible) setNewTaskInputVisible(true);
+					}}
+					className={`-mx-3 flex cursor-pointer items-center gap-x-2 rounded-lg p-3 text-xs font-medium transition-all md:gap-x-4 md:text-sm ${
+						newTaskInputVisible ? "bg-colorGray/20 text-[--text-rgb]" : "text-colorGray/60 hover:bg-colorGray/20 hover:text-[--text-rgb]"
+					}`}
+				>
+					<div
+						// onClick={insertTask}
+						className={`-m-2 flex rounded-lg transition duration-200 ${newTaskInputVisible ? "hover:bg-colorGray/30" : ""}`}
+					>
+						<FontAwesomeIcon
+							fixedWidth
+							icon={faPlus}
+							className={`h-5 w-5 p-2 text-[#4F81E1] transition-transform duration-700 ${newTaskInputVisible ? "" : "rotate-180"}`}
+						/>
+					</div>
+
+					{newTaskInputVisible ? (
+						<>
+							<input
+								onBlur={() => {
+									if (taskName == "") setNewTaskInputVisible(false);
+								}}
+								autoFocus
+								placeholder="Type name of new Sub-Task"
+								className="w-full bg-transparent outline-none"
+								type="text"
+								value={taskName}
+								onSubmit={() => console.log("s")}
+								onChange={(e) => setTaskName(e.target.value)}
+							/>
+							<div
+								onClick={() => {
+									setNewTaskInputVisible(false);
+									setTaskName("");
+								}}
+								className={`-m-2 flex rounded-lg text-colorGray/50 transition duration-200  ${
+									taskName == "" ? "" : "hover:bg-colorGray/30 hover:text-colorGray"
+								}`}
+							>
+								<FontAwesomeIcon
+									fixedWidth
+									icon={faClose}
+									className={`${taskName == "" ? "scale-50 opacity-0" : "scale-180 opacity-100"} h-5 w-5 p-2 transition duration-700`}
+								/>
+							</div>
+						</>
+					) : (
+						<p>New Sub-Task</p>
+					)}
+				</div>
 			</div>
 		</div>
 	);
