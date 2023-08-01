@@ -22,9 +22,9 @@ export default function AddDo() {
 	const supabase = createClientComponentClient();
 
 	return (
-		<div className="z-50 mx-auto mt-6 flex w-full max-w-7xl flex-col items-start gap-x-12 gap-y-4 rounded-lg bg-[--sidebar-rgb] px-5 py-4 shadow-md md:mt-10 md:flex-row md:p-10 ">
+		<div className="z-50 mx-auto mt-6 flex w-full max-w-7xl flex-col items-start gap-x-12 gap-y-4 rounded-lg bg-[--sidebar-rgb] px-5 py-4 shadow-md md:mt-10 md:flex-row md:flex-wrap md:p-10 ">
 			{/* Left half */}
-			<div className="flex flex-col gap-y-3 md:w-1/2">
+			<div className="flex basis-full flex-col gap-y-3 md:basis-1/2">
 				{/* Date and title */}
 				<div className="flex flex-row items-center gap-x-4 md:gap-x-7">
 					{/* Title */}
@@ -87,7 +87,7 @@ export default function AddDo() {
 			</div>
 
 			{/* Right half */}
-			<div className="flex w-full flex-col md:w-1/2">
+			<div className="flex w-full basis-full flex-col md:grow md:basis-2/5">
 				{/* Title */}
 				<p className="mb-1.5 cursor-default font-semibold md:mb-3 md:text-lg">Sub tasks</p>
 
@@ -196,6 +196,16 @@ export default function AddDo() {
 					)}
 				</div>
 			</div>
+
+			<button
+				className={`ms-auto w-fit rounded-lg px-3 py-2.5 text-xs font-medium text-white transition-all duration-500 md:px-7 md:py-4 md:text-base
+${name != null && name != "" ? "bg-colorBlue" : "bg-red-700"}
+		 `}
+				disabled={name == null || name == ""}
+				// onClick={() => insertNewDoToDB()}
+			>
+				{name != null && name != "" ? 'Add "' + name + '" to Task Table' : "Fill all of the fields!"}
+			</button>
 		</div>
 	);
 }
