@@ -89,7 +89,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 						>
 							{oldName}
 						</h2>
-						<p className="text-sm font-medium text-colorGray md:text-base">{dos.length}</p>
+						<p className="text-sm font-medium text-colorGray md:text-base">{dos.filter((singleDo) => !singleDo.done).length}</p>
 
 						{/* Spacer */}
 						<div className="grow" />
@@ -101,7 +101,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 					<FontAwesomeIcon fixedWidth icon={faPlus} className="h-4 cursor-pointer p-1 py-1.5 text-[#4F81E1] md:h-8 md:px-3" />
 				</div>
 
-				{dos.length == 0 ? (
+				{dos.filter((singleDo) => !singleDo.done).length == 0 ? (
 					<div
 						className="flex rounded-lg transition-all hover:bg-colorGray/20"
 						onClick={async () => {
