@@ -1,23 +1,11 @@
 "use client";
 
-import { faArrowsRotate, faDiagramProject } from "@fortawesome/free-solid-svg-icons";
+import { faDiagramProject } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import RevalidateListPage from "./revalidateListPage";
 import EditDo from "./editDo";
-
-type DataDoType = {
-	due_date: string;
-	name: string;
-	description: string;
-	task: string;
-	id: string;
-	list: string;
-	sub_tasks: SubTaskType[];
-	done: boolean;
-};
-type SubTaskType = { id: number; name: string; done: boolean };
 
 export default function DoComponent(props: { do: DataDoType }) {
 	const [checkbox, setCheckbox] = useState<boolean>(props.do.done);

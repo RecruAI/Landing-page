@@ -10,9 +10,6 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
-type DataListType = { icon: string; id: string; name: string; user_id: string; date_created: string; tasks: string[] };
-type DataDoType = { due_date: string; name: string; description: string; task: string; id: string; list: string; sub_tasks: []; done: boolean };
-
 export default function SideBar() {
 	const [visible, setVisible] = useState<Boolean>(false);
 	const [addListComponentVisible, setAddListComponentVisible] = useState<Boolean>(false);
