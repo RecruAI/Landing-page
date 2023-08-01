@@ -1,8 +1,5 @@
 import Link from "next/link";
 
-type DataListType = { icon: string; id: string; name: string; user_id: string; date_created: string; tasks: string[] };
-type DataDoType = { due_date: string; name: string; description: string; task: string; id: string; list: string; sub_tasks: []; done: boolean };
-
 export default function ListLinksContainer(props: { hideSidebar: Function; loading: boolean; lists: DataListType[]; dos: DataDoType[] }) {
 	return (
 		<>

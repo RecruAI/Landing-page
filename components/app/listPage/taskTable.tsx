@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import RevalidateListPage from "./revalidateListPage";
 import DoComponent from "./doComponent";
 
-type DataDoType = { due_date: string; name: string; description: string; task: string; id: string; list: string; sub_tasks: []; done: boolean };
-
 export default function TaskTable(props: { task: string; id: string; tasks: string[]; index: number; dos: DataDoType[] }) {
 	const [name, setName] = useState<string>(props.task);
 	const [oldName, setOldName] = useState<string>(props.task);
