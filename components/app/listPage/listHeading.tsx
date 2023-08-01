@@ -128,7 +128,6 @@ export default function ListHeading(props: { icon: string; name: string; id: str
 								className="w-full bg-transparent outline-none"
 								type="text"
 								value={taskName}
-								onSubmit={() => console.log("s")}
 								onChange={(e) => setTaskName(e.target.value)}
 							/>
 							<div
@@ -136,7 +135,9 @@ export default function ListHeading(props: { icon: string; name: string; id: str
 									setNewTaskInputVisible(false);
 									setTaskName("");
 								}}
-								className="my-1 flex cursor-pointer rounded-lg text-colorGray/50 transition duration-200 hover:bg-colorGray/30 hover:text-colorGray md:-mx-1"
+								className={`duration-200md:-mx-1 my-1 flex rounded-lg text-colorGray transition  ${
+									taskName == "" ? "" : "cursor-pointer hover:bg-colorGray/30"
+								}`}
 							>
 								<FontAwesomeIcon
 									fixedWidth
