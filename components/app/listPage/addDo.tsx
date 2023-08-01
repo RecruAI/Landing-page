@@ -8,13 +8,11 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import ContentEditable from "react-contenteditable";
 
-export default function EditDo(props: { do: DataDoType }) {
-	const [name, setName] = useState(props.do.name);
-	const [description, setDscription] = useState<string | null>(props.do.description);
-	const [subTasks, setSubTasks] = useState(props.do.sub_tasks);
-	const [dueDate, setDueDate] = useState(props.do.due_date);
-
-	const [tempName, setTempName] = useState(props.do.name);
+export default function AddDo() {
+	const [name, setName] = useState<string | null>(null);
+	const [description, setDscription] = useState<string | null>(null);
+	const [subTasks, setSubTasks] = useState<SubTaskType[]>([]);
+	const [dueDate, setDueDate] = useState<string>(new Date().toDateString());
 
 	const [dataPickerVisible, setDataPickerVisible] = useState<Boolean>(false);
 
@@ -22,13 +20,6 @@ export default function EditDo(props: { do: DataDoType }) {
 	const [newTaskName, setNewTaskName] = useState<string>("");
 
 	const supabase = createClientComponentClient();
-
-	useEffect(() => {
-		async function updateDo() {
-			await supabase.from("dos").update({ name: name, description: description, sub_tasks: subTasks, due_date: dueDate }).eq("id", props.do.id);
-		}
-		updateDo();
-	}, [name, description, subTasks, dueDate]);
 
 	return (
 		<div className="z-50 mx-auto mt-6 flex w-full max-w-7xl flex-col items-start gap-x-12 gap-y-4 rounded-lg bg-[--sidebar-rgb] px-5 py-4 shadow-md md:mt-10 md:flex-row md:p-10 ">
@@ -38,16 +29,17 @@ export default function EditDo(props: { do: DataDoType }) {
 				<div className="flex flex-row items-center gap-x-4 md:gap-x-7">
 					{/* Title */}
 					<ContentEditable
-						html={tempName}
+						html={name ?? "Set name..."}
 						onChange={(e) =>
-							setTempName(
+							setName(
 								e.target.value
 									.replace(/(<([^>]+)>)/gi, "")
 									.replace(/\&nbsp;/g, " ")
 									.trim()
 							)
 						}
-						onBlur={(e) => (e.target.innerText != "" ? setName(e.target.innerText) : setTempName(name))}
+						onFocus={() => setName((oldName) => (oldName == null ? "" : oldName))}
+						onBlur={() => setName((oldName) => (oldName == "" ? null : oldName))}
 						className="-m-3 w-fit rounded-md bg-transparent px-3 py-2 font-semibold outline-none hover:bg-colorGray/10 focus:bg-colorGray/10 md:text-lg"
 					/>
 

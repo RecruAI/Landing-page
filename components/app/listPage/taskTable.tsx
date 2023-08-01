@@ -6,11 +6,14 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import RevalidateListPage from "../../../functions/revalidateListPage";
 import DoComponent from "./doComponent";
+import AddDo from "./addDo";
 
 export default function TaskTable(props: { task: string; id: string; tasks: string[]; index: number; dos: DataDoType[] }) {
 	const [name, setName] = useState<string>(props.task);
 	const [oldName, setOldName] = useState<string>(props.task);
 	const [nameEditing, setNameEditing] = useState<Boolean>(false);
+	const [addDoVisible, setAddDoVisible] = useState<Boolean>(false);
+
 	// Adding only dos which aren't done
 	const [dos, setDos] = useState<DataDoType[]>(props.dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done)));
 
@@ -94,7 +97,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 				)}
 
 				{/* Add new 'do' button */}
-				<div className="flex rounded-lg transition-all hover:bg-colorGray/20">
+				<div className="flex rounded-lg transition-all hover:bg-colorGray/20" onClick={() => setAddDoVisible(true)}>
 					<FontAwesomeIcon fixedWidth icon={faPlus} className="h-4 cursor-pointer p-1 py-1.5 text-[#4F81E1] md:h-8 md:px-3" />
 				</div>
 
@@ -122,9 +125,17 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 
 			{/* Tasks */}
 			<div className="flex flex-col gap-y-1">
-				{dos.map((singleDo) => (
-					<DoComponent do={singleDo} key={singleDo.id} />
-				))}
+				{!addDoVisible ? (
+					dos.map((singleDo) => <DoComponent do={singleDo} key={singleDo.id} />)
+				) : (
+					<>
+						<AddDo />
+						<div
+							className={`fixed left-0 top-0 z-30 h-full w-full bg-[--background-rgb] opacity-50 transition-all duration-700`}
+							onClick={() => setAddDoVisible(false)}
+						></div>
+					</>
+				)}
 			</div>
 		</div>
 	);
