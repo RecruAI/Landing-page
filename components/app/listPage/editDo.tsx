@@ -10,9 +10,13 @@ import ContentEditable from "react-contenteditable";
 
 export default function EditDo(props: { do: DataDoType }) {
 	const [name, setName] = useState(props.do.name);
-	const [description, setDscription] = useState<string>(props.do.description ?? "Add description...");
+	const [description, setDscription] = useState<string | null>(props.do.description);
 	const [subTasks, setSubTasks] = useState(props.do.sub_tasks);
 	const [dueDate, setDueDate] = useState(props.do.due_date);
+
+	const [tempName, setTempName] = useState(props.do.name);
+
+	const [dataPickerVisible, setDataPickerVisible] = useState<Boolean>(false);
 
 	const [newTaskInputVisible, setNewTaskInputVisible] = useState<Boolean>(false);
 	const [newTaskName, setNewTaskName] = useState<string>("");
@@ -34,35 +38,48 @@ export default function EditDo(props: { do: DataDoType }) {
 				<div className="flex flex-row items-center gap-x-4 md:gap-x-7">
 					{/* Title */}
 					<ContentEditable
-						html={name}
+						html={tempName}
 						onChange={(e) =>
-							setName(
+							setTempName(
 								e.target.value
 									.replace(/(<([^>]+)>)/gi, "")
 									.replace(/\&nbsp;/g, " ")
 									.trim()
 							)
 						}
-						className="w-fit bg-transparent font-semibold outline-none md:text-lg"
+						onBlur={(e) => (e.target.innerText != "" ? setName(e.target.innerText) : setTempName(name))}
+						className="-m-3 w-fit rounded-md bg-transparent px-3 py-2 font-semibold outline-none hover:bg-colorGray/10 focus:bg-colorGray/10 md:text-lg"
 					/>
 
 					{/* Date */}
-					<div
-						className={`w-fit rounded-md px-2 py-1 text-2xs sm:text-xs md:text-sm ${
-							checkDateRelativeTime(dueDate) == 0
-								? "bg-green-500/10 text-green-500"
-								: checkDateRelativeTime(dueDate) == 1
-								? "bg-colorGray/10 text-colorGray"
-								: "bg-red-500/10 text-red-500"
-						}`}
-					>
-						{returnDateTileText(dueDate)}
-					</div>
+					{!dataPickerVisible ? (
+						<div
+							className={`w-fit cursor-pointer rounded-md px-2 py-1 text-2xs sm:text-xs md:text-sm ${
+								checkDateRelativeTime(dueDate) == 0
+									? "bg-green-500/10 text-green-500"
+									: checkDateRelativeTime(dueDate) == 1
+									? "bg-colorGray/10 text-colorGray"
+									: "bg-red-500/10 text-red-500"
+							}`}
+							onClick={() => setDataPickerVisible(true)}
+						>
+							{returnDateTileText(dueDate)}
+						</div>
+					) : (
+						<input
+							autoFocus
+							type="date"
+							onBlur={() => setDataPickerVisible(false)}
+							value={dueDate}
+							onChange={(e) => setDueDate(e.target.value)}
+							className="w-fit rounded-md bg-colorGray/10 px-2 py-1 text-2xs text-colorGray sm:text-xs md:text-sm"
+						/>
+					)}
 				</div>
 
 				{/* Description */}
 				<ContentEditable
-					html={description}
+					html={description ?? "Add description..."}
 					className="-mx-2.5 rounded-lg p-2.5 text-xs font-normal text-colorGray outline-none transition-all hover:bg-colorGray/10 hover:text-[--text-rgb] focus:bg-colorGray/10 focus:text-[--text-rgb] md:-mx-3 md:p-3 md:text-base"
 					onChange={(e) =>
 						setDscription(
@@ -72,48 +89,58 @@ export default function EditDo(props: { do: DataDoType }) {
 								.trim()
 						)
 					}
-					onFocus={() => setDscription((oldDescription) => (oldDescription == "Add description..." ? "" : oldDescription))}
-					onBlur={() => setDscription((oldDescription) => (oldDescription == "" ? "Add description..." : oldDescription))}
+					onFocus={() => setDscription((oldDescription) => (oldDescription == null ? "" : oldDescription))}
+					onBlur={() => setDscription((oldDescription) => (oldDescription == "" ? null : oldDescription))}
 				/>
 			</div>
 
 			{/* Right half */}
-			<div className="flex w-full flex-col gap-y-3 md:w-1/2">
+			<div className="flex w-full flex-col md:w-1/2">
 				{/* Title */}
-				<p className="cursor-default font-semibold md:mb-2 md:text-lg">Sub tasks</p>
+				<p className="mb-1.5 cursor-default font-semibold md:mb-3 md:text-lg">Sub tasks</p>
 
 				{/* List of subtasks */}
-				{subTasks.map((sub_task, index) => (
-					<div key={Math.random()} className="flex flex-row items-center gap-x-2 md:gap-x-4">
-						{/* Checkbox */}
+				{subTasks
+					.sort((doA, doB) => {
+						if (doB.done == doA.done) return 0;
+						else if (!doB.done && doA.done) return 1;
+						else if (doB.done && !doA.done) return -1;
+						else return 0;
+					})
+					.map((sub_task, index) => (
 						<div
-							onClick={() =>
-								setSubTasks((subTasks) => {
-									let newSubTasks = subTasks;
-									newSubTasks[index].done = !newSubTasks[index].done;
-									return newSubTasks.slice(0);
-								})
-							}
-							className="relative z-30 flex cursor-pointer items-center transition-all duration-300 ease-bouncy-bezier"
+							key={Math.random()}
+							className="flex flex-row items-center gap-x-2 border-t-1 border-t-colorGray/30 py-2 first-of-type:border-t-0 md:gap-x-4 md:py-2.5"
 						>
-							<span className={`spanCheckbox !rounded-full ${sub_task.done ? "activeSpanCheckbox" : ""}`}></span>
-						</div>
+							{/* Checkbox */}
+							<div
+								onClick={() =>
+									setSubTasks((subTasks) => {
+										let newSubTasks = subTasks;
+										newSubTasks[index].done = !newSubTasks[index].done;
+										return newSubTasks.slice(0);
+									})
+								}
+								className="relative z-30 flex cursor-pointer items-center transition-all duration-300 ease-bouncy-bezier"
+							>
+								<span className={`spanCheckbox !rounded-full ${sub_task.done ? "activeSpanCheckbox" : ""}`}></span>
+							</div>
 
-						{/* Name of sub task */}
-						<p className={`w-full text-xs md:text-sm ${sub_task.done ? "text-colorGray/50 line-through" : ""}`}>{sub_task.name}</p>
-						<div
-							onClick={() =>
-								setSubTasks((oldSubTasks) => {
-									oldSubTasks.splice(index, 1);
-									return oldSubTasks.slice(0);
-								})
-							}
-							className="-my-1.5 flex rounded-lg px-1 py-1.5 transition duration-200 hover:bg-colorGray/30"
-						>
-							<FontAwesomeIcon fixedWidth icon={faClose} className="h-4 w-4 text-red-500" />
+							{/* Name of sub task */}
+							<p className={`w-full text-xs md:text-sm ${sub_task.done ? "text-colorGray/50 line-through" : ""}`}>{sub_task.name}</p>
+							<div
+								onClick={() =>
+									setSubTasks((oldSubTasks) => {
+										oldSubTasks.splice(index, 1);
+										return oldSubTasks.slice(0);
+									})
+								}
+								className="-my-1.5 flex rounded-lg px-1 py-1.5 transition duration-200 hover:bg-colorGray/30"
+							>
+								<FontAwesomeIcon fixedWidth icon={faClose} className="h-4 w-4 text-red-500" />
+							</div>
 						</div>
-					</div>
-				))}
+					))}
 
 				<div
 					onClick={() => {

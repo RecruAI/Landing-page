@@ -133,3 +133,16 @@
   transition-delay: .5s;
 }
 
+::-webkit-datetime-edit-month-field,
+::-webkit-datetime-edit-day-field,
+::-webkit-datetime-edit-year-field{
+  background-color: transparent;
+  cursor: pointer;padding: 0;
+}
+::-webkit-datetime-edit{
+  padding: 0;
+}
+
+::-webkit-datetime{
+  background-color: red;
+}

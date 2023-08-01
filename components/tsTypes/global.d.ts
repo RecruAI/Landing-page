@@ -13,7 +13,7 @@ declare global {
     type DataDoType = {
         due_date: string;
         name: string;
-        description: string;
+        description: string | null;
         task: string;
         id: string;
         list: string;

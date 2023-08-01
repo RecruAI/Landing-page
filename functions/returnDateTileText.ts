@@ -3,6 +3,7 @@ import checkDateRelativeTime from "./checkDateRelativeTime";
 // Function returns formatted date text
 export default function returnDateTileText(stringDataToCheck: string): string {
     // Setting times
+    const today = new Date()
     var taskData = new Date(stringDataToCheck);
 
     // Setting time var
@@ -24,16 +25,19 @@ export default function returnDateTileText(stringDataToCheck: string): string {
     const isYesterday = yesterday.toDateString() === taskData.toDateString();
     const isTommorow = tommorow.toDateString() === taskData.toDateString();
 
+    // Setting year if years doesn't match
+    const year = today.getFullYear() == taskData.getFullYear() ? "" : " " + taskData.getFullYear()
+
     if (dateTime == -1) {
         // If isYesterday equals true, return "Yesterday"
         // Else return date
         if (isYesterday) return "Yesterday";
-        else return taskData.getDate() + " " + monthsNames[taskData.getMonth()];
+        else return taskData.getDate() + " " + monthsNames[taskData.getMonth()] + year;
     } else if (dateTime == 1) {
         // If isTommorows equals true, return "Tommorow"
         // Else return date
         if (isTommorow) return "Tommorow";
-        else return taskData.getDate() + " " + monthsNames[taskData.getMonth()];
+        else return taskData.getDate() + " " + monthsNames[taskData.getMonth()] + year;
     }
     // If dateTime is undefined return error
     else return "Error";
