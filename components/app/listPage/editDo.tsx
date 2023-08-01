@@ -153,7 +153,7 @@ export default function EditDo(props: { do: DataDoType }) {
 					{/* Plus icon */}
 					<div
 						onClick={() => {
-							setSubTasks((oldSubTasks) => [...oldSubTasks, { id: Date.now(), done: false, name: newTaskName }]);
+							if (newTaskName != "") setSubTasks((oldSubTasks) => [...oldSubTasks, { id: Date.now(), done: false, name: newTaskName }]);
 							setNewTaskName("");
 							setNewTaskInputVisible(false);
 						}}
@@ -172,14 +172,15 @@ export default function EditDo(props: { do: DataDoType }) {
 							{/* Input field */}
 							<input
 								onBlur={() => {
-									if (newTaskName == "") setNewTaskInputVisible(false);
+									setNewTaskInputVisible(false);
+									setNewTaskName("");
 								}}
 								autoFocus
 								placeholder="Type name of new Sub-Task"
 								className="w-full bg-transparent outline-none"
 								type="text"
 								value={newTaskName}
-								onChange={(e) => setNewTaskName(e.target.value)}
+								onChange={(e) => setNewTaskName(e.target.value.trim())}
 							/>
 
 							{/* "X" button, to delete input and unfocus field, cancel adding new subtask */}
