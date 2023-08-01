@@ -1,6 +1,6 @@
 "use client";
 
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
@@ -86,7 +86,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 						>
 							{oldName}
 						</h2>
-						<p className="text-sm font-medium text-colorGray md:text-base">{dos.filter((singleDo) => !singleDo.done).length}</p>
+						<p className="text-sm font-medium text-colorGray md:text-base">{dos.length}</p>
 
 						{/* Spacer */}
 						<div className="grow" />
@@ -95,8 +95,26 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 
 				{/* Add new 'do' button */}
 				<div className="flex rounded-lg transition-all hover:bg-colorGray/20">
-					<FontAwesomeIcon fixedWidth icon={faPlus} className="h-4 cursor-pointer p-1 py-1.5 text-[#4F81E1] md:h-8 md:px-2.5" />
+					<FontAwesomeIcon fixedWidth icon={faPlus} className="h-4 cursor-pointer p-1 py-1.5 text-[#4F81E1] md:h-8 md:px-3" />
 				</div>
+
+				{dos.length == 0 ? (
+					<div
+						className="flex rounded-lg transition-all hover:bg-colorGray/20"
+						onClick={async () => {
+							let newTasks = props.tasks;
+
+							const index = newTasks.indexOf(name);
+							newTasks.splice(index, 1);
+
+							await supabase.from("lists").update({ tasks: newTasks }).eq("id", props.id);
+						}}
+					>
+						<FontAwesomeIcon fixedWidth icon={faTrash} className="h-4 cursor-pointer p-1 py-1.5 text-red-500 md:h-8 md:px-3" />
+					</div>
+				) : (
+					<></>
+				)}
 			</div>
 
 			{/* Spacer */}
