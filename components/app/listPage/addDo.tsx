@@ -8,7 +8,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import ContentEditable from "react-contenteditable";
 
-export default function AddDo() {
+export default function AddDo(props: { listId: string; task: string; hideAddDo: Function }) {
 	const [name, setName] = useState<string | null>(null);
 	const [description, setDscription] = useState<string | null>(null);
 	const [subTasks, setSubTasks] = useState<SubTaskType[]>([]);
@@ -202,7 +202,12 @@ export default function AddDo() {
 ${name != null && name != "" ? "bg-colorBlue" : "bg-red-700"}
 		 `}
 				disabled={name == null || name == ""}
-				// onClick={() => insertNewDoToDB()}
+				onClick={async () => {
+					await supabase
+						.from("dos")
+						.insert([{ name: name, description: description, sub_tasks: subTasks, due_date: dueDate, list: props.listId, task: props.task }]);
+					props.hideAddDo();
+				}}
 			>
 				{name != null && name != "" ? 'Add "' + name + '" to Task Table' : "Fill all of the fields!"}
 			</button>

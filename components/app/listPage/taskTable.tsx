@@ -129,7 +129,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 					dos.map((singleDo) => <DoComponent do={singleDo} key={singleDo.id} />)
 				) : (
 					<>
-						<AddDo />
+						<AddDo listId={props.id} task={name} hideAddDo={() => setAddDoVisible(false)} />
 						<div
 							className={`fixed left-0 top-0 z-30 h-full w-full bg-[--background-rgb] opacity-50 transition-all duration-700`}
 							onClick={() => setAddDoVisible(false)}
