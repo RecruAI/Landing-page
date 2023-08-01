@@ -2,7 +2,8 @@
 
 import { faClose, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useEffect, useState } from "react";
 import ContentEditable from "react-contenteditable";
 
 export default function EditDo(props: { do: DataDoType; dateTileText: string; dateTileTense: number }) {
@@ -12,6 +13,15 @@ export default function EditDo(props: { do: DataDoType; dateTileText: string; da
 
 	const [newTaskInputVisible, setNewTaskInputVisible] = useState<Boolean>(false);
 	const [newTaskName, setNewTaskName] = useState<string>("");
+
+	const supabase = createClientComponentClient();
+
+	useEffect(() => {
+		async function updateDo() {
+			await supabase.from("dos").update({ name: name, description: description, sub_tasks: subTasks }).eq("id", props.do.id);
+		}
+		updateDo();
+	}, [name, description, subTasks]);
 
 	return (
 		<div className="z-50 mt-6 flex flex-col items-start gap-x-12 gap-y-4 rounded-lg bg-[--sidebar-rgb] px-5 py-4 shadow-md md:mt-10 md:flex-row md:p-10 ">
@@ -87,7 +97,18 @@ export default function EditDo(props: { do: DataDoType; dateTileText: string; da
 						</div>
 
 						{/* Name of sub task */}
-						<p className={`text-xs md:text-sm ${sub_task.done ? "text-colorGray/50 line-through" : ""}`}>{sub_task.name}</p>
+						<p className={`w-full text-xs md:text-sm ${sub_task.done ? "text-colorGray/50 line-through" : ""}`}>{sub_task.name}</p>
+						<div
+							onClick={() =>
+								setSubTasks((oldSubTasks) => {
+									oldSubTasks.splice(index, 1);
+									return oldSubTasks.slice(0);
+								})
+							}
+							className="-my-1.5 flex rounded-lg px-1 py-1.5 transition duration-200 hover:bg-colorGray/30"
+						>
+							<FontAwesomeIcon fixedWidth icon={faClose} className="h-4 w-4 text-red-500" />
+						</div>
 					</div>
 				))}
 
@@ -95,13 +116,17 @@ export default function EditDo(props: { do: DataDoType; dateTileText: string; da
 					onClick={() => {
 						if (!newTaskInputVisible) setNewTaskInputVisible(true);
 					}}
-					className={`-mx-2 flex cursor-pointer items-center gap-x-2 rounded-lg p-2 text-xs transition-all md:-mx-3 md:gap-x-4 md:p-3 md:text-sm ${
+					className={`-ms-2 flex cursor-pointer items-center gap-x-2 rounded-lg p-2 text-xs transition-all md:-ms-3 md:gap-x-4 md:p-3 md:text-sm ${
 						newTaskInputVisible ? "bg-colorGray/20 text-[--text-rgb]" : "text-colorGray/60 hover:bg-colorGray/20 hover:text-[--text-rgb]"
 					}`}
 				>
 					{/* Plus icon */}
 					<div
-						// onClick={insertTask}
+						onClick={() => {
+							setSubTasks((oldSubTasks) => [...oldSubTasks, { id: Date.now(), done: false, name: newTaskName }]);
+							setNewTaskName("");
+							setNewTaskInputVisible(false);
+						}}
 						className={`-m-2 flex rounded-lg transition duration-200 ${newTaskInputVisible ? "hover:bg-colorGray/30" : ""}`}
 					>
 						<FontAwesomeIcon
