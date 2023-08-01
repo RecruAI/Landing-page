@@ -1,6 +1,6 @@
 "use client";
 
-import RevalidateListPage from "@/components/app/listPage/revalidateListPage";
+import RevalidateListPage from "@/functions/revalidateListPage";
 import { faClose, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";

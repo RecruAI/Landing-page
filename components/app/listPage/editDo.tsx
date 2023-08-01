@@ -1,15 +1,18 @@
 "Use client";
 
+import checkDateRelativeTime from "@/functions/checkDateRelativeTime";
+import returnDateTileText from "@/functions/returnDateTileText";
 import { faClose, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import ContentEditable from "react-contenteditable";
 
-export default function EditDo(props: { do: DataDoType; dateTileText: string; dateTileTense: number }) {
+export default function EditDo(props: { do: DataDoType }) {
 	const [name, setName] = useState(props.do.name);
 	const [description, setDscription] = useState<string>(props.do.description ?? "Add description...");
 	const [subTasks, setSubTasks] = useState(props.do.sub_tasks);
+	const [dueDate, setDueDate] = useState(props.do.due_date);
 
 	const [newTaskInputVisible, setNewTaskInputVisible] = useState<Boolean>(false);
 	const [newTaskName, setNewTaskName] = useState<string>("");
@@ -18,13 +21,13 @@ export default function EditDo(props: { do: DataDoType; dateTileText: string; da
 
 	useEffect(() => {
 		async function updateDo() {
-			await supabase.from("dos").update({ name: name, description: description, sub_tasks: subTasks }).eq("id", props.do.id);
+			await supabase.from("dos").update({ name: name, description: description, sub_tasks: subTasks, due_date: dueDate }).eq("id", props.do.id);
 		}
 		updateDo();
-	}, [name, description, subTasks]);
+	}, [name, description, subTasks, dueDate]);
 
 	return (
-		<div className="z-50 mt-6 flex flex-col items-start gap-x-12 gap-y-4 rounded-lg bg-[--sidebar-rgb] px-5 py-4 shadow-md md:mt-10 md:flex-row md:p-10 ">
+		<div className="z-50 mx-auto mt-6 flex w-full max-w-7xl flex-col items-start gap-x-12 gap-y-4 rounded-lg bg-[--sidebar-rgb] px-5 py-4 shadow-md md:mt-10 md:flex-row md:p-10 ">
 			{/* Left half */}
 			<div className="flex flex-col gap-y-3 md:w-1/2">
 				{/* Date and title */}
@@ -46,14 +49,14 @@ export default function EditDo(props: { do: DataDoType; dateTileText: string; da
 					{/* Date */}
 					<div
 						className={`w-fit rounded-md px-2 py-1 text-2xs sm:text-xs md:text-sm ${
-							props.dateTileTense == 0
+							checkDateRelativeTime(dueDate) == 0
 								? "bg-green-500/10 text-green-500"
-								: props.dateTileTense == 1
+								: checkDateRelativeTime(dueDate) == 1
 								? "bg-colorGray/10 text-colorGray"
 								: "bg-red-500/10 text-red-500"
 						}`}
 					>
-						{props.dateTileText}
+						{returnDateTileText(dueDate)}
 					</div>
 				</div>
 

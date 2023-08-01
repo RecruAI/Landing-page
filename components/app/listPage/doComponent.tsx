@@ -4,8 +4,10 @@ import { faDiagramProject } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
-import RevalidateListPage from "./revalidateListPage";
+import RevalidateListPage from "../../../functions/revalidateListPage";
 import EditDo from "./editDo";
+import checkDateRelativeTime from "@/functions/checkDateRelativeTime";
+import returnDateTileText from "@/functions/returnDateTileText";
 
 export default function DoComponent(props: { do: DataDoType }) {
 	const [checkbox, setCheckbox] = useState<boolean>(props.do.done);
@@ -20,63 +22,10 @@ export default function DoComponent(props: { do: DataDoType }) {
 	}, [props]);
 
 	// Function returs 0 if present, -1 if past and 1 if future
-	function checkDate(): number {
-		// Setting dates
-		// Getting just date from both
-		const dateToCheck = new Date(doData.due_date);
-		const dateNow = new Date(new Date().toDateString());
-
-		// Setting time to 00:00
-		dateToCheck.setHours(0, 0, 0, 0);
-		dateNow.setHours(0, 0, 0, 0);
-
-		// Past
-		if (dateToCheck.getTime() < dateNow.getTime()) return -1;
-		// Future
-		else if (dateToCheck.getTime() > dateNow.getTime()) return 1;
-		// Present
-		else return 0;
-	}
+	const dateRelativeTime = checkDateRelativeTime(props.do.due_date);
 
 	// Function returns formatted date text
-	function returnDateTileText(): string {
-		// Setting times
-		var today = new Date();
-		var taskData = new Date(doData.due_date);
-
-		// Setting time var
-		const dateTime = checkDate();
-
-		// If dateTime equals 0 return "Today"
-		if (dateTime == 0) return "Today";
-
-		// Declaring months names
-		const monthsNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
-
-		// Setting tommorows and yeasterdays date
-		const yesterday = new Date();
-		yesterday.setDate(yesterday.getDate() - 1);
-		const tommorow = new Date();
-		tommorow.setDate(tommorow.getDate() + 1);
-
-		// Checking if date is tommorows or yeasterdays
-		const isYesterday = yesterday.toDateString() === taskData.toDateString();
-		const isTommorow = tommorow.toDateString() === taskData.toDateString();
-
-		if (dateTime == -1) {
-			// If isYesterday equals true, return "Yesterday"
-			// Else return date
-			if (isYesterday) return "Yesterday";
-			else return taskData.getDate() + " " + monthsNames[today.getMonth() + 1];
-		} else if (dateTime == 1) {
-			// If isTommorows equals true, return "Tommorow"
-			// Else return date
-			if (isTommorow) return "Tommorow";
-			else return taskData.getDate() + " " + monthsNames[today.getMonth() + 1];
-		}
-		// If dateTime is undefined return error
-		else return "Error";
-	}
+	const dateTitleText = returnDateTileText(props.do.due_date);
 
 	return (
 		<>
@@ -103,10 +52,10 @@ export default function DoComponent(props: { do: DataDoType }) {
 				{/* Date tile */}
 				<div
 					className={`rounded-md px-1.5 py-0.5 text-2xs md:px-2 md:py-1 md:text-sm ${
-						checkDate() == 0 ? "bg-green-500/10 text-green-500" : checkDate() == 1 ? "bg-colorGray/10 text-colorGray" : "bg-red-500/10 text-red-500"
+						dateRelativeTime == 0 ? "bg-green-500/10 text-green-500" : dateRelativeTime == 1 ? "bg-colorGray/10 text-colorGray" : "bg-red-500/10 text-red-500"
 					}`}
 				>
-					{returnDateTileText()}
+					{dateTitleText}
 				</div>
 
 				{/* Spacer */}
@@ -129,7 +78,7 @@ export default function DoComponent(props: { do: DataDoType }) {
 
 			{settingsVisible ? (
 				<>
-					<EditDo dateTileText={returnDateTileText()} do={doData} dateTileTense={checkDate()} />
+					<EditDo do={doData} />
 					<div
 						className={`fixed left-0 top-0 z-30 h-full w-full bg-[--background-rgb] opacity-50 transition-all duration-700`}
 						onClick={() => setSettingsVisible(false)}
