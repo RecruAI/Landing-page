@@ -4,6 +4,7 @@ import SideBar from "./sideBar";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { PostgrestSingleResponse } from "@supabase/supabase-js";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
 	// Creating connection with supabase
@@ -19,7 +20,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 		redirect("/");
 	} else {
 		// Fetching users with user id of user
-		let { data: users } = await supabase.from("users").select().eq("user_id", session.user.id);
+		let { data: users }: PostgrestSingleResponse<UserDataType[]> = await supabase.from("users").select();
 
 		// Checking if there is record in db with user id
 		if (users?.length! > 0) {

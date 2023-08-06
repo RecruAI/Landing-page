@@ -27,4 +27,12 @@ declare global {
         done: boolean
     };
 
+type UserDataType = {
+    user_id: string;
+    name: string;
+    last_name: string;
+    email: string;
+    nickname: string;
+}
+
 }
