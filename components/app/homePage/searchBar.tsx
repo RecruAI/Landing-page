@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import DoTile from "./DoTile";
+import SortAndCompareDos from "@/functions/sortAndCompareDos";
 
 export default function SearchBar(props: { dos: DataDoType[] }) {
 	const [dos, setDos] = useState<DataDoType[]>(props.dos);
@@ -51,9 +52,12 @@ export default function SearchBar(props: { dos: DataDoType[] }) {
 				<>
 					<div className="h-0.5 bg-colorGray/50"></div>
 					<div className="flex flex-col">
-						{visibleDos.slice(0, 7).map((singleDo) => (
-							<DoTile do={singleDo} key={singleDo.id} />
-						))}
+						{visibleDos
+							.slice(0, 7)
+							.sort((doA, doB) => SortAndCompareDos(doA, doB))
+							.map((singleDo) => (
+								<DoTile do={singleDo} key={singleDo.id} />
+							))}
 
 						<p
 							className={`flex flex-col rounded-b-lg border-t-2 border-colorGray/50 bg-colorGray/5 px-2 text-center md:px-9 md:py-5 ${
