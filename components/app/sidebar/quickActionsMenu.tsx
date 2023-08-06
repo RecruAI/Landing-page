@@ -1,14 +1,47 @@
 "use client";
 
+import checkIfPastDate from "@/functions/checkIfPastDate";
 import { faBoxArchive, faCalendar, faCalendarCheck, faHome, faInbox, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function QuickActionsMenu() {
+export default function QuickActionsMenu(props: { dos: DataDoType[] }) {
 	const [today, setToday] = useState<number | undefined>(undefined);
 	const [nextWeek, setNextWeek] = useState<number | undefined>(undefined);
-	const [forgotten, setForgotten] = useState<number | undefined>(0);
+	const [forgotten, setForgotten] = useState<number | undefined>(undefined);
+
+	useEffect(() => {
+		setToday(
+			props.dos.filter((singleDo: DataDoType) => {
+				// Setting dates
+				const dateToCheck = new Date(singleDo.due_date);
+				const dateNow = new Date(new Date().toDateString());
+
+				return dateToCheck.toDateString() == dateNow.toDateString();
+			}).length
+		);
+
+		setNextWeek(
+			props.dos.filter((singleDo: DataDoType) => {
+				// Setting dates
+				const dateToCheck = new Date(singleDo.due_date);
+				const dateNow = new Date(new Date().toDateString());
+
+				// Setting time to 00:00
+				dateToCheck.setHours(0, 0, 0, 0);
+				dateNow.setHours(0, 0, 0, 0);
+
+				// Setting next weeks date
+				const nextWeekDate = new Date();
+				nextWeekDate.setDate(nextWeekDate.getDate() + 7);
+
+				return dateToCheck.getTime() > dateNow.getTime() && dateToCheck.getTime() < nextWeekDate.getTime();
+			}).length
+		);
+
+		setForgotten(props.dos.filter((singleDo: DataDoType) => checkIfPastDate(singleDo.due_date) && !singleDo.done).length);
+	}, [props.dos]);
 
 	return (
 		<>

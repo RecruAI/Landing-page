@@ -84,7 +84,7 @@ export default function SideBar() {
 				<div className="flex flex-col gap-y-3 px-4 pb-5 pt-7">
 					<AccountButton />
 
-					<QuickActionsMenu />
+					<QuickActionsMenu dos={dos} />
 				</div>
 
 				<div className="border-t-1 border-colorGray/20">
