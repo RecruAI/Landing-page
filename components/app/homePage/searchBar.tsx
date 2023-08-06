@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import DoComponent from "../listPage/doComponent";
+import DoTile from "./DoTile";
 
 export default function SearchBar(props: { dos: DataDoType[] }) {
 	const [dos, setDos] = useState<DataDoType[]>(props.dos);
@@ -47,13 +47,21 @@ export default function SearchBar(props: { dos: DataDoType[] }) {
 				</div>
 			</div>
 
-			{visibleDos.length != 0 ? (
+			{searchPhrase != "" ? (
 				<>
 					<div className="h-0.5 bg-colorGray/50"></div>
-					<div className="mx-7 my-5 flex flex-col gap-y-1">
+					<div className="flex flex-col">
 						{visibleDos.slice(0, 7).map((singleDo) => (
-							<DoComponent do={singleDo} key={singleDo.id} />
+							<DoTile do={singleDo} key={singleDo.id} />
 						))}
+
+						<p
+							className={`flex flex-col rounded-b-lg border-t-2 border-colorGray/50 bg-colorGray/5 px-2 text-center md:px-9 md:py-5 ${
+								visibleDos.length == 0 || visibleDos.length > 7 ? "block" : "hidden"
+							}`}
+						>
+							{visibleDos.length > 7 ? "There is " + (visibleDos.length - 7) + " more results to show..." : "There are no results to show"}
+						</p>
 					</div>
 				</>
 			) : (
