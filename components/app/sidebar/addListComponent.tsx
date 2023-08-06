@@ -6,6 +6,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import EmojiPicker, { EmojiStyle, Theme } from "emoji-picker-react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import RevalidateListPage from "@/functions/revalidateListPage";
 
 export default function AddListComponent(props: { hideComponent: Function }) {
 	const router = useRouter();
@@ -33,6 +34,8 @@ export default function AddListComponent(props: { hideComponent: Function }) {
 			.select();
 
 		router.push(`/app/${data[0].id}`);
+
+		RevalidateListPage();
 	}
 
 	return (

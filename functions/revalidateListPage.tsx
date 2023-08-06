@@ -2,5 +2,6 @@
 import { revalidatePath } from "next/cache";
 
 export default async function RevalidateListPage() {
+	revalidatePath("/app");
 	revalidatePath("/app/[id]");
 }
