@@ -69,7 +69,7 @@ export default function AddListComponent(props: { hideComponent: Function }) {
 							type="text"
 							maxLength={25}
 							value={listTitle}
-							placeholder="List title"
+							placeholder="List name"
 							onChange={(e) => setListTitle(e.target.value)}
 							className="rounded-md border-1 border-colorGray/30 bg-transparent px-3 py-2 text-sm text-[--text-rgb] outline-none hover:border-colorGray/70"
 						/>

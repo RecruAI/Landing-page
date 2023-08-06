@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
 import EmojiPicker, { EmojiStyle, Theme } from "emoji-picker-react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
@@ -38,7 +36,7 @@ export default function QuickAddList() {
 
 	return (
 		<>
-			<div className=" rounded-lg px-7 py-4 shadow-md outline-dotted outline-2 outline-colorGray/50 md:py-6 2xl:py-9">
+			<div className="rounded-lg px-7 py-4 shadow-md outline-dotted outline-2 outline-colorGray/50 md:py-6 2xl:py-9">
 				<p className="mb-3 cursor-default text-xl font-normal text-colorGray/70">Quick add new list</p>
 
 				<div className="flex flex-row items-center gap-x-2 sm:gap-x-5">
@@ -57,7 +55,7 @@ export default function QuickAddList() {
 						type="text"
 						maxLength={35}
 						value={listTitle}
-						placeholder="List title"
+						placeholder="List name"
 						onChange={(e) => setListTitle(e.target.value)}
 						className="grow rounded-md border-1 border-colorGray/30 bg-transparent px-3 py-2 text-sm text-[--text-rgb] outline-none hover:border-colorGray/70 md:py-3 md:text-base"
 					/>

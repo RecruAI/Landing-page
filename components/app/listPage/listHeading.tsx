@@ -135,7 +135,7 @@ export default function ListHeading(props: { icon: string; name: string; id: str
 									setNewTaskInputVisible(false);
 									setTaskName("");
 								}}
-								className={`duration-200md:-mx-1 my-1 flex rounded-lg text-colorGray transition  ${
+								className={`my-1 flex rounded-lg text-colorGray transition duration-200 md:-mx-1  ${
 									taskName == "" ? "" : "cursor-pointer hover:bg-colorGray/30"
 								}`}
 							>

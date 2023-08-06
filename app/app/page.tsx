@@ -1,8 +1,11 @@
 import QuickAddList from "@/components/app/homePage/quickAddList";
+import SearchBar from "@/components/app/homePage/searchBar";
+import checkIfPastDate from "@/functions/checkIfPastDate";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
 	const supabase = createServerComponentClient({
@@ -14,10 +17,15 @@ export default async function Page() {
 
 	let { data: lists }: PostgrestSingleResponse<DataListType[]> = await supabase.from("lists").select("*");
 	let { data: dos }: PostgrestSingleResponse<DataDoType[]> = await supabase.from("dos").select("*");
+
+	if (lists == null || dos == null) redirect("/");
+
 	return (
-		<section className="mx-4 mb-10 mt-20 text-[--text-rgb] md:mx-20 md:mb-20 md:mt-28">
+		<section className="mx-4 mb-10 mt-20 text-[--text-rgb] md:mx-20 md:mb-20 md:mt-28 2xl:mx-36">
 			<h1 className="mb-3 text-center text-6xl font-extrabold text-[--text-rgb]">Welcome back {users![0].name}!</h1>
 			<h3 className="mb-20 text-center text-3xl font-normal text-colorGray/70">Have a nice productive day!</h3>
+
+			<SearchBar dos={dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done))} />
 
 			<h3 className="mb-7 text-4xl font-bold">Your lists</h3>
 
