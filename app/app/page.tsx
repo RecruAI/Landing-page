@@ -1,3 +1,4 @@
+import QuickAddList from "@/components/app/homePage/quickAddList";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
@@ -20,7 +21,9 @@ export default async function Page() {
 
 			<h3 className="mb-7 text-4xl font-bold">Your lists</h3>
 
-			<div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 2xl:grid-cols-3">
+			<QuickAddList />
+
+			<div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 2xl:grid-cols-3">
 				{lists!.map((list) => {
 					const dosForList: DataDoType[] = dos!.filter((singleDo: DataDoType) => singleDo.list == list.id && !singleDo.done);
 
