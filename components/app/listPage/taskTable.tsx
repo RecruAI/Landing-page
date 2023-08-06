@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import RevalidateListPage from "../../../functions/revalidateListPage";
 import DoComponent from "./doComponent";
 import AddDo from "./addDo";
+import checkIfPastDate from "@/functions/checkIfPastDate";
 
 export default function TaskTable(props: { task: string; id: string; tasks: string[]; index: number; dos: DataDoType[] }) {
 	const [name, setName] = useState<string>(props.task);
@@ -53,20 +54,6 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 		}
 	}
 
-	// Function check if date if past relative to current date
-	function checkIfPastDate(date: string): boolean {
-		// Setting dates
-		// Getting just date from both
-		const dateToCheck = new Date(date);
-		const dateNow = new Date(new Date().toDateString());
-
-		// Setting time to 00:00
-		dateToCheck.setHours(0, 0, 0, 0);
-		dateNow.setHours(0, 0, 0, 0);
-
-		return dateToCheck.getTime() < dateNow.getTime();
-	}
-
 	return (
 		<div className="flex flex-col gap-y-1">
 			{/* Task table title row */}
@@ -101,6 +88,8 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 					<FontAwesomeIcon fixedWidth icon={faPlus} className="h-4 cursor-pointer p-1 py-1.5 text-[#4F81E1] md:h-8 md:px-3" />
 				</div>
 
+				{/* Trash icon, to delete taskTable */}
+				{/* Visible only if there are no more tasks in task table */}
 				{dos.filter((singleDo) => !singleDo.done).length == 0 ? (
 					<div
 						className="flex rounded-lg transition-all hover:bg-colorGray/20"
