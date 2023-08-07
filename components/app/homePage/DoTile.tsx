@@ -21,9 +21,9 @@ export default function DoTile(props: { do: DataDoType }) {
 	const dateTitleText = returnDateTileText(props.do.due_date);
 
 	return (
-		<Link className="flex items-center gap-x-3 text-clip px-2 transition hover:bg-colorGray/20 md:gap-x-6 md:px-9 md:py-3" href={"/app/" + props.do.list}>
+		<Link className="flex items-center gap-x-3 text-clip px-3 transition hover:bg-colorGray/20 md:gap-x-6 md:px-9 md:py-3" href={"/app/" + props.do.list}>
 			{/* Checkbox */}
-			<div className="relative z-30 my-2.5 flex items-center transition-all duration-300 ease-bouncy-bezier">
+			<div className="relative z-20 my-2.5 flex scale-75 items-center transition-all duration-300 ease-bouncy-bezier md:scale-100">
 				<span className="spanCheckbox"></span>
 			</div>
 

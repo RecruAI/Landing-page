@@ -41,7 +41,7 @@ export default function DoComponent(props: { do: DataDoType }) {
 						await supabase.from("dos").update({ done: !checkbox }).eq("id", props.do.id);
 						RevalidateListPage();
 					}}
-					className="relative z-30 my-2.5 flex items-center transition-all duration-300 ease-bouncy-bezier"
+					className="relative z-20 my-2.5 flex items-center transition-all duration-300 ease-bouncy-bezier"
 				>
 					<span className={`spanCheckbox ${checkbox ? "activeSpanCheckbox" : ""}`}></span>
 				</div>

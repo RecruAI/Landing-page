@@ -23,12 +23,12 @@ export default function SearchBar(props: { dos: DataDoType[] }) {
 	}, [searchPhrase, dos]);
 
 	return (
-		<div className="mx-auto my-20 flex max-w-7xl flex-col items-stretch rounded-xl bg-[--sidebar-rgb] shadow-md outline outline-2 outline-colorGray/50">
-			<div className="mx-7 my-4 flex items-center gap-x-5">
-				<FontAwesomeIcon fixedWidth icon={faMagnifyingGlass} className="h-8 w-8 p-2 text-colorGray" />
+		<div className="mx-auto my-10 flex max-w-6xl flex-col items-stretch rounded-lg bg-[--sidebar-rgb] shadow-md outline outline-2 outline-colorGray/50 md:my-20 md:rounded-xl">
+			<div className="mx-1.5 my-1 flex items-center gap-x-2 md:mx-7 md:my-2 md:gap-x-5">
+				<FontAwesomeIcon fixedWidth icon={faMagnifyingGlass} className="h-4 w-4 p-2 text-colorGray md:h-8 md:w-8" />
 				<input
 					type="text"
-					className="w-full bg-transparent text-xl outline-none"
+					className="w-full bg-transparent outline-none md:text-xl"
 					placeholder="Search..."
 					value={searchPhrase}
 					onChange={(e) => setSearchPhrase(e.target.value)}
@@ -41,7 +41,7 @@ export default function SearchBar(props: { dos: DataDoType[] }) {
 					<FontAwesomeIcon
 						fixedWidth
 						icon={faClose}
-						className={`h-7 w-7 px-1.5 transition duration-700 md:h-8 md:w-8 md:px-2 md:py-0.5 ${
+						className={`h-4 w-4 px-1.5 transition duration-700 md:h-8 md:w-8 md:px-2 md:py-0.5 ${
 							searchPhrase == "" ? "scale-50 opacity-0" : "scale-180 opacity-100"
 						}`}
 					/>
@@ -60,7 +60,7 @@ export default function SearchBar(props: { dos: DataDoType[] }) {
 							))}
 
 						<p
-							className={`flex flex-col rounded-b-lg border-t-2 border-colorGray/50 bg-colorGray/5 px-2 text-center md:px-9 md:py-5 ${
+							className={`flex flex-col rounded-b-lg border-t-2 border-colorGray/50 bg-colorGray/5 py-2 text-center text-sm md:rounded-b-xl md:py-5 md:text-base ${
 								visibleDos.length == 0 || visibleDos.length > 7 ? "block" : "hidden"
 							}`}
 						>
