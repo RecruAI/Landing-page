@@ -92,7 +92,7 @@ export default function SideBar() {
 				<div className="flex flex-col gap-y-3 px-2.5 pb-5 pt-7 md:px-4">
 					<AccountButton />
 
-					<QuickActionsMenu dos={dos} toggleComponent={() => setIsSearchbarVisible((oldState) => !oldState)} />
+					<QuickActionsMenu dos={dos} hideSidebar={() => setVisible(false)} toggleComponent={() => setIsSearchbarVisible((oldState) => !oldState)} />
 				</div>
 
 				<div className="border-t-1 border-colorGray/20">
