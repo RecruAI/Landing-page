@@ -19,6 +19,7 @@ declare global {
         list: string;
         sub_tasks: SubTaskType[];
         done: boolean
+        date_created: string;
     };
 
     type SubTaskType = {

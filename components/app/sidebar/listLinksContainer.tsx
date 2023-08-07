@@ -1,3 +1,4 @@
+import SortAndCompareLists from "@/functions/sortAndCompareLists";
 import Link from "next/link";
 
 export default function ListLinksContainer(props: { hideSidebar: Function; loading: boolean; lists: DataListType[]; dos: DataDoType[] }) {
@@ -33,27 +34,29 @@ export default function ListLinksContainer(props: { hideSidebar: Function; loadi
 					</div>
 				</>
 			) : (
-				props.lists.map((list) => {
-					const dosForList: DataDoType[] = props.dos.filter((singleDo: DataDoType) => singleDo.list == list.id && !singleDo.done);
+				props.lists
+					.sort((listA, listB) => SortAndCompareLists(listA, listB))
+					.map((list) => {
+						const dosForList: DataDoType[] = props.dos.filter((singleDo: DataDoType) => singleDo.list == list.id && !singleDo.done);
 
-					return (
-						<Link
-							href={"/app/" + list.id}
-							className="sidebarButton"
-							key={list.id}
-							onClick={() => {
-								props.hideSidebar();
-							}}
-						>
-							<span className="p-1 text-lg">{list.icon}</span>
+						return (
+							<Link
+								href={"/app/" + list.id}
+								className="sidebarButton"
+								key={list.id}
+								onClick={() => {
+									props.hideSidebar();
+								}}
+							>
+								<span className="p-1 text-lg">{list.icon}</span>
 
-							<p className="text-[--text-rgb]">{list.name}</p>
+								<p className="text-[--text-rgb]">{list.name}</p>
 
-							{/* Indicator showing how many undone 'dos' are on that list */}
-							<p className="ms-auto text-colorGray">{dosForList.length != 0 ? dosForList.length : ""}</p>
-						</Link>
-					);
-				})
+								{/* Indicator showing how many undone 'dos' are on that list */}
+								<p className="ms-auto text-colorGray">{dosForList.length != 0 ? dosForList.length : ""}</p>
+							</Link>
+						);
+					})
 			)}
 		</>
 	);
