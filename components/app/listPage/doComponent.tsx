@@ -47,7 +47,7 @@ export default function DoComponent(props: { do: DataDoType }) {
 				</div>
 
 				{/* Title */}
-				<p className={`text-xs md:text-base ${checkbox ? "line-through" : ""}`}>{doData.name}</p>
+				<p className={`truncate text-xs md:text-base ${checkbox ? "line-through" : ""}`}>{doData.name}</p>
 
 				{/* Date tile */}
 				<div
@@ -58,17 +58,19 @@ export default function DoComponent(props: { do: DataDoType }) {
 					{dateTitleText}
 				</div>
 
-				{/* Spacer */}
-				<div className="grow" />
-
 				{/* Amount of subtasks */}
 				{doData.sub_tasks.length != 0 ? (
-					<div className="flex flex-row items-center gap-x-2 text-2xs text-colorGray/50 md:text-sm">
-						<FontAwesomeIcon fixedWidth icon={faDiagramProject} className="aspect-square h-3.5" />
-						<p className="hidden md:block">
-							{doData.sub_tasks.filter((sub_task: SubTaskType) => sub_task.done == true).length}/{doData.sub_tasks.length}
-						</p>
-					</div>
+					<>
+						{/* Spacer */}
+						<div className="grow" />
+
+						<div className="flex flex-row items-center gap-x-2 text-2xs text-colorGray/50 md:text-sm">
+							<FontAwesomeIcon fixedWidth icon={faDiagramProject} className="aspect-square h-3.5" />
+							<p className="hidden md:block">
+								{doData.sub_tasks.filter((sub_task: SubTaskType) => sub_task.done == true).length}/{doData.sub_tasks.length}
+							</p>
+						</div>
+					</>
 				) : (
 					<></>
 				)}

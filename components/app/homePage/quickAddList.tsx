@@ -36,7 +36,7 @@ export default function QuickAddList() {
 
 	return (
 		<>
-			<div className="rounded-lg px-4 py-3 shadow-md outline-dotted outline-2 outline-colorGray/50 md:px-7 md:py-6 2xl:py-9">
+			<div className="rounded-lg px-4 py-3 shadow-md outline-dotted outline-2 outline-colorGray/50 md:px-7 md:py-6">
 				<p className="mb-3 cursor-default text-sm font-normal text-colorGray/70 sm:text-base md:text-xl">Quick add new list</p>
 
 				<div className="flex flex-col items-end gap-x-5 gap-y-3 sm:flex-row md:items-center">

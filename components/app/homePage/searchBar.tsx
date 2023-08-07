@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import DoTile from "./DoTile";
+import SearchDoTile from "./searchDoTile";
 import SortAndCompareDos from "@/functions/sortAndCompareDos";
 
-export default function SearchBar(props: { dos: DataDoType[] }) {
+export default function SearchBar(props: { dos: DataDoType[]; lists: DataListType[] }) {
 	const [dos, setDos] = useState<DataDoType[]>(props.dos);
 	const [visibleDos, setVisibleDos] = useState<DataDoType[]>([]);
 	const [searchPhrase, setSearchPhrase] = useState<string>("");
@@ -56,11 +56,11 @@ export default function SearchBar(props: { dos: DataDoType[] }) {
 							.slice(0, 7)
 							.sort((doA, doB) => SortAndCompareDos(doA, doB))
 							.map((singleDo) => (
-								<DoTile do={singleDo} key={singleDo.id} />
+								<SearchDoTile do={singleDo} key={singleDo.id} list={props.lists.filter((list) => list.id == singleDo.list)[0]} />
 							))}
 
 						<p
-							className={`flex flex-col rounded-b-lg border-t-2 border-colorGray/50 bg-colorGray/5 py-2 text-center text-sm md:rounded-b-xl md:py-5 md:text-base ${
+							className={`flex flex-col rounded-b-lg border-t-2 border-colorGray/50 bg-colorGray/5 py-2 text-center text-sm transition-none md:rounded-b-xl md:py-5 md:text-base ${
 								visibleDos.length == 0 || visibleDos.length > 7 ? "block" : "hidden"
 							}`}
 						>

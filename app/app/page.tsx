@@ -26,13 +26,11 @@ export default async function Page() {
 			<h1 className="text-center text-2xl font-extrabold text-[--text-rgb] md:mb-3 md:text-5xl">Welcome back {users![0].name}!</h1>
 			<h3 className="mb-6 text-center text-xl font-normal text-colorGray/70 md:mb-20 md:text-3xl">Have a nice productive day!</h3>
 
-			<SearchBar dos={dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done))} />
+			<SearchBar lists={lists} dos={dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done))} />
 
 			<h3 className="mb-4 text-xl font-bold md:mb-7 md:text-4xl">Your lists</h3>
 
-			<QuickAddList />
-
-			<div className="mt-5 grid grid-cols-1 gap-5 md:mt-10 md:grid-cols-2 2xl:grid-cols-3">
+			<div className="mb-5 grid grid-cols-1 gap-3 sm:gap-4 md:mt-10 md:grid-cols-2 md:gap-5 2xl:grid-cols-3">
 				{lists!.map((list) => {
 					const dosForList: DataDoType[] = dos!.filter((singleDo: DataDoType) => singleDo.list == list.id && !singleDo.done);
 
@@ -53,6 +51,8 @@ export default async function Page() {
 					);
 				})}
 			</div>
+
+			<QuickAddList />
 		</section>
 	);
 }
