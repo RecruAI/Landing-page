@@ -31,7 +31,7 @@ export default function DoTileSearch(props: { do: DataDoType; list: DataListType
 
 			{/* Date tile */}
 			<div
-				className={`rounded-md px-1.5 py-0.5 text-2xs md:px-2 md:py-1 md:text-sm ${
+				className={`whitespace-nowrap rounded-md px-1.5 py-0.5 text-2xs md:px-2 md:py-1 md:text-sm ${
 					dateRelativeTime == 0 ? "bg-green-500/10 text-green-500" : dateRelativeTime == 1 ? "bg-colorGray/10 text-colorGray" : "bg-red-500/10 text-red-500"
 				}`}
 			>

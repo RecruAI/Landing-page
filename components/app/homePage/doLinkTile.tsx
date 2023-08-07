@@ -32,8 +32,8 @@ export default function DoLinkTile(props: { do: DataDoType; list: DataListType }
 	return (
 		<>
 			<button
-				className={`-ms-1 flex items-center gap-x-3 text-clip rounded-lg px-2 font-medium transition-all md:-mx-3 md:gap-x-5 md:px-5
-				md:py-0.5 ${checkbox ? "taskTileDone" : "taskTileUndone"} ${settingsVisible ? "z-40 scale-[1.02] !outline-colorGray/50" : ""}`}
+				className={`-ms-1 flex items-center gap-x-3 text-clip rounded-lg px-4 font-medium transition-all md:-mx-3 md:gap-x-5 md:px-5
+				md:py-0.5 ${checkbox ? "taskTileDone" : "taskTileUndone"} ${settingsVisible ? "scale-[1.02] !outline-colorGray/50" : ""}`}
 				onClick={() => setSettingsVisible((prevState) => !prevState)}
 			>
 				{/* Checkbox */}
@@ -44,7 +44,7 @@ export default function DoLinkTile(props: { do: DataDoType; list: DataListType }
 						await supabase.from("dos").update({ done: !checkbox }).eq("id", props.do.id);
 						RevalidateListPage();
 					}}
-					className="relative z-20 my-3 flex items-center transition-all duration-300 ease-bouncy-bezier"
+					className="relative my-3 flex items-center transition-all duration-300 ease-bouncy-bezier"
 				>
 					<span className={`spanCheckbox ${checkbox ? "activeSpanCheckbox" : ""}`}></span>
 				</div>
@@ -82,7 +82,7 @@ export default function DoLinkTile(props: { do: DataDoType; list: DataListType }
 				)}
 
 				{/* Icon */}
-				<Link href={"/app/" + props.list.id}>
+				<Link href={"/app/" + props.list.id} className="flex">
 					<FontAwesomeIcon fixedWidth icon={faArrowUpRightFromSquare} className="h-3 w-3 text-colorGray hover:text-[--text-rgb] md:h-4 md:w-4" />
 				</Link>
 			</button>

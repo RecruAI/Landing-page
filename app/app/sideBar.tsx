@@ -9,10 +9,13 @@ import QuickActionsMenu from "@/components/app/sidebar/quickActionsMenu";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
+import SearchBar from "@/components/app/homePage/searchBar";
+import checkIfPastDate from "@/functions/checkIfPastDate";
 
 export default function SideBar() {
 	const [visible, setVisible] = useState<Boolean>(false);
 	const [addListComponentVisible, setAddListComponentVisible] = useState<Boolean>(false);
+	const [isSearchbarVisible, setIsSearchbarVisible] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [lists, setLists] = useState<DataListType[]>([]);
 	const [dos, setDos] = useState<DataDoType[]>([]);
@@ -53,16 +56,21 @@ export default function SideBar() {
 		};
 	}, [supabase]);
 
-	function hideAddListComponent() {
-		setAddListComponentVisible(false);
-	}
-	function hideSidebar() {
-		setVisible(false);
-	}
-
 	return (
 		<>
-			{addListComponentVisible ? <AddListComponent hideComponent={hideAddListComponent} /> : <></>}
+			{addListComponentVisible ? <AddListComponent hideComponent={() => setAddListComponentVisible(false)} /> : <></>}
+
+			{isSearchbarVisible ? (
+				<div className="fixed left-0 top-0 flex h-screen w-screen">
+					<div className="z-50 mt-20 h-fit w-full px-5 text-[--text-rgb] md:px-20 xl:ms-72 2xl:ms-20vw ">
+						<SearchBar dos={dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done))} lists={lists} />
+					</div>
+
+					<div className="fixed left-0 top-0 z-30 h-screen w-screen bg-[--background-rgb] opacity-75" onClick={() => setIsSearchbarVisible(false)}></div>
+				</div>
+			) : (
+				<></>
+			)}
 
 			{/* Hamburger button */}
 			<div
@@ -84,14 +92,14 @@ export default function SideBar() {
 				<div className="flex flex-col gap-y-3 px-2.5 pb-5 pt-7 md:px-4">
 					<AccountButton />
 
-					<QuickActionsMenu dos={dos} />
+					<QuickActionsMenu dos={dos} toggleComponent={() => setIsSearchbarVisible((oldState) => !oldState)} />
 				</div>
 
 				<div className="border-t-1 border-colorGray/20">
 					<div className="flex flex-col gap-y-1 px-2.5 py-5 md:px-4">
 						<p className="py-2.5 ps-2 text-lg font-semibold text-[--text-rgb]">Lists</p>
 
-						<ListLinksContainer lists={lists} dos={dos} hideSidebar={() => hideSidebar()} loading={loading} />
+						<ListLinksContainer lists={lists} dos={dos} hideSidebar={() => setVisible(false)} loading={loading} />
 
 						<button
 							className="sidebarButton mt-1"

@@ -46,7 +46,7 @@
 }
 
 .spanCheckbox{
-  @apply flex h-5 w-5  items-center justify-center rounded-md border-2 border-colorGray bg-transparent transition-all duration-300 ease-bouncy-bezier
+  @apply flex h-5 w-5 items-center justify-center rounded-md border-2 border-colorGray bg-transparent transition-all duration-300 ease-bouncy-bezier
 }
 .activeSpanCheckbox{
   @apply border-10 border-colorBlue animate-shrink-bounce;

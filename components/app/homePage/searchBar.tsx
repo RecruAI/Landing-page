@@ -23,7 +23,7 @@ export default function SearchBar(props: { dos: DataDoType[]; lists: DataListTyp
 	}, [searchPhrase, dos]);
 
 	return (
-		<div className="mx-auto my-10 flex max-w-6xl flex-col items-stretch rounded-lg bg-[--sidebar-rgb] shadow-md outline outline-2 outline-colorGray/50 md:my-20 md:rounded-xl">
+		<div className="z-50 mx-auto my-10 flex max-w-6xl flex-col items-stretch rounded-lg bg-[--sidebar-rgb] shadow-md outline outline-2 outline-colorGray/50 md:my-20 md:rounded-xl">
 			<div className="mx-1.5 my-1 flex items-center gap-x-2 md:mx-7 md:my-2 md:gap-x-5">
 				<FontAwesomeIcon fixedWidth icon={faMagnifyingGlass} className="h-4 w-4 p-2 text-colorGray md:h-8 md:w-8" />
 				<input
@@ -41,7 +41,7 @@ export default function SearchBar(props: { dos: DataDoType[]; lists: DataListTyp
 					<FontAwesomeIcon
 						fixedWidth
 						icon={faClose}
-						className={`h-4 w-4 px-1.5 transition duration-700 md:h-8 md:w-8 md:px-2 md:py-0.5 ${
+						className={`h-4 w-4 px-0.5 py-1 transition duration-700 md:h-8 md:w-8 md:px-2 md:py-0.5 ${
 							searchPhrase == "" ? "scale-50 opacity-0" : "scale-180 opacity-100"
 						}`}
 					/>

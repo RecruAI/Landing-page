@@ -30,7 +30,7 @@ export default function DoComponent(props: { do: DataDoType }) {
 	return (
 		<>
 			<button
-				className={`taskTile text-clip ${checkbox ? "taskTileDone" : "taskTileUndone"} ${settingsVisible ? "z-40 scale-[1.02] !outline-colorGray/50" : ""}`}
+				className={`taskTile text-clip ${checkbox ? "taskTileDone" : "taskTileUndone"} ${settingsVisible ? "scale-[1.02] !outline-colorGray/50" : ""}`}
 				onClick={() => setSettingsVisible((prevState) => !prevState)}
 			>
 				{/* Checkbox */}
@@ -41,7 +41,7 @@ export default function DoComponent(props: { do: DataDoType }) {
 						await supabase.from("dos").update({ done: !checkbox }).eq("id", props.do.id);
 						RevalidateListPage();
 					}}
-					className="relative z-20 my-2.5 flex items-center transition-all duration-300 ease-bouncy-bezier"
+					className="relative my-2.5 flex items-center transition-all duration-300 ease-bouncy-bezier"
 				>
 					<span className={`spanCheckbox ${checkbox ? "activeSpanCheckbox" : ""}`}></span>
 				</div>
@@ -51,7 +51,7 @@ export default function DoComponent(props: { do: DataDoType }) {
 
 				{/* Date tile */}
 				<div
-					className={`rounded-md px-1.5 py-0.5 text-2xs md:px-2 md:py-1 md:text-sm ${
+					className={`whitespace-nowrap rounded-md px-1.5 py-0.5 text-2xs md:px-2 md:py-1 md:text-sm ${
 						dateRelativeTime == 0 ? "bg-green-500/10 text-green-500" : dateRelativeTime == 1 ? "bg-colorGray/10 text-colorGray" : "bg-red-500/10 text-red-500"
 					}`}
 				>
@@ -74,7 +74,6 @@ export default function DoComponent(props: { do: DataDoType }) {
 				) : (
 					<></>
 				)}
-
 			</button>
 
 			{settingsVisible ? (

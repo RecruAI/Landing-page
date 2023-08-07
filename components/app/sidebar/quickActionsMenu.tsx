@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export default function QuickActionsMenu(props: { dos: DataDoType[] }) {
+export default function QuickActionsMenu(props: { dos: DataDoType[]; toggleComponent: Function }) {
 	const [today, setToday] = useState<number | undefined>(undefined);
 	const [nextWeek, setNextWeek] = useState<number | undefined>(undefined);
 	const [forgotten, setForgotten] = useState<number | undefined>(undefined);
@@ -46,7 +46,7 @@ export default function QuickActionsMenu(props: { dos: DataDoType[] }) {
 	return (
 		<>
 			<div className="flex flex-col gap-y-1">
-				<button className="sidebarButton">
+				<button className="sidebarButton" onClick={() => props.toggleComponent()}>
 					<FontAwesomeIcon fixedWidth icon={faMagnifyingGlass} className="h-8 w-8 p-1.5 text-colorGray" />
 					<p className="text-[--text-rgb]">Quick find</p>
 				</button>
