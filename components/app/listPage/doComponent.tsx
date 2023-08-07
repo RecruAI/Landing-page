@@ -75,7 +75,6 @@ export default function DoComponent(props: { do: DataDoType }) {
 					<></>
 				)}
 
-				{/* <FontAwesomeIcon fixedWidth icon={faArrowsRotate} className="aspect-square h-3.5 text-2xs text-colorGray/50 md:text-sm" /> */}
 			</button>
 
 			{settingsVisible ? (
