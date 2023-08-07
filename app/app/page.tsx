@@ -1,5 +1,8 @@
+import DoLinkTile from "@/components/app/homePage/doLinkTile";
 import QuickAddList from "@/components/app/homePage/quickAddList";
 import SearchBar from "@/components/app/homePage/searchBar";
+import DoComponent from "@/components/app/listPage/doComponent";
+import checkDateRelativeTime from "@/functions/checkDateRelativeTime";
 import checkIfPastDate from "@/functions/checkIfPastDate";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
@@ -28,7 +31,18 @@ export default async function Page() {
 
 			<SearchBar lists={lists} dos={dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done))} />
 
-			<h3 className="mb-4 text-xl font-bold md:mb-7 md:text-4xl">Your lists</h3>
+			<Link href={"/app/quick/today"} className="text-xl font-bold md:text-4xl">
+				Today
+			</Link>
+			<div className="mb-5 grid grid-cols-1 gap-3 sm:gap-4 md:mt-7 md:grid-cols-2 md:gap-5 2xl:grid-cols-3">
+				{dos
+					.filter((singleDo) => checkDateRelativeTime(singleDo.due_date) == 0)
+					.map((singleDo) => (
+						<DoLinkTile do={singleDo} list={lists!.filter((list) => list.id == singleDo.list)[0]} />
+					))}
+			</div>
+
+			<h3 className="mb-4 mt-6 text-xl font-bold md:mb-7 md:mt-20 md:text-4xl">Your lists</h3>
 
 			<div className="mb-5 grid grid-cols-1 gap-3 sm:gap-4 md:mt-10 md:grid-cols-2 md:gap-5 2xl:grid-cols-3">
 				{lists!.map((list) => {

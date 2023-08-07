@@ -2,6 +2,7 @@
 
 import checkDateRelativeTime from "@/functions/checkDateRelativeTime";
 import returnDateTileText from "@/functions/returnDateTileText";
+import RevalidateListPage from "@/functions/revalidateListPage";
 import { faClose, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -207,6 +208,8 @@ ${name != null && name != "" ? "bg-colorBlue" : "bg-red-700"}
 						.from("dos")
 						.insert([{ name: name, description: description, sub_tasks: subTasks, due_date: dueDate, list: props.listId, task: props.task }]);
 					props.hideAddDo();
+
+					RevalidateListPage();
 				}}
 			>
 				{name != null && name != "" ? 'Add "' + name + '" to Task Table' : "Fill all of the fields!"}

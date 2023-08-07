@@ -2,6 +2,7 @@
 
 import checkDateRelativeTime from "@/functions/checkDateRelativeTime";
 import returnDateTileText from "@/functions/returnDateTileText";
+import RevalidateListPage from "@/functions/revalidateListPage";
 import { faClose, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -28,6 +29,7 @@ export default function EditDo(props: { do: DataDoType }) {
 			await supabase.from("dos").update({ name: name, description: description, sub_tasks: subTasks, due_date: dueDate }).eq("id", props.do.id);
 		}
 		updateDo();
+		RevalidateListPage();
 	}, [name, description, subTasks, dueDate]);
 
 	return (

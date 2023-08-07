@@ -89,7 +89,7 @@ export default function SideBar() {
 
 				<div className="border-t-1 border-colorGray/20">
 					<div className="flex flex-col gap-y-1 px-2.5 py-5 md:px-4">
-						<p className="select-none py-2.5 ps-2 text-lg font-semibold text-[--text-rgb]">Lists</p>
+						<p className="py-2.5 ps-2 text-lg font-semibold text-[--text-rgb]">Lists</p>
 
 						<ListLinksContainer lists={lists} dos={dos} hideSidebar={() => hideSidebar()} loading={loading} />
 

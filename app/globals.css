@@ -32,7 +32,7 @@
 }
 
 .sidebarButton{
-  @apply flex select-none text-sm font-medium items-center gap-x-3 rounded-lg pl-3 pr-4 py-px transition-all hover:bg-colorGray/30
+  @apply flex text-sm font-medium items-center gap-x-3 rounded-lg pl-3 pr-4 py-px transition-all hover:bg-colorGray/30
 } 
 
 .taskTile{

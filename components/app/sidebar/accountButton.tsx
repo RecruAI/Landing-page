@@ -34,10 +34,7 @@ export default function AccountButton() {
 		<>
 			<div className="relative z-50">
 				{loaded ? (
-					<div
-						onClick={() => setVisible(!visible)}
-						className="flex cursor-pointer select-none items-center gap-x-3 rounded-lg px-3 py-2 transition-all hover:bg-colorGray/30"
-					>
+					<div onClick={() => setVisible(!visible)} className="flex cursor-pointer items-center gap-x-3 rounded-lg px-3 py-2 transition-all hover:bg-colorGray/30">
 						<div className="flex h-9 w-9 items-center justify-center rounded-md bg-[--text-rgb] text-lg font-bold text-[--background-rgb]">
 							{nickname.slice(0, 1).toLocaleUpperCase()}
 						</div>
