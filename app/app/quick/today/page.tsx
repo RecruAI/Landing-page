@@ -34,7 +34,7 @@ export default async function Page() {
 				{/* Task table title row */}
 				<div className="flex flex-row items-center gap-x-1.5 md:gap-x-3">
 					<h2 className="-ms-1.5 cursor-pointer truncate rounded-md px-1.5 py-0.5 text-lg font-bold text-[--text-rgb] hover:bg-colorGray/50 md:-ms-3 md:px-3 md:py-1 md:text-2xl">
-						Todays tasks
+						Todays dos
 					</h2>
 					<p className="text-sm font-medium text-colorGray md:text-base">{dosToShow?.filter((singleDo) => !singleDo.done).length}</p>
 
