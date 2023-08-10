@@ -1,6 +1,6 @@
 "use client";
 
-import { faArrowUpRightFromSquare, faCircle, faDiagramProject, faDog, faDotCircle, faHandPointDown, faShare } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faDiagramProject } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import checkDateRelativeTime from "@/functions/checkDateRelativeTime";
 import returnDateTileText from "@/functions/returnDateTileText";

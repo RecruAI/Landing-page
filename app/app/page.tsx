@@ -4,6 +4,7 @@ import SearchBar from "@/components/app/homePage/searchBar";
 import checkDateRelativeTime from "@/functions/checkDateRelativeTime";
 import checkIfPastDate from "@/functions/checkIfPastDate";
 import SortAndCompareDos from "@/functions/sortAndCompareDos";
+import SortAndCompareLists from "@/functions/sortAndCompareLists";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
@@ -50,25 +51,27 @@ export default async function Page() {
 			<h3 className="mb-3 mt-6 text-xl font-bold md:mb-5 md:mt-20 md:text-4xl">Your lists</h3>
 
 			<div className="mb-5 grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 md:gap-5 2xl:grid-cols-3">
-				{lists!.map((list) => {
-					const dosForList: DataDoType[] = dos!.filter((singleDo: DataDoType) => singleDo.list == list.id && !singleDo.done);
+				{lists!
+					.sort((listA, listB) => SortAndCompareLists(listA, listB))
+					.map((list) => {
+						const dosForList: DataDoType[] = dos!.filter((singleDo: DataDoType) => singleDo.list == list.id && !singleDo.done);
 
-					return (
-						<Link
-							key={list.id}
-							href={`/app/${list.id}`}
-							className="flex items-center gap-x-3 rounded-lg px-5 py-2 outline outline-2 outline-colorGray/50 transition-all hover:bg-colorGray/10 md:gap-x-4 md:py-4"
-						>
-							<p className="sm:text-xl md:text-2xl">{list.icon}</p>
+						return (
+							<Link
+								key={list.id}
+								href={`/app/${list.id}`}
+								className="flex items-center gap-x-3 rounded-lg px-5 py-2 outline outline-2 outline-colorGray/50 transition-all hover:bg-colorGray/10 md:gap-x-4 md:py-4"
+							>
+								<p className="sm:text-xl md:text-2xl">{list.icon}</p>
 
-							<p className="text-sm font-semibold md:text-base">{list.name}</p>
+								<p className="text-sm font-semibold md:text-base">{list.name}</p>
 
-							<div className="grow" />
+								<div className="grow" />
 
-							<p className="ms-auto text-xs text-colorGray sm:text-sm md:text-base">{dosForList.length != 0 ? dosForList.length : ""}</p>
-						</Link>
-					);
-				})}
+								<p className="ms-auto text-xs text-colorGray sm:text-sm md:text-base">{dosForList.length != 0 ? dosForList.length : ""}</p>
+							</Link>
+						);
+					})}
 			</div>
 
 			<QuickAddList />
