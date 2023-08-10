@@ -1,3 +1,4 @@
+import DoLinkTile from "@/components/app/homePage/doLinkTile";
 import DoComponent from "@/components/app/listPage/doComponent";
 import SortAndCompareDos from "@/functions/sortAndCompareDos";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +13,7 @@ export default async function Page() {
 	});
 
 	let { data: dos }: PostgrestSingleResponse<DataDoType[]> = await supabase.from("dos").select("*");
+	let { data: lists }: PostgrestSingleResponse<DataListType[]> = await supabase.from("lists").select("*");
 
 	const dosToShow = dos
 		?.filter((singleDo: DataDoType) => {
@@ -38,10 +40,10 @@ export default async function Page() {
 			<h1 className="text-center text-3xl font-extrabold text-[--text-rgb] md:mb-3 md:text-5xl">Next week</h1>
 			<h3 className="mb-6 text-center text-xl font-normal text-colorGray/70 md:mb-20 md:text-3xl">These are your dos for the next week!</h3>
 
-			<div className="flex flex-col gap-y-1">
+			<div className="mt-5 flex flex-col gap-y-1 md:mt-7">
 				{/* Task table title row */}
 				<div className="flex flex-row items-center gap-x-1.5 md:gap-x-3">
-					<h2 className="-ms-1.5 cursor-pointer truncate rounded-md px-1.5 py-0.5 text-lg font-bold text-[--text-rgb] hover:bg-colorGray/50 md:-ms-3 md:px-3 md:py-1 md:text-2xl">
+					<h2 className="-ms-1.5 cursor-pointer truncate rounded-md px-1.5 py-0.5 text-base font-bold text-[--text-rgb] md:-ms-3 md:px-3 md:py-1 md:text-xl">
 						Next weeks dos
 					</h2>
 					<p className="text-sm font-medium text-colorGray md:text-base">{dosToShow?.filter((singleDo) => !singleDo.done).length}</p>
@@ -56,7 +58,7 @@ export default async function Page() {
 				{/* Tasks */}
 				<div className="flex flex-col gap-y-1">
 					{dosToShow?.map((singleDo) => (
-						<DoComponent do={singleDo} key={singleDo.id} />
+						<DoLinkTile key={singleDo.id} do={singleDo} list={lists!.filter((list) => list.id == singleDo.list)[0]} />
 					))}
 				</div>
 			</div>
