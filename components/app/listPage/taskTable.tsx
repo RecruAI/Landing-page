@@ -8,6 +8,7 @@ import RevalidateListPage from "../../../functions/revalidateListPage";
 import DoComponent from "./doComponent";
 import AddDo from "./addDo";
 import checkIfPastDate from "@/functions/checkIfPastDate";
+import SortAndCompareDos from "@/functions/sortAndCompareDos";
 
 export default function TaskTable(props: { task: string; id: string; tasks: string[]; index: number; dos: DataDoType[] }) {
 	const [name, setName] = useState<string>(props.task);
@@ -115,7 +116,7 @@ export default function TaskTable(props: { task: string; id: string; tasks: stri
 			{/* Tasks */}
 			<div className="flex flex-col gap-y-1">
 				{!addDoVisible ? (
-					dos.map((singleDo) => <DoComponent do={singleDo} key={singleDo.id} />)
+					dos.sort((doA, doB) => SortAndCompareDos(doA, doB)).map((singleDo) => <DoComponent do={singleDo} key={singleDo.id} />)
 				) : (
 					<>
 						<AddDo listId={props.id} task={name} hideAddDo={() => setAddDoVisible(false)} />
