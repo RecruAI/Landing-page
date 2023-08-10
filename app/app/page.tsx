@@ -29,7 +29,7 @@ export default async function Page() {
 			<h1 className="text-center text-2xl font-extrabold text-[--text-rgb] md:mb-3 md:text-5xl">Welcome back {users![0].name}!</h1>
 			<h3 className="mb-6 text-center text-xl font-normal text-colorGray/70 md:mb-20 md:text-3xl">Have a nice productive day!</h3>
 
-			<SearchBar clearSearchbar={() => {}} lists={lists} dos={dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done))} />
+			<SearchBar lists={lists} dos={dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done))} />
 
 			<Link
 				href={"/app/quick/today"}

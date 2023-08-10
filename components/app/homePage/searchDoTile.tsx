@@ -1,6 +1,6 @@
 "use client";
 
-import { faArrowUpRightFromSquare, faDiagramProject, faShare } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare, faCircle, faDiagramProject, faDog, faDotCircle, faHandPointDown, faShare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import checkDateRelativeTime from "@/functions/checkDateRelativeTime";
 import returnDateTileText from "@/functions/returnDateTileText";
@@ -20,7 +20,7 @@ export default function DoTileSearch(props: { do: DataDoType; list: DataListType
 			href={"/app/" + props.do.list}
 		>
 			{/* Icon */}
-			<FontAwesomeIcon fixedWidth icon={faArrowUpRightFromSquare} className="h-5 w-5 p-2 text-colorGray md:h-7 md:w-7" />
+			<FontAwesomeIcon fixedWidth icon={faCircle} className="h-2 w-2 py-2.5 text-colorGray md:h-4 md:w-4 md:py-3" />
 
 			{/* Title */}
 			<p className="truncate text-xs md:text-base">{props.do.name}</p>
