@@ -30,7 +30,7 @@ export default async function Page() {
 			<FontAwesomeIcon icon={faCalendarCheck} className="mb-4 h-12 p-1 text-[#46BF77] md:mb-8 md:h-20" />
 
 			<h1 className="text-center text-3xl font-extrabold text-[--text-rgb] md:mb-3 md:text-5xl">Today</h1>
-			<h3 className="mb-6 text-center text-xl font-normal text-colorGray/70 md:mb-20 md:text-3xl">Let's see what you have to do today!</h3>
+			<h3 className="mb-6 text-center text-xl font-normal text-colorGray/70 md:mb-20 md:text-3xl">Let&apos;s see what you have to do today!</h3>
 
 			<div className="mt-5 flex flex-col gap-y-1 md:mt-7">
 				{/* Task table title row */}

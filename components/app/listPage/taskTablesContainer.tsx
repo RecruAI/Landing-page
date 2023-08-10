@@ -30,7 +30,7 @@ export default function TaskTablesContainer(props: { listData: DataListType; dos
 		return () => {
 			subscription.unsubscribe();
 		};
-	}, [supabase]);
+	}, [supabase, props.listData]);
 
 	return (
 		<div className="mt-8 flex flex-col gap-y-10 md:mt-16 md:gap-y-20">

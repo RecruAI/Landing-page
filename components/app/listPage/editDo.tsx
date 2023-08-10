@@ -30,7 +30,7 @@ export default function EditDo(props: { do: DataDoType }) {
 		}
 		updateDo();
 		RevalidateListPage();
-	}, [name, description, subTasks, dueDate]);
+	}, [name, description, subTasks, dueDate, props.do]);
 
 	return (
 		<div className="z-50 mx-auto mt-6 flex w-full max-w-7xl flex-col items-start gap-x-12 gap-y-4 rounded-lg bg-[--sidebar-rgb] px-5 py-4 shadow-md md:mt-10 md:flex-row md:p-10 ">
