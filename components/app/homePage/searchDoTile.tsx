@@ -6,7 +6,7 @@ import checkDateRelativeTime from "@/functions/checkDateRelativeTime";
 import returnDateTileText from "@/functions/returnDateTileText";
 import Link from "next/link";
 
-export default function DoTileSearch(props: { do: DataDoType; list: DataListType }) {
+export default function DoTileSearch(props: { do: DataDoType; list: DataListType; clearSearchbar?: Function }) {
 	// Function returs 0 if present, -1 if past and 1 if future
 	const dateRelativeTime = checkDateRelativeTime(props.do.due_date);
 
@@ -15,6 +15,7 @@ export default function DoTileSearch(props: { do: DataDoType; list: DataListType
 
 	return (
 		<Link
+			onClick={() => (props.clearSearchbar ? props.clearSearchbar() : undefined)}
 			className="flex w-full items-center gap-x-3 text-clip px-3 transition hover:bg-colorGray/20 md:gap-x-4 md:px-9 md:py-3 lg:gap-x-5"
 			href={"/app/" + props.do.list}
 		>

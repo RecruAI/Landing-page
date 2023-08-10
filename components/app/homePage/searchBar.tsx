@@ -6,7 +6,7 @@ import { faClose, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import SearchDoTile from "./searchDoTile";
 import SortAndCompareDos from "@/functions/sortAndCompareDos";
 
-export default function SearchBar(props: { dos: DataDoType[]; lists: DataListType[] }) {
+export default function SearchBar(props: { dos: DataDoType[]; lists: DataListType[]; clearSearchbar?: Function }) {
 	const [dos, setDos] = useState<DataDoType[]>(props.dos);
 	const [visibleDos, setVisibleDos] = useState<DataDoType[]>([]);
 	const [searchPhrase, setSearchPhrase] = useState<string>("");
@@ -56,7 +56,12 @@ export default function SearchBar(props: { dos: DataDoType[]; lists: DataListTyp
 							.slice(0, 7)
 							.sort((doA, doB) => SortAndCompareDos(doA, doB))
 							.map((singleDo) => (
-								<SearchDoTile do={singleDo} key={singleDo.id} list={props.lists.filter((list) => list.id == singleDo.list)[0]} />
+								<SearchDoTile
+									clearSearchbar={() => (props.clearSearchbar ? props.clearSearchbar() : undefined)}
+									do={singleDo}
+									key={singleDo.id}
+									list={props.lists.filter((list) => list.id == singleDo.list)[0]}
+								/>
 							))}
 
 						<p

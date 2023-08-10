@@ -63,7 +63,11 @@ export default function SideBar() {
 			{isSearchbarVisible ? (
 				<div className="fixed left-0 top-0 flex h-screen w-screen">
 					<div className="z-50 mt-20 h-fit w-full px-5 text-[--text-rgb] md:px-20 xl:ms-72 2xl:ms-20vw ">
-						<SearchBar dos={dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done))} lists={lists} />
+						<SearchBar
+							dos={dos.filter((singleDo) => !singleDo.done || (!checkIfPastDate(singleDo.due_date) && singleDo.done))}
+							lists={lists}
+							clearSearchbar={() => setIsSearchbarVisible(false)}
+						/>
 					</div>
 
 					<div className="fixed left-0 top-0 z-30 h-screen w-screen bg-[--background-rgb] opacity-75" onClick={() => setIsSearchbarVisible(false)}></div>
