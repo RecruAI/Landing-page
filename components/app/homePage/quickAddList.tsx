@@ -31,7 +31,7 @@ export default function QuickAddList() {
 
 		RevalidateListPage();
 
-		router.push(`/app/${data[0].id}`);
+		router.push(`/app/list/${data[0].id}`);
 	}
 
 	return (

@@ -17,7 +17,7 @@ export default function DoTileSearch(props: { do: DataDoType; list: DataListType
 		<Link
 			onClick={() => (props.clearSearchbar ? props.clearSearchbar() : undefined)}
 			className="flex w-full items-center gap-x-3 text-clip px-3 transition hover:bg-colorGray/20 md:gap-x-4 md:px-9 md:py-3 lg:gap-x-5"
-			href={"/app/" + props.do.list}
+			href={"/app/list/" + props.do.list}
 		>
 			{/* Icon */}
 			<FontAwesomeIcon fixedWidth icon={faCircle} className="h-2 w-2 py-2.5 text-colorGray md:h-4 md:w-4 md:py-3" />

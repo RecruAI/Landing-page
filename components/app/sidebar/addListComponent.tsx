@@ -33,7 +33,7 @@ export default function AddListComponent(props: { hideComponent: Function }) {
 			.insert([{ user_id: await getUserId(), name: listTitle, icon: selectedEmoji }])
 			.select();
 
-		router.push(`/app/${data[0].id}`);
+		router.push(`/app/list/${data[0].id}`);
 
 		RevalidateListPage();
 	}

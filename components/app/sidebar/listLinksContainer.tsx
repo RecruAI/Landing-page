@@ -41,7 +41,7 @@ export default function ListLinksContainer(props: { hideSidebar: Function; loadi
 
 						return (
 							<Link
-								href={"/app/" + list.id}
+								href={"/app/list/" + list.id}
 								className="sidebarButton"
 								key={list.id}
 								onClick={() => {

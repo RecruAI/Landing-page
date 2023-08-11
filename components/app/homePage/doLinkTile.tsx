@@ -82,7 +82,7 @@ export default function DoLinkTile(props: { do: DataDoType; list: DataListType }
 				)}
 
 				{/* Icon */}
-				<Link href={"/app/" + props.list.id} className="flex">
+				<Link href={"/app/list/" + props.list.id} className="flex">
 					<FontAwesomeIcon fixedWidth icon={faArrowUpRightFromSquare} className="h-3 w-3 text-colorGray hover:text-[--text-rgb] md:h-4 md:w-4" />
 				</Link>
 			</button>

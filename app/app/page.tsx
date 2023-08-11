@@ -59,7 +59,7 @@ export default async function Page() {
 						return (
 							<Link
 								key={list.id}
-								href={`/app/${list.id}`}
+								href={`/app/list/${list.id}`}
 								className="flex items-center gap-x-3 rounded-lg px-5 py-2 outline outline-2 outline-colorGray/50 transition-all hover:bg-colorGray/10 md:gap-x-4 md:py-4"
 							>
 								<p className="sm:text-xl md:text-2xl">{list.icon}</p>

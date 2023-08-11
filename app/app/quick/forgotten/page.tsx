@@ -1,5 +1,4 @@
 import DoLinkTile from "@/components/app/homePage/doLinkTile";
-import DoComponent from "@/components/app/listPage/doComponent";
 import checkIfPastDate from "@/functions/checkIfPastDate";
 import SortAndCompareDos from "@/functions/sortAndCompareDos";
 import { faBoxArchive } from "@fortawesome/free-solid-svg-icons";
@@ -28,9 +27,7 @@ export default async function Page() {
 			<div className="mt-5 flex flex-col gap-y-1 md:mt-7">
 				{/* Task table title row */}
 				<div className="flex flex-row items-center gap-x-1.5 md:gap-x-3">
-					<h2 className="-ms-1.5 cursor-pointer truncate rounded-md px-1.5 py-0.5 text-base font-bold text-[--text-rgb] md:-ms-3 md:px-3 md:py-1 md:text-xl">
-						Forgotten dos
-					</h2>
+					<h2 className="-ms-1.5 rounded-md px-1.5 py-0.5 text-base font-bold text-[--text-rgb] md:-ms-3 md:px-3 md:py-1 md:text-xl">Forgotten dos</h2>
 					<p className="text-sm font-medium text-colorGray md:text-base">{dosToShow?.filter((singleDo) => !singleDo.done).length}</p>
 
 					{/* Spacer */}
