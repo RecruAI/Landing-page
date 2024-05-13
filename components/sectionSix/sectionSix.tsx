@@ -8,11 +8,9 @@ export default function SectionSix(props: { font: NextFont }) {
 			<div className="flex flex-col items-center gap-y-5 text-start sm:gap-y-6 lg:items-start xl:gap-y-8">
 				<span className="me-auto w-fit rounded-md bg-[#F9F1EC] px-3 py-1 text-sm font-medium text-[#C3995D] sm:text-xl">Get started</span>
 				<h3 className={'w-full text-3xl text-[--text-rgb] sm:text-4xl md:text-5xl lg:text-6xl xl:text-5xl 2xl:text-6xl ' + props.font.className}>
-					Achieve peace of mind with Do It
+					Lorem ipsum dolor sit amet consectetur.
 				</h3>
-				<p className="mb-5 text-justify text-sm text-colorGray sm:text-lg">
-					Become focused, organized, and calm with Do It. Top #1 task manager and to-do list app in the world.
-				</p>
+				<p className="mb-5 text-justify text-sm text-colorGray sm:text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, culpa!</p>
 				<NewsletterButton />
 			</div>
 			<picture className="hidden lg:block xl:translate-x-1/4 xl:translate-y-16 2xl:translate-y-20">

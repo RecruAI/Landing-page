@@ -5,7 +5,7 @@ export default function SectionFive(props: { font: NextFont }) {
 	return (
 		<section className="responsiveWidth mt-44 flex flex-col items-center gap-y-4 sm:gap-y-8">
 			<span className="w-fit rounded-md bg-[#EDF4EF] px-3 py-1 text-lg font-medium text-[#76B689] sm:text-xl">Testemonials</span>
-			<h3 className={"text-3xl text-[--text-rgb] sm:text-6xl lg:text-5xl xl:text-7xl " + props.font.className}>Users love Do It</h3>
+			<h3 className={'text-3xl text-[--text-rgb] sm:text-6xl lg:text-5xl xl:text-7xl ' + props.font.className}>Users love Do It</h3>
 
 			<div className="my-16 flex justify-center sm:gap-x-10 md:gap-x-16 lg:gap-x-20 xl:my-20">
 				<Image
@@ -32,10 +32,9 @@ export default function SectionFive(props: { font: NextFont }) {
 			</div>
 
 			<p className="max-w-3xl text-sm tracking-wide text-colorGray sm:text-lg md:text-xl">
-				&quot;Do It helps keep me organized - I truly could not live without it! Allows me to prioritize my tasks in a super simple way. I definitely recommend Do It
-				to everyone - I really think it&apos;s the best to-do list app available!&quot;
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut repellendus iusto recusandae expedita amet voluptates atque nemo deserunt cumque? Aperiam.
 			</p>
-			<span className={"text-base tracking-wider text-[--text-rgb] sm:text-xl md:text-2xl " + props.font.className}>- Andrew Cano</span>
+			<span className={'text-base tracking-wider text-[--text-rgb] sm:text-xl md:text-2xl ' + props.font.className}>- Lorem, ipsum.</span>
 		</section>
-	);
+	)
 }

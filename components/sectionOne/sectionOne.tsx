@@ -6,13 +6,13 @@ import UtilitiesContainer from "./utilitiesContainer";
 export default function SectionOne(props: { font: NextFont }) {
 	return (
 		<section className="relative flex w-screen flex-col items-center justify-center gap-y-8 bg-gradient-to-br from-[--background-rgb] to-[--background-rgb-darker] px-10 pb-40 pt-28 text-center md:px-20 md:pt-32 lg:px-24 lg:py-40 xl:px-32">
-			<h1 className={"m-0 text-4xl tracking-wider text-[--text-rgb] md:text-5xl lg:text-6xl xl:text-7xl " + props.font.className}>
-				Get it done for REAL with <br className="hidden lg:block" />
-				Powerful To-do list
+			<h1 className={'m-0 text-4xl tracking-wider text-[--text-rgb] md:text-5xl lg:text-6xl xl:text-7xl ' + props.font.className}>
+				Lorem ipsum, <br className="hidden lg:block" />
+				dolor sit amet adipisicing.
 			</h1>
 			<p className="text-md text-colorGray md:text-lg lg:text-xl xl:text-2xl">
-				Become focused, organized, and calm with DoIt. <br className="hidden lg:block" />
-				Top #1 task manager and to-do list app in the world.
+				Lorem ipsum dolor sit amet. <br className="hidden lg:block" />
+				Lorem ipsum dolor sit amet consectetur.
 			</p>
 
 			<NewsletterButton />
@@ -25,5 +25,5 @@ export default function SectionOne(props: { font: NextFont }) {
 			</div>
 			<UtilitiesContainer font={props.font} />
 		</section>
-	);
+	)
 }

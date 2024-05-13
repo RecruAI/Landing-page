@@ -5,11 +5,11 @@ export default function SectionTwo(props: { font: NextFont }) {
 	return (
 		<section className="responsiveWidth flex flex-col items-center justify-evenly lg:flex-row">
 			<div className="flex flex-col gap-y-4 text-start sm:gap-y-8 lg:basis-5/12">
-				<span className="w-fit rounded-md bg-[#F9F1EC] px-3 py-1 text-lg font-medium text-[#C3995D] sm:text-xl">Headings</span>
-				<h3 className={"text-3xl text-[--text-rgb] sm:text-6xl lg:text-5xl xl:text-7xl " + props.font.className}>Divide and conquer</h3>
+				<span className="w-fit rounded-md bg-[#F9F1EC] px-3 py-1 text-lg font-medium text-[#C3995D] sm:text-xl">Lorem.</span>
+				<h3 className={'text-3xl text-[--text-rgb] sm:text-6xl lg:text-5xl xl:text-7xl ' + props.font.className}> Lorem, ipsum dolor. </h3>
 				<p className="text-justify text-sm text-colorGray sm:text-lg">
-					Use headings to create categories, milestones, or whatever you need - just give each one a name and drag your to-dos underneath. Instantly you&apos;ve got
-					a nice, clean structure for your list, and the plan becomes perfectly clear.
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum reiciendis dolorum quia aperiam velit porro temporibus ullam explicabo blanditiis, ex dolores
+					accusamus laborum eius autem ea impedit asperiores harum quae.
 				</p>
 			</div>
 
@@ -22,5 +22,5 @@ export default function SectionTwo(props: { font: NextFont }) {
 				</picture>
 			</div>
 		</section>
-	);
+	)
 }
