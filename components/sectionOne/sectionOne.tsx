@@ -1,7 +1,7 @@
+import NewsletterButton from "@/components/startButton";
 import { NextFont } from "next/dist/compiled/@next/font";
 import Image from "next/image";
 import UtilitiesContainer from "./utilitiesContainer";
-import StartButton from "../startButton";
 
 export default function SectionOne(props: { font: NextFont }) {
 	return (
@@ -15,14 +15,12 @@ export default function SectionOne(props: { font: NextFont }) {
 				Top #1 task manager and to-do list app in the world.
 			</p>
 
-			<StartButton />
+			<NewsletterButton />
 
 			<div className="overflow-hidden rounded-3xl border-b-1 border-colorGray/30 bg-gradient-to-b from-transparent to-[--background-rgb-darker] px-8 md:px-12 lg:px-16 xl:px-20">
 				<picture>
-					<source srcSet="/landing_page/images/SectionOneDark-Mobile.png" media="(hover: none) and (pointer: coarse) and (prefers-color-scheme: dark)" />
-					<source srcSet="/landing_page/images/SectionOneLight-Mobile.png" media="(hover: none) and (pointer: coarse) and (prefers-color-scheme: light)" />
-					<source srcSet="/landing_page/images/SectionOneDark.png" media="(prefers-color-scheme: dark)" />
-					<Image src="/landing_page/images/SectionOneLight.png" width="1300" height="1000" alt="Web app image" className="mt-20 rounded-t-3xl drop-shadow-2xl" />
+					<source srcSet="/images/SectionOneLight-Mobile.png" media="(hover: none) and (pointer: coarse) and (prefers-color-scheme: light)" />
+					<Image src="/images/SectionOneLight.png" width="1300" height="1000" alt="Web app image" className="mt-20 rounded-t-3xl drop-shadow-2xl" />
 				</picture>
 			</div>
 			<UtilitiesContainer font={props.font} />

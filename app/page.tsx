@@ -1,11 +1,11 @@
-import Footer from "@/components/landing_page/footer";
-import Header from "@/components/landing_page/header";
-import SectionFive from "@/components/landing_page/sectionFive/sectionFive";
-import SectionFour from "@/components/landing_page/sectionFour/sectionFour";
-import SectionOne from "@/components/landing_page/sectionOne/sectionOne";
-import SectionSix from "@/components/landing_page/sectionSix/sectionSix";
-import SectionThree from "@/components/landing_page/sectionThree/sectionThree";
-import SectionTwo from "@/components/landing_page/sectionTwo/sectionTwo";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
+import SectionFive from "@/components/sectionFive/sectionFive";
+import SectionFour from "@/components/sectionFour/sectionFour";
+import SectionOne from "@/components/sectionOne/sectionOne";
+import SectionSix from "@/components/sectionSix/sectionSix";
+import SectionThree from "@/components/sectionThree/sectionThree";
+import SectionTwo from "@/components/sectionTwo/sectionTwo";
 import localFont from "next/font/local";
 
 const EuropaGrotesk = localFont({ src: "EuropaGrotesk.otf" });

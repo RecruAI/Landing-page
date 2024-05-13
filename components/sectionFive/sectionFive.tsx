@@ -9,21 +9,21 @@ export default function SectionFive(props: { font: NextFont }) {
 
 			<div className="my-16 flex justify-center sm:gap-x-10 md:gap-x-16 lg:gap-x-20 xl:my-20">
 				<Image
-					src="/landing_page/images/SectionFive-1.png"
+					src="/images/SectionFive-1.png"
 					width="100"
 					height="100"
 					alt="User profile picture"
 					className="scale-75 rounded-full border-4 border-[--text-rgb] opacity-70 shadow-2xl blur-sm md:scale-90 lg:scale-100"
 				/>
 				<Image
-					src="/landing_page/images/SectionFive-2.png"
+					src="/images/SectionFive-2.png"
 					width="100"
 					height="100"
 					alt="User profile picture"
 					className="-translate-y-10 scale-75 rounded-full border-4 border-[--text-rgb] shadow-2xl md:scale-90 lg:scale-100"
 				/>
 				<Image
-					src="/landing_page/images/SectionFive-3.png"
+					src="/images/SectionFive-3.png"
 					width="100"
 					height="100"
 					alt="User profile picture"

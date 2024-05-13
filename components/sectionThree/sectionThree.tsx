@@ -6,12 +6,10 @@ export default function SectionThree(props: { font: NextFont }) {
 		<section className="responsiveWidth flex flex-col-reverse items-center justify-evenly lg:flex-row">
 			<div className="relative flex basis-7/12 overflow-hidden">
 				<picture className="translate-x-10 translate-y-8">
-					<source srcSet="/landing_page/images/SectionThreeDark-1.png" media="(prefers-color-scheme: dark)" />
-					<Image src="/landing_page/images/SectionThreeLight-1.png" width="300" height="300" alt="Moble app image" />
+					<Image src="/images/SectionThreeLight-1.png" width="300" height="300" alt="Moble app image" />
 				</picture>
 				<picture className="-translate-x-10 translate-y-40">
-					<source srcSet="/landing_page/images/SectionThreeDark-2.png" media="(prefers-color-scheme: dark)" />
-					<Image src="/landing_page/images/SectionThreeLight-2.png" width="300" height="300" alt="Moble app image" />
+					<Image src="/images/SectionThreeLight-2.png" width="300" height="300" alt="Moble app image" />
 				</picture>
 			</div>
 

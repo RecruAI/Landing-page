@@ -10,16 +10,6 @@
 
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-rgb: rgb( 33, 33, 33);
-    --background-rgb-darker:rgb( 20, 20, 20);
-    --text-rgb: rgb(255, 255, 255);
-    --sidebar-rgb:rgb(37, 39, 40);
-
-  }
-}
-
 .responsiveWidth{
   @apply w-full QHD:w-3/4 WQHD:w-2/3 mx-auto ;
 }

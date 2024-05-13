@@ -1,6 +1,6 @@
+import NewsletterButton from "@/components/startButton";
 import { NextFont } from "next/dist/compiled/@next/font";
 import Image from "next/image";
-import StartButton from "../startButton";
 
 export default function SectionSix(props: { font: NextFont }) {
 	return (
@@ -13,12 +13,12 @@ export default function SectionSix(props: { font: NextFont }) {
 				<p className="mb-5 text-justify text-sm text-colorGray sm:text-lg">
 					Become focused, organized, and calm with Do It. Top #1 task manager and to-do list app in the world.
 				</p>
-				<StartButton />
+				<NewsletterButton />
 			</div>
 			<picture className="hidden lg:block xl:translate-x-1/4 xl:translate-y-16 2xl:translate-y-20">
-				<source srcSet="/landing_page/images/SectionSixDark.png" media="(prefers-color-scheme: dark)" />
+				<source srcSet="/images/SectionSixDark.png" media="(prefers-color-scheme: dark)" />
 				<Image
-					src="/landing_page/images/SectionSixLight.png"
+					src="/images/SectionSixLight.png"
 					width="1300"
 					height="1000"
 					alt="Web app image"

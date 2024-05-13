@@ -15,12 +15,10 @@ export default function SectionTwo(props: { font: NextFont }) {
 
 			<div className="relative flex scale-75 flex-col items-end gap-y-5 sm:scale-100 lg:basis-7/12 lg:scale-75 xl:scale-100">
 				<picture className="-translate-x-14 translate-y-10 xl:-translate-x-24">
-					<source srcSet="/landing_page/images/SectionTwoDark-1.png" media="(prefers-color-scheme: dark)" />
-					<Image src="/landing_page/images/SectionTwoLight-1.png" width="500" height="500" alt="Moble app image" className="rounded-xl" />
+					<Image src="/images/SectionTwoLight-1.png" width="500" height="500" alt="Moble app image" className="rounded-xl" />
 				</picture>
 				<picture className="z-10 -translate-y-10 translate-x-10 xl:translate-x-0">
-					<source srcSet="/landing_page/images/SectionTwoDark-2.png" media="(prefers-color-scheme: dark)" />
-					<Image src="/landing_page/images/SectionTwoLight-2.png" width="350" height="500" alt="Moble app image" className="rounded-xl" />
+					<Image src="/images/SectionTwoLight-2.png" width="350" height="500" alt="Moble app image" className="rounded-xl" />
 				</picture>
 			</div>
 		</section>
