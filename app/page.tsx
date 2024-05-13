@@ -28,5 +28,5 @@ export default function Home() {
 			</div>
 			<Footer font={EuropaGrotesk} />
 		</main>
-	);
+	)
 }

@@ -1,12 +1,11 @@
-import { NextFont } from "next/dist/compiled/@next/font";
-import Image from "next/image";
-import UtilitiesContainer from "./utilitiesContainer";
+import { NextFont } from 'next/dist/compiled/@next/font'
+import UtilitiesContainer from './utilitiesContainer'
 
 export default function SectionFour(props: { font: NextFont }) {
 	return (
 		<section className="responsiveWidth flex flex-col items-center gap-y-24">
 			<div className="flex w-full flex-col items-center justify-between gap-y-3 text-start lg:basis-5/12 lg:flex-row">
-				<h3 className={"text-4xl tracking-wider text-[--text-rgb] sm:text-6xl lg:text-5xl xl:text-6xl 2xl:text-7xl" + props.font.className}>
+				<h3 className={'text-4xl tracking-wider text-[--text-rgb] sm:text-6xl lg:text-5xl xl:text-6xl 2xl:text-7xl' + props.font.className}>
 					And that&apos;s not all...
 				</h3>
 
@@ -17,5 +16,5 @@ export default function SectionFour(props: { font: NextFont }) {
 
 			<UtilitiesContainer font={props.font} />
 		</section>
-	);
+	)
 }
