@@ -5,9 +5,6 @@
 :root {
   --background-rgb: rgb(255, 255, 255);
   --background-rgb-darker:rgb( 242, 242, 242);
-  --text-rgb:rgb( 25, 25, 25);
-  --sidebar-rgb:rgb(249, 249, 249);
-
 }
 
 .responsiveWidth{
