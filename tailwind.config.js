@@ -16,6 +16,7 @@ module.exports = {
 				white: '#FFFFFF',
 				red: '#F04242',
 				green: '#42B380',
+				lightGreen: '#44FFD2',
 			},
 			screens: {
 				WQHD: '3840px',
@@ -27,6 +28,9 @@ module.exports = {
 			},
 			borderWidth: {
 				1: '1px',
+			},
+			boxShadow: {
+				button: '4px 4px 5px rgba(0, 0, 0, 0.25)',
 			},
 		},
 	},
